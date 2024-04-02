@@ -1,7 +1,9 @@
-const express = require("express");
-const app = express();
+const express = require("express")
+const app = express()
 app.use(express.static('public'))
 
-//app.listen(3000, () => console.log("Server ready on port 3000."));
+app.get('/lola', (req, res) => res.send('testting lola request'))
 
-module.exports = app;
+//app.listen(3000, () => console.log("Server ready on port 3000."))
+
+module.exports = app
