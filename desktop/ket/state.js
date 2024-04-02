@@ -11,7 +11,8 @@ export default class State{
                 author: 'Sam',
                 date: Date.now(),
                 description: 'Chess game',
-                link: ''
+                play: '',
+                repo: ''
             },
             {
                 id: '10',
@@ -19,7 +20,29 @@ export default class State{
                 author: 'Sam',
                 date: Date.now(),
                 description: 'Video chat',
-                link: ''
+                play: '',
+                repo: ''
+
+            },
+            {
+                id: '20',
+                name: 'Skatty',
+                author: 'Alex',
+                date: Date.now(),
+                description: 'Taxation',
+                play: '',
+                repo: ''
+
+            },
+
+            {
+                id: '30',
+                name: 'Wally',
+                author: 'Sam',
+                date: Date.now(),
+                description: 'Banking',
+                play: '',
+                repo: ''
             }
 
         ]

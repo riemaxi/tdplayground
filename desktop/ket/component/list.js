@@ -6,7 +6,6 @@ const content = `
         display: flex;
         flex-direction: column;
         width: 100%;
-        overflow-y: auto;
         font-family: Arial;
         gap: 31px;
     }
@@ -46,11 +45,25 @@ const content = `
     }
 
     .description{
+        width: 100%;
         font-size: 25px;
     }
 
-    .link{
-        font-size: 20px;
+    .commands{
+        display: flex;
+        width: 100%;
+        height: 40px;
+        gap: 100px;
+    }
+
+    .command{
+        display: flex;
+        width: 40px;
+        height: 100%;
+    }
+
+    .command img{
+        height: 100%;
         cursor: pointer;
     }
 </style>
@@ -83,20 +96,26 @@ export default class List extends Element{
                 </div>
 
                 <div class="description">${item.description}</div>
-                <div class="link" id="${item.id}">go play</div>
+
+                <div class="commands">
+                    <div class="command"><img class="play" data-id="${item.id}" src="./img/goplay.png"></div>
+                    <div class="command"><img class="repo" data-id="${item.id}" src="./img/repo.png"></div>
+                </div>
+                
             </div>
         `
 
         this.get('root').innerHTML = items.map(item => html(item)).join('')
 
-        this.queryAll('.link').forEach(link => handle(link.id))
+        this.queryAll('.play').forEach(b => b.onclick = () => handle('play', b.dataset.id))
+        this.queryAll('.repo').forEach(b => b.onclick = () => handle('repo', b.dataset.id))
 
     }
 
     set data(value){
         this.createList(
             value,
-            id =>  this.handle('selection', id)
+            (id, data) =>  this.handle(id, data)
         )
     }
 }

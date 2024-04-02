@@ -17,19 +17,25 @@ const content = `
     }
 
     #header{
+        position: fixed;
+        top: 0px;
         display: flex;
+        width: 100%;
         height: 100px;
     }
 
     #list{
+        position: absolute;
         display: flex;
+        width: 100%;
         height: 100%;
+        top: 102px; 
     }    
 </style>
 <div id="root">
     <div id="content">
-        <play-header id="header"></play-header>
         <play-list id="list"></play-list>
+        <play-header id="header"></play-header>                    
     </div>
 </div>
 `

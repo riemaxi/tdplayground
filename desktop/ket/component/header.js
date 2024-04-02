@@ -9,6 +9,7 @@ const content = `
         border: 0 0 1px 0;
         border-color: black;
         font-family: Arial;
+        background-color: white;
     }
 </style>
 <div id="root">
