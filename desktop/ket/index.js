@@ -13,7 +13,7 @@ export default class Ket{
         this.registerComponents()        
 
         frame.handle = (id, data) => this.handleUser(id, data)
-        frame.data = state.list
+        frame.data = state.serviceproviders 
     }
 
     handleUser(id,  data){

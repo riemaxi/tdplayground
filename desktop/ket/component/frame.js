@@ -1,6 +1,6 @@
 import Element from "./common/element.js"
 import Header from "./header.js"
-import List from "./list.js"
+import ServiceProvider from "./serviceprovider.js"
 
 const content = `
 <style>
@@ -40,7 +40,7 @@ const content = `
 </div>
 `
 
-class ListHandler extends List{
+class ListHandler extends ServiceProvider{
     constructor(){
         super()
     }
@@ -50,7 +50,7 @@ export default class Frame extends Element{
     constructor(){
         super(content)
 
-        window.customElements.define('play-list', ListHandler)
+        window.customElements.define('play-list', ServiceProvider)
         window.customElements.define('play-header', Header)
 
         this.control()

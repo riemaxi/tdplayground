@@ -1,4 +1,5 @@
 import Element from "./common/element.js"
+import Marketplace from "./marketplace.js"
 
 const content = `
 <style>
@@ -49,43 +50,24 @@ const content = `
         font-size: 25px;
     }
 
-    .commands{
-        display: flex;
-        width: 100%;
-        height: 40px;
-        gap: 100px;
+    play-marketplace{
+        margin: 20px 0 20px 0;
     }
 
-    .command{
-        display: flex;
-        width: 40px;
-        height: 100%;
-    }
-
-    .command img{
-        height: 100%;
-        cursor: pointer;
-    }
-</style>
+    </style>
 <div id="root">
 </div>
 `
-/**
- * item
- * name
- * author's name
- * date
- * description
- * link
- */
 
-export default class List extends Element{
+export default class ServiceProvider extends Element{
     constructor(){
         super(content)
+
+        window.customElements.define('play-marketplace', Marketplace)
     }
 
     createList(items, handle){
-        let html = item => `
+        let html = (item, interfaces) => `
             <div class="item">
                 <div class="header">
                     <div class="name">${item.name}</div>
@@ -94,22 +76,20 @@ export default class List extends Element{
                         <div class="date">${new Date( item.date).toLocaleDateString()}</div>
                     </div>
                 </div>
-
                 <div class="description">${item.description}</div>
 
-                <div class="commands">
-                    <div class="command"><img class="play" data-id="${item.id}" src="./img/goplay.png"></div>
-                    <div class="command"><img class="repo" data-id="${item.id}" src="./img/repo.png"></div>
-                </div>
-                
+                <play-marketplace id="${item.id}"></play-marketplace>
+
+                <div><button>publish</button></div>
             </div>
         `
 
-        this.get('root').innerHTML = items.map(item => html(item)).join('')
+        this.get('root').innerHTML = items.map(item =>  html(item)).join('')
 
-        this.queryAll('.play').forEach(b => b.onclick = () => handle('play', b.dataset.id))
-        this.queryAll('.repo').forEach(b => b.onclick = () => handle('repo', b.dataset.id))
-
+        this.queryAll('play-marketplace').forEach(mp => {
+            mp.data = items.find(item => mp.id == item.id)?.interfaces
+            mp.handle = (id, data) => handle('marketplace', {marketplace: mp.id, command: {id, data}} )
+        })
     }
 
     set data(value){
