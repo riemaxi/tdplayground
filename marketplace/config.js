@@ -1,5 +1,7 @@
 module.exports = {
-	password : 'password',
+	desk: {
+		port: 65333
+	},
 
 	prompt: {
 		host: 'http://217.76.52.255:20000',
@@ -17,6 +19,7 @@ module.exports = {
 	},
 
 	data: {
-			path: './data/list.json'
+			path: './data/list.json',
+			state: './data/state'
 	}
 }

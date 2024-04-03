@@ -62,21 +62,21 @@ export default class Marketplace extends Element{
     }
 
     createList(items, handle){
-        let html = item => `
+        let html = (id, data) => `
         <div class="item">
             <div class="publishing">
-                <div class="name">${item.name}</div>
-                <div class="date">${new Date(item.date).toLocaleDateString()}</div>
+                <div class="name">${data.name}</div>
+                <div class="date">${new Date(data.date).toLocaleDateString()}</div>
             </div>
             <div class="commands">
-                <div class="command"><img class="play" data-id="${item.id}" src="./img/goplay.png"></div>
-                <div class="command"><img class="repo" data-id="${item.id}" src="./img/repo.png"></div>
-                <div class="command"><img class="youtube" data-id="${item.id}" src="./img/youtube.webp"></div>
-                <div class="command"><img class="instagram" data-id="${item.id}" src="./img/instagram.webp"></div>
+                <div class="command"><img class="play" data-id="${id}" src="./img/goplay.png"></div>
+                <div class="command"><img class="repo" data-id="${id}" src="./img/repo.png"></div>
+                <div class="command"><img class="youtube" data-id="${id}" src="./img/youtube.webp"></div>
+                <div class="command"><img class="instagram" data-id="${id}" src="./img/instagram.webp"></div>
             </div>
         </div>`
 
-        this.get('root').innerHTML = items.map(item => html(item)).join('')
+        this.get('root').innerHTML = items.map(item => html(item.id, item.data)).join('')
 
         this.queryAll('.command img').forEach(c => c.onclick = () => this.handle(c.className, c.dataset.id))
     }

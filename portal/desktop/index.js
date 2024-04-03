@@ -11,4 +11,8 @@ let bra = new class extends Bra{
     constructor(){
         super()
     }
+
+    onList(data){
+        ket.update('list', data)
+    }
 }

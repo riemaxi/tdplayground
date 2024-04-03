@@ -67,27 +67,27 @@ export default class ServiceProvider extends Element{
     }
 
     createList(items, handle){
-        let html = (item, interfaces) => `
-            <div class="item">
+        let html = (id, data) => `
+              <div class="item">
                 <div class="header">
-                    <div class="name">${item.name}</div>
+                    <div class="name">${data.name}</div>
                     <div class="publishing">
-                        <div class="author">${item.author}</div>
-                        <div class="date">${new Date( item.date).toLocaleDateString()}</div>
+                        <div class="author">${data.author}</div>
+                        <div class="date">${new Date( data.date).toLocaleDateString()}</div>
                     </div>
                 </div>
-                <div class="description">${item.description}</div>
+                <div class="description">${data.description}</div>
 
-                <play-marketplace id="${item.id}"></play-marketplace>
+                <play-marketplace id="${id}"></play-marketplace>
 
                 <div><button>publish</button></div>
             </div>
         `
 
-        this.get('root').innerHTML = items.map(item =>  html(item)).join('')
+        this.get('root').innerHTML = items.map(item =>  html(item.id, item.data)).join('')
 
         this.queryAll('play-marketplace').forEach(mp => {
-            mp.data = items.find(item => mp.id == item.id)?.interfaces
+            mp.data = items.find(item => mp.id == item.id)?.data?.interfaces
             mp.handle = (id, data) => handle('marketplace', {marketplace: mp.id, command: {id, data}} )
         })
     }

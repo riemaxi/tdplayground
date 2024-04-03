@@ -1,4 +1,5 @@
 const config = require('./config')
+const {v4: uuid} = require('uuid')
 
 let db = new class extends require('./data'){
     constructor(){
@@ -87,5 +88,45 @@ new class extends require('./prompt'){
         db.updateInterface(e.detail)
         this.notify(data.from, 'interface-updated', data.detail)        
     }
+}
 
+class Session{
+    constructor(socket, id){
+        this.socket =  socket
+        this.id = id
+
+        this.socket.on('list', data => this.notify('list', db.listSPs(data)))
+    }
+
+    notify(id, data){
+        this.socket.emit(id, data)
+    }
+
+    close(){
+        
+    }
+}
+
+
+
+let desk = new class extends require('./core/apidesk'){
+    constructor(){
+        super(config.desk)
+
+        this.sessions = {}
+    }
+
+    onListening(){
+        console.log(config.desk.port)
+    }
+
+    createSession(socket){
+        let id = uuid()
+        return  this.sessions[id] = new Session(socket, id)
+}
+
+onCloseSession(session){
+        session.close()
+        delete this.sessions[session.id]
+}
 }

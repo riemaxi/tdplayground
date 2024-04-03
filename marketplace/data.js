@@ -73,9 +73,15 @@ class SP extends DataObject{
     }
 }
 
-
 module.exports = class{
     constructor(config){
          this.sp = new SP(config.path)
+
+         const State = require(config.state)
+         let state = new State()
+
+         //console.log('SPs', state.serviceproviders)
+         
+         fs.writeFileSync(config.path, JSON.stringify(state.serviceproviders))
     }
 }
