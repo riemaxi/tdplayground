@@ -9,9 +9,9 @@ module.exports = {
 		greeting: 'welcome ...',
 
 		credentials: {
-			accesskey: '500111',
-			password: '1a2eb1fc-636d-44c3-8a73-349fefa242b8',
-			address: 'marketplace.playground.4da'
+			accesskey: '444000',
+			password: 'aa4ce880-e0f3-41d2-aa76-d97595ce718b',
+			address: 'marketplace.playground.local'
 		},
 
 		peers: {
