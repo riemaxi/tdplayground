@@ -16,8 +16,11 @@ let prompt = new class extends require('./prompt'){
     }
 
     onResponse(e){
-        let {to, data} = e.detail
-        desk.notify(to, 'response', data)        
+        let {response, request} = e.detail
+        let {subject, detail} = request
+        
+        console.log('on response', response)
+        desk.notify(detail.to, 'response', {response, subject})        
     }
 }
 

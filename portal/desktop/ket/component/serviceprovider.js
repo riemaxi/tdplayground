@@ -86,7 +86,7 @@ export default class ServiceProvider extends Element{
 
         this.queryAll('play-marketplace').forEach(mp => {
             mp.data = items.find(item => mp.id == item.id)?.data?.interfaces
-            mp.handle = (id, data) => handle('marketplace', {marketplace: mp.id, command: {id, data}} )
+            mp.handle = (id, data) => handle('marketplace', data )
         })
     }
 

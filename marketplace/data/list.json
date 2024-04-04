@@ -20,7 +20,7 @@
                         "data":{
                             "name":"4 Digital Asset",
                             "date":1712177198210,
-                            "play":"",
+                            "play":"http://localhost:3000/ux/helloworld/",
                             "repo":"",
                             "instagram":"",
                             "youtube":""

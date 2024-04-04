@@ -69,16 +69,16 @@ export default class Marketplace extends Element{
                 <div class="date">${new Date(data.date).toLocaleDateString()}</div>
             </div>
             <div class="commands">
-                <div class="command"><img class="play" data-id="${id}" src="./img/goplay.png"></div>
-                <div class="command"><img class="repo" data-id="${id}" src="./img/repo.png"></div>
-                <div class="command"><img class="youtube" data-id="${id}" src="./img/youtube.webp"></div>
-                <div class="command"><img class="instagram" data-id="${id}" src="./img/instagram.webp"></div>
+                <div class="command"><img class="play" id="play" data-location="${data.play}" src="./img/goplay.png"></div>
+                <div class="command"><img class="repo" id="repo" data-location="${data.repo}" src="./img/repo.png"></div>
+                <div class="command"><img class="youtube" id="youtube" data-location="${data.youtube}" src="./img/youtube.webp"></div>
+                <div class="command"><img class="instagram" id="instagram" data-location="${data.instagram}" src="./img/instagram.webp"></div>
             </div>
         </div>`
 
         this.get('root').innerHTML = items.map(item => html(item.id, item.data)).join('')
 
-        this.queryAll('.command img').forEach(c => c.onclick = () => this.handle(c.className, c.dataset.id))
+        this.queryAll('.command img').forEach(c => c.onclick = () => this.handle(c.className, {id: c.id, location: c.dataset.location}))
     }
 
     set data(value){

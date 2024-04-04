@@ -17,12 +17,21 @@ export default class Ket{
 
     update(id, data){
         switch(id){
-            case 'list': frame.data = data; break;
+            case 'list': this.handleNetwork(data); break;
         }
     }
 
-    handleUser(id,  data){
-        console.log(id, data)
+    handleNetwork(data){
+        state.data = data
+        frame.data = state.data
+    }
+
+    handleUser(id,  command){
+        console.log(id, command)
+
+        switch(command.id){
+            case 'play' : window.location = command.location; break;
+        }
     }
 
     registerComponents(){

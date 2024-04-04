@@ -1,6 +1,6 @@
 module.exports = {
 	desk: {
-		port: 65333
+		port: 65335
 	},
 
 	prompt: {
@@ -9,8 +9,8 @@ module.exports = {
 		greeting: 'welcome ...',
 
 		credentials: {
-			accesskey: '444000',
-			password: 'aa4ce880-e0f3-41d2-aa76-d97595ce718b',
+			accesskey: '444001',
+			password: '550c72ee-26c3-4540-ad8d-45ab3e98b201',
 			address: 'dispatcher.playground.local'
 		},
 

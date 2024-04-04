@@ -6,12 +6,15 @@ const content = `
         display: flex;
         width: 100%;
         height: 100%;
+        font-family: Arial;
     }
 
     #content{
         display: flex;
         width: 100%;
-        flex-direction: column;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
     }
 
 </style>

@@ -5,6 +5,10 @@ let ket = new class extends Ket{
     constructor(){
         super()
     }
+
+    on(id, data){
+        bra.sendRequest(data)
+    }
 }
 
 let bra = new class extends Bra{
@@ -12,7 +16,11 @@ let bra = new class extends Bra{
         super()
     }
 
-    onResponse(){
+    onResponse(data){
         ket.update('', data)
+    }
+
+    onInit(data){
+        ket.init(data)
     }
 }
