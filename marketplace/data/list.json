@@ -12,7 +12,7 @@
                 "provider":"4 Digital Asset",
                 "ranking":0
             },
-            "description":"Hello world. A get started for development of service providers (SPs)",
+            "description":"<h3>Hello World Service Provider on TDPnet: A Development Starter Guide</h3><p>Welcome to the exciting world of TDPnet, where Service Providers (SPs) play a crucial role in delivering digital products. </p>            <p>This guide introduces you to the development of a simple \"Hello World\" SP, which is a foundational step for understanding TDPnet's unique capabilities.</p><p>TDPnet, leveraging Software Defined Networking (SDN), breaks traditional networking barriers, offering a peer-to-peer communication model where SPs interact through dynamically assigned channels. These channels, devoid of conventional IP addresses, enhance security and boost privacy.</p>",
             "tags":["helloworld","beginner", "basics"],
             "interfaces":[
                     {

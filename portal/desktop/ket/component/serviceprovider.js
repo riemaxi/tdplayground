@@ -79,8 +79,6 @@ export default class ServiceProvider extends Element{
                 <div class="description">${data.description}</div>
 
                 <play-marketplace id="${id}"></play-marketplace>
-
-                <div><button>publish</button></div>
             </div>
         `
 

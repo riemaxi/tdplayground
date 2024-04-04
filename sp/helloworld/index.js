@@ -16,7 +16,7 @@ new class extends require('./prompt'){
 
 	onRequest(e){
         let {from, subject, detail} = e
-        this.response(from, subject, {response: 'hello world', request: detail})
+        this.response(from, {response: 'hello world', request: {subject, detail}})
 
         console.log('on request', from)
     }

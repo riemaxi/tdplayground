@@ -10,6 +10,7 @@ module.exports = class Prompt extends require('./core/session'){
 		this.credentials = config.credentials
 		this.address = this.credentials.address
 		this.host = config.host
+		this.greeting = config.greeting
 		this.peers = config.peers
 
 		this.connect(this.host)
@@ -36,17 +37,26 @@ module.exports = class Prompt extends require('./core/session'){
 
 	onCommand(data, valid, signal){
 		switch(data.subject){
-            case 'request': this.onRequest(data); break;
+			case 'response': this.onResponse(data); break;
         }
     }
 
-	onRequest(_){}
+	onResponse(_){}
 
-	response(to, data){
+	request(to, subject, detail){
+		this.send('data', msg.create(
+			this.address,
+			this.peers[to],
+			subject,
+			detail ) )
+	}
+
+
+	example(to, data){
 		this.send('data', msg.create(
 			this.address,
 			to,
-			'response',
+			'example',
 			data ) )
 	}
 
