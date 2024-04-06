@@ -4,9 +4,9 @@ module.exports= {
 		//host: 'http://127.0.0.1:20000',
 
 		credentials: {
-			accesskey: '200005',
-			password: 'a30ca15b-b318-4095-a776-14f9e61f53b1',
-			address: 'chess.playground.4da'
+			accesskey: '200010',
+			password: 'c726db88-9eef-4941-93f5-e81bead31eff',
+			address: 'arbiter.chess.playground.4da'
 		},
 
 		peers: {
