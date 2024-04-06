@@ -10,9 +10,14 @@ let frame = document.getElementById('frame')
 
 export default class Ket{
     constructor(){
-        this.registerComponents()        
+        this.registerComponents()
 
         frame.handle = (id, data) => this.handleUser(id, data)
+    }
+
+    init(data){
+	state.session = data
+	this.on('list', {})
     }
 
     update(id, data){
@@ -27,10 +32,11 @@ export default class Ket{
     }
 
     handleUser(id,  command){
-        console.log(id, command)
-
         switch(command.id){
             case 'play' : window.location = command.location; break;
+            case 'repo' : window.location = command.location; break;
+            case 'youtube' : window.location = command.location; break;
+            case 'instagram' : window.location = command.location; break;
         }
     }
 
