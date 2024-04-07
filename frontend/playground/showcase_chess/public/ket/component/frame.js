@@ -100,7 +100,7 @@ export default class Frame extends Element{
     }
 
     set data(value){
-        this.get('content').innerHTML = value
+        this.board.data = value.board
     }
 
     onResize(size){

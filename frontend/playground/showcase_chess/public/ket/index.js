@@ -16,7 +16,15 @@ export default class Ket{
     }
 
     init(data){
-        state.session = data
+        state.session = data.session
+
+        frame.data = {
+            board: {
+                pieces: data.pieces,
+                configuration: state.configuration
+            }
+        }
+        
         this.on('x')
     }
 

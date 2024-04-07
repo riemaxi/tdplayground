@@ -83,7 +83,18 @@ export default class Board extends Element{
     }
 
     set data(value){
-        let {backgraound, pieces, piece} = value
-        console.log('board data', backgraound, pieces, piece)
+        let {configuration, pieces} = value
+
+        let canvas = this.get('canvas')
+        let place = (id, c, r) => {
+            if (id !== ''){
+                let template = document.createElement('template')
+                template.innerHTML = pieces[id]?.replace('X', c)?.replace('Y', r)
+                canvas.appendChild(template.content.cloneNode(true))
+            }
+        }
+
+        configuration.forEach((row,i) => row.forEach((id,j) => place(id, j, i) ))
+
     }
 }
