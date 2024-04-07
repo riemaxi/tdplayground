@@ -108,10 +108,16 @@ export default class Frame extends Element{
         if (size.width > size.height){
             this.content.style.gridTemplateRows = '1fr'
             this.content.style.gridTemplateColumns = '1fr 2fr 1fr'
+
+            this.board.show(.4 * size.width)
         }
         else{
             this.content.style.gridTemplateColumns = '1fr'
             this.content.style.gridTemplateRows = '1fr 2fr 1fr'
+
+            this.board.show(size.width)
         }
+
+
     }
 }
