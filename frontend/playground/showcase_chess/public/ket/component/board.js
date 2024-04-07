@@ -46,7 +46,7 @@ export default class Board extends Element{
     }
 
     cell(r,c){
-        let color = (r % 2 && !(c % 2)) || (c % 2 && !(r % 2)) ? 'green' : 'white'
+        let color = (r % 2 && !(c % 2)) || (c % 2 && !(r % 2)) ? '#8DD06C' : 'white'
         return `<rect class="cell" id="${c}-${r}" x="${c}" y="${r}" width="1" height="1" fill="${color}"/>`
     }
 
