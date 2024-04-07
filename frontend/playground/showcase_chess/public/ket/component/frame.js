@@ -33,7 +33,6 @@ const content = `
         _width: 40%;
         height: 100%;
     }
-
 </style>
 <div id="root">
     <div id="content">
@@ -97,13 +96,18 @@ export default class Frame extends Element{
 
         window.onresize = () => this.onResize(this.size)
         window.ondeviceorientation = () => this.onResize(this.size)
+
+        this.board.onMove = e => console.log('move', e)
     }
 
     set data(value){
         this.board.data = value.board
+        this.board.show()
     }
 
     onResize(size){
+        if (!this.board.data)
+            return
 
         if (size.width > size.height){
             this.content.style.gridTemplateRows = '1fr'

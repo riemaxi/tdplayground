@@ -20,7 +20,6 @@ export default class Ket{
 
         frame.data = {
             board: {
-                pieces: data.pieces,
                 configuration: state.configuration
             }
         }

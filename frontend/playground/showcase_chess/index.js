@@ -1,21 +1,5 @@
 const config = require('./config')
 
-let pieces = () => {
-	const fs = require('fs')
-
-	let images = fs.readdirSync('./data/piece')
-	
-	let list = {}
-	images.forEach(path => {
-		let image =  fs.readFileSync('./data/piece/' + path, {encoding: 'utf-8'})
-
-		let id = path.split('.')[0]
-		list[id] = image
-	} )
-
-	return list
-}
-
 let prompt = new class extends require('./prompt'){
 	constructor(){
 		super(config.prompt)
@@ -46,7 +30,7 @@ class Session{
 
 		this.socket.on('x', data => prompt.request({to: id, ...data}))
 
-		this.notify('init', { session: {id}, pieces: pieces()})
+		this.notify('init', { session: {id}})
 	}
 
 	notify(id, data){
