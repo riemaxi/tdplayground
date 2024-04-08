@@ -119,15 +119,7 @@ export default class Board extends Element{
     }
 
     get configuration(){
-        let grid = [...Array(8)].map((_, r) => [...Array(8)].map((_,c) => '' ))
-        this.queryAll('.symbol').forEach(s => {
-            let pos = s.id.split('-').slice(1).map(v => parseInt(v))
-
-            grid[pos[0]][pos[1]] = s.id
-         })
-
-         return grid
-
+        return this.queryAll('.symbol').map(s => s.id)
     }
 
     set piece(value){
@@ -165,8 +157,8 @@ export default class Board extends Element{
             this.current.setAttribute('y', position[1] + .8)
             this.current.style.fontWeight = ''
 
-            this.current.id = `${name}-${position[0]}-${position[1]}`            
-
+            this.current.id = `${name}-${position[1]}-${position[0]}`    
+            
             this.onMove({piece: name, oldPosition, position, configuration: this.configuration })
 
             this.current = null

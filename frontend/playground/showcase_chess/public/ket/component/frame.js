@@ -71,7 +71,7 @@ export default class Frame extends Element{
         window.onresize = () => this.onResize(this.size)
         window.ondeviceorientation = () => this.onResize(this.size)
 
-        this.board.onMove = e => console.log('move', this.board.configuration)
+        this.board.onMove = e => console.log('move')
         this.toolbar.onRotate = id => this.board.rotate(id)
     }
 
