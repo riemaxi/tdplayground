@@ -22,7 +22,7 @@ const content = `
     }
 
     #session{
-        _height: 100%;
+        height: 100px;
     }
 
     #toolbar{
@@ -73,6 +73,10 @@ export default class Frame extends Element{
 
         this.board.onMove = e => console.log('move', e)
         this.toolbar.onRotate = id => this.board.rotate(id)
+    }
+
+    get session(){
+        return this.get('session')
     }
 
     set data(value){

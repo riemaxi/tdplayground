@@ -18,6 +18,8 @@ export default class Ket{
     init(data){
         state.session = data.session
 
+        frame.session.id = state.session.id
+
         frame.data = {
             board: {
                 configuration: state.configuration
