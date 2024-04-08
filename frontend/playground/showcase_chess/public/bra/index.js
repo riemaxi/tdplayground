@@ -4,17 +4,19 @@ export default class Bra{
         this.socket = io()
 
         this.socket.on('init', data => this.onInit(data))
-        this.socket.on('response', data => this.onResponse(data))
+        this.socket.on('move', data => this.onMove(data))
+        this.socket.on('invite', data => this.onInvite(data))
+        this.socket.on('role', data => this.onRole(data))
+        this.socket.on('paste', data => this.onPaste(data))
     }
 
     send(id, data){
         this.socket.emit(id, data)
     }
 
-    sendRequest(id, data){
-        this.send(id, data)
-    }
-
-    onResponse(_){}
+    onMove(_){}
+    onInvite(_){}
+    onRole(_){}
+    onPaste(_){}
     onInit(_){}
 }

@@ -67,7 +67,7 @@ export default class Toolbar extends Element{
         perspectives.forEach(p => p.onclick = () => this.onRotate(p.id))
 
         let  clipboard = this.queryAll('.clipboard-action')
-        clipboard.forEach(b => b.onclick = () => console.log(b.id))
+        clipboard.forEach(b => b.onclick = () => this.handle(b.id))
     }
 
     onRotate(_){}

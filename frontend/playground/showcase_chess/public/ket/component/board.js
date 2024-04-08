@@ -50,6 +50,8 @@ export default class Board extends Element{
     constructor(){
         super(content)
 
+        this.role = 'w'
+        
         this.control()
     }
 
@@ -89,9 +91,16 @@ export default class Board extends Element{
     }
 
     control(){
+        this.controlCells()
+        this.controlSymbols()
+    }
+
+    controlCells(){
         let cells = this.queryAll('.cell')
         cells.forEach(cell => cell.onclick = () => this.handleCell(cell))
+    }
 
+    controlSymbols(){
         let symbols = this.queryAll('.symbol')
         symbols.forEach(symbol => symbol.onclick = () => this.handleSymbol(symbol) )
     }
@@ -118,6 +127,14 @@ export default class Board extends Element{
         console.log('board utility', value)
     }
 
+    set configuration(value){
+        this.current = null
+        this.queryAll('.symbol').forEach(s => s.remove())
+        this.buildPieces(value)
+
+        this.control()
+    }
+
     get configuration(){
         return this.queryAll('.symbol').map(s => s.id)
     }
@@ -136,20 +153,31 @@ export default class Board extends Element{
     }
 
     handleSymbol(symbol){
-        if (this.current){
-            this.current.style.fontWeight = ''
+        let name = symbol.id.split('-')[0]
+        console.log('name', name, this.role)
+
+        if (!this.role)
+            return
+
+
+        if (this.role === 'both' || this.role === name[0]){
+
+            if (this.current){
+                this.current.style.fontWeight = ''
+            }
+
+            this.current = symbol 
+            this.current.style.fontWeight = 'bold'
+
+            this.onSymbol(symbol.id)
         }
-
-        this.current = symbol 
-        this.current.style.fontWeight = 'bold'
-
-        this.onSymbol(symbol.id)
     }
 
     handleCell(cell){
         if (this.current){
             let vector = this.current.id.split('-')
             let name = vector[0]
+
             let oldPosition = vector.slice(1).map(v => parseInt(v))
             let position = cell.id.split('-').map(v => parseInt(v))
 

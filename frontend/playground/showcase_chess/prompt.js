@@ -37,19 +37,24 @@ module.exports = class Prompt extends require('../../core/session'){
 
 	onCommand(data, valid, signal){
 		switch(data.subject){
-			case 'response': this.onResponse(data); break;
+			case 'move': this.onMove(data); break;
+			case 'invite': this.onInvite(data); break;
+			case 'paste': this.onPaste(data); break;
+			case 'role': this.onRole(data); break;
         }
     }
 
-	onResponse(_){}
+	onMove(_){}
+	onPaste(_){}
+	onInvite(_){}
+	onRole(_){}
 
-	request(detail){
+	notify(subject, detail){
 		this.send('data', msg.create(
 			this.address,
-			this.peers.sp,
-			'request',
+			this.peers.hub,
+			subject,
 			detail ) )
 	}
-
 }
 

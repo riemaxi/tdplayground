@@ -13,24 +13,44 @@ let prompt = new class extends require('./prompt'){
 		console.log('granted as', this.address)
 	}
 
-	onResponse(data){
-		let {request, response} = data.detail
+	onMove(e){
+		console.log('on move', e.detail)
+	}
 
-		console.log('response', response, 'to', request.detail.to)
-		desk.notify(request.detail.to, 'response', response)
+	onPaste(e){
+		console.log('on paste', e.detail)
+	}
+
+	onInvite(e){
+		console.log('on invite', e.detail)
+	}
+
+	onRole(e){
+		console.log('on role', e.detail)
 	}
 }
 
 class Session{
 	constructor(socket, id){
 		this.socket = socket
-		this.id = id
+		this.id = id	
 
-		console.log('open', id)
-
-		this.socket.on('x', data => prompt.request({to: id, ...data}))
+		this.socket.on('move', data => this.handleEvent('move', data))
+		this.socket.on('invite', data => this.handleEvent('invite', data))
+		this.socket.on('role', data => this.handleEvent('role', data))
+		this.socket.on('paste', data => this.handleEvent('paste', data))
 
 		this.notify('init', { session: {id}})
+	}
+
+	handleEvent(id, data){
+		console.log(id, {to: this.id, data})
+		
+		if (desk.getSession(data.peer))
+			desk.notify(data.peer, id, {to: this.id, data})
+		else{
+			prompt.notify(id, {to: this.id, data})
+		}
 	}
 
 	notify(id, data){
@@ -38,7 +58,6 @@ class Session{
 	}
 
 	close(){
-		console.log('closed', this.id)
 	}
 }
 
@@ -46,6 +65,10 @@ let desk = new class extends require('../../core/ns.desk'){
 	constructor(){
 		super(config.desk)
 		this.sessions = {}
+	}
+
+	getSession(id){
+		return this.sessions[id]
 	}
 
 	notify(to, id, data){

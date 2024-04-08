@@ -14,4 +14,18 @@ export default class State{
             ['wr-7-0','wn-7-1','wb-7-2','wq-7-3','wk-7-4','wb-7-5','wn-7-6','wr-7-7']
         ]
     }
+
+    normalize(configuration){
+        let grid = [...Array(8)].map(() => [...Array(8)].map(() => ''))
+
+        configuration.forEach(p => {
+            let vector = p.split('-')
+            let col = vector[1]
+            let row = vector[2]
+
+            grid[col][row] = p
+        })
+
+        return grid
+    }
 }

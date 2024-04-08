@@ -82,8 +82,8 @@ const content = `
                 <img src="./img/invite.png">
             </div>
             <div id="role">
-                <div class="role-box" id="black-box"><input id="black" type="radio" name="role"></div>
-                <div class="role-box" id="white-box"><input id="white" type="radio" name="role" checked></div>
+                <div class="role-box" id="black-box"><input id="black" type="checkbox"></div>
+                <div class="role-box" id="white-box"><input id="white" type="checkbox" checked></div>
             </div>
         </div>
     </div>
@@ -100,7 +100,13 @@ export default class Session extends Element{
     }
 
     control(){
+        this.queryAll('.role-box').forEach(rb => rb.onclick = () => this.handleRole())
+    }
 
+    get peer(){
+        return {
+            id: this.get('peer-id').innerText
+        }
     }
 
     registerComponents(){
@@ -111,7 +117,24 @@ export default class Session extends Element{
         console.log('session data', value)
     }
 
-    set id(value){
-        this.get('id').innerText = value
+    set peer(value){
+        this.get('id').innerText = value.id
+    }
+
+    handleRole(){
+        let w = this.get('white')
+        let b = this.get('black')
+
+        let role = null 
+        if (b.checked && w.checked) 
+            role = 'both'
+
+        if (b.checked && !w.checked)
+             role = 'b'
+
+        if (w.checked && !b.checked)
+            role = 'w'
+
+        this.handle('role', role)
     }
 }

@@ -18,38 +18,44 @@ export default class Ket{
     init(data){
         state.session = data.session
 
-        frame.session.id = state.session.id
+        frame.session.peer = state.session
 
         frame.data = {
             board: {
                 configuration: state.configuration
             }
         }
-        
-        this.on('x')
     }
 
     update(id, data){
         frame.data = data
     }
 
-    handlePaste(){
+    handleUserRole(data){
+        frame.board.role = data
+
+        if (data && data !== 'both')
+            this.on('role', {peer: frame.session.peer, data})
+    }
+
+    handleUserPaste(){
         navigator.clipboard.readText()
             .then(data => {
-                let configuration = JSON.parse(data)
-                frame.data = {
-                    configuration
-                }
+                let json = JSON.parse(data)
+                let configuration = state.normalize(json)
+                frame.board.configuration = configuration
+
+                this.on('paste', {peer: frame.session.peer, data: configuration})
             })
     }
 
-
     handleUser(id, data){
         switch(id){
-            case 'copy' : navigator.clipboard.writeText(JSON.stringify(data)); break;
-            case 'paste' : this.handlePaste(); break;
-            case 'move' : this.on('move', data); break;
-            case 'invite' : this.on('invite', data); break;
+            case 'copy' : navigator.clipboard.writeText(JSON.stringify(frame.board.configuration)); break;
+            case 'paste' : this.handleUserPaste(); break;
+            case 'move' : this.on('move', {peer: frame.session.peer, data}); break;
+            case 'invite' : this.on('invite', {peer: frame.session.peer, data}); break;
+            case 'role' : this.handleUserRole(data) ; break;
         }
     }
 
