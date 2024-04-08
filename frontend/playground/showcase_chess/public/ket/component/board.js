@@ -66,22 +66,22 @@ export default class Board extends Element{
         return `<rect class="cell" id="${c}-${r}" x="${c}" y="${r}" width="1" height="1" fill="${color}"/>`
     }
 
-    show(){
+    draw(data){
         this.scale = {
             x: this.board.getBoundingClientRect().width / 8,
             y : this.board.getBoundingClientRect().height / 8
         }
   
-        this.board.innerHTML.trim() && this.rescale() ||  this.build()
+        this.canvas ? this.rescale() : this.build(data.configuration)
 
         this.control()
     }
 
-    build(){
+    build(configuration){
         let grid = [...Array(8)].map((_, r) => [...Array(8)].map((_,c) => 0 ))
         this.board.innerHTML = `<g id="canvas" transform="scale(${this.scale.x},${this.scale.y})">` +  grid.map((r,i)  => r.map((c,j) => this.cell(i,j)).join('') ).join('') + '</g>'
 
-        this.buildPieces()
+        this.buildPieces(configuration)
     }
 
     rescale(){
@@ -96,16 +96,20 @@ export default class Board extends Element{
         symbols.forEach(symbol => symbol.onclick = () => this.handleSymbol(symbol) )
     }
 
-    buildPieces(){
+    buildPieces(configuration){
         let symbol = {  'br':'♜',bn:'♞',bb:'♝',bk:'♚',bq:'♛',bp:'♟', 
                         'wr':'♖',wn:'♘',wb:'♗',wk:'♔',wq:'♕',wp:'♙' }
 
         let piece = (id, c, r) => {
-            let shape = symbol[id] //this.pieces[id]?.replace('X', c)?.replace('Y', r)
-            return id !== '' ? `<text id="${id}-${c}-${r}" x="${c + .2}"  y="${r + .8}" class="symbol">${shape}</text>`: ''
+            if (id == '')
+                return ''
+
+            let vector = id.split('-')
+            let shape = symbol[vector[0]]
+            return `<text id="${id}" x="${c + .2}"  y="${r + .8}" class="symbol">${shape}</text>`
         }
 
-        let svgcontent = this.configuration.map((row, i) => row.map((id, j) => piece(id, j,i)).join('') ).join('')
+        let svgcontent = configuration.map((row, i) => row.map((id, j) => piece(id, j,i)).join('') ).join('')
         this.canvas.innerHTML += svgcontent
 
     }
@@ -119,8 +123,8 @@ export default class Board extends Element{
     }
 
     set data(value){
-        let {configuration} = value
-        this.configuration = configuration
+        /*let {configuration} = value
+        this.configuration = configuration*/
     }
 
     get data(){
@@ -152,8 +156,8 @@ export default class Board extends Element{
             this.current.style.fontWeight = ''
 
             this.current.id = `${name}-${position[0]}-${position[1]}`            
-            this.configuration[position[1]][position[0]] = name
-            this.configuration[oldPosition[1]][oldPosition[0]] = ''
+            //this.configuration[position[1]][position[0]] = name
+            //this.configuration[oldPosition[1]][oldPosition[0]] = ''
 
             this.onMove({piece: name, oldPosition, position, configuration: this.configuration })
 

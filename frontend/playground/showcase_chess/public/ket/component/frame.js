@@ -80,14 +80,10 @@ export default class Frame extends Element{
     }
 
     set data(value){
-        this.board.data = value.board
-        this.board.show()
+        this.board.draw(value.board)
     }
 
     onResize(size){
-        if (!this.board.data)
-            return
-
         if (size.width > size.height){
             this.content.style.width = size.height + 'px'
         }
@@ -95,7 +91,7 @@ export default class Frame extends Element{
             this.content.style.height = size.width + 'px'
         }
 
-        this.board.show()
+        this.board.draw()
 
     }
 }
