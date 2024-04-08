@@ -7,7 +7,6 @@ let ket = new class extends Ket{
     }
 
     on(id, data){
-        console.log(id, data)
         bra.send(id, data)
     }
 }

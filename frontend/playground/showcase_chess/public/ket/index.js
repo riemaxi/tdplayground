@@ -54,7 +54,7 @@ export default class Ket{
             case 'copy' : navigator.clipboard.writeText(JSON.stringify(frame.board.configuration)); break;
             case 'paste' : this.handleUserPaste(); break;
             case 'move' : this.on('move', {peer: frame.session.peer, data}); break;
-            case 'invite' : this.on('invite', {peer: frame.session.peer, data}); break;
+            case 'invite' : this.on('invite', data); break;
             case 'role' : this.handleUserRole(data) ; break;
             case 'copy-id' : navigator.clipboard.writeText(data); break;
         }

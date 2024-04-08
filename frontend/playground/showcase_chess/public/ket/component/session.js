@@ -79,7 +79,7 @@ const content = `
         <div id="footer">
             <div id="peer-box">
                 <input id="peer-id" type="text" placeholder="peer id">
-                <img src="./img/invite.png">
+                <img id="invite" src="./img/invite.png">
             </div>
             <div id="role">
                 <div class="role-box" id="black-box"><input id="black" type="checkbox"></div>
@@ -103,6 +103,7 @@ export default class Session extends Element{
         this.queryAll('.role-box').forEach(rb => rb.onclick = () => this.handleRole())
 
         this.get('copy').onclick = () => this.handle('copy-id', this.localId )
+        this.get('invite').onclick = () => this.handle('invite', this.peer.id )
     }
 
     get localId(){
@@ -115,7 +116,7 @@ export default class Session extends Element{
 
     get peer(){
         return {
-            id: this.get('peer-id').innerText
+            id: this.get('peer-id').value
         }
     }
 
