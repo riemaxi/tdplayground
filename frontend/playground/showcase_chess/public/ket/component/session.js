@@ -101,6 +101,16 @@ export default class Session extends Element{
 
     control(){
         this.queryAll('.role-box').forEach(rb => rb.onclick = () => this.handleRole())
+
+        this.get('copy').onclick = () => this.handle('copy-id', this.localId )
+    }
+
+    get localId(){
+        return this.get('id').innerText
+    }
+
+    set localId(value){
+        this.get('id').innerText = value
     }
 
     get peer(){
@@ -118,7 +128,7 @@ export default class Session extends Element{
     }
 
     set peer(value){
-        this.get('id').innerText = value.id
+        this.get('peer-id').innerText = value.id
     }
 
     handleRole(){

@@ -18,7 +18,7 @@ export default class Ket{
     init(data){
         state.session = data.session
 
-        frame.session.peer = state.session
+        frame.session.localId = state.session.id
 
         frame.data = {
             board: {
@@ -56,6 +56,7 @@ export default class Ket{
             case 'move' : this.on('move', {peer: frame.session.peer, data}); break;
             case 'invite' : this.on('invite', {peer: frame.session.peer, data}); break;
             case 'role' : this.handleUserRole(data) ; break;
+            case 'copy-id' : navigator.clipboard.writeText(data); break;
         }
     }
 
