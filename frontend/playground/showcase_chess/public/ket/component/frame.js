@@ -13,24 +13,23 @@ const content = `
     }
 
     #content{
-        display: grid;
-        grid-template-columns: 1fr 2fr 1fr;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
         width: 100%;
         height: 100%;
+        margin: auto;
     }
 
     #session{
-        _width: 30%;
-        height: 100%;
+        _height: 100%;
     }
 
     #toolbar{
-        _width: 30%;
-        height: 100%;
+        _height: 100%;
     }
 
     #board{
-        _width: 40%;
         height: 100%;
     }
 </style>
@@ -42,32 +41,6 @@ const content = `
     </div>
 </div>
 `
-
-/**
- tool
- - create
- - remove
- - get
- - copy
- - paste
- 
-session
-  game id
-  messaging: write, send, history, latest
-  timer
-  
- board:
-    background
-	pieces
-	selected  piece
-	
- state:
-	game id
-   oponent
-   role
-   configuration
-   time
- */
 
 export default class Frame extends Element{
     constructor(){
@@ -93,11 +66,13 @@ export default class Frame extends Element{
         this.root = this.get('root')
         this.content = this.get('content')
         this.board = this.get('board')
+        this.toolbar = this.get('toolbar')
 
         window.onresize = () => this.onResize(this.size)
         window.ondeviceorientation = () => this.onResize(this.size)
 
         this.board.onMove = e => console.log('move', e)
+        this.toolbar.onRotate = id => this.board.rotate(id)
     }
 
     set data(value){
@@ -110,18 +85,13 @@ export default class Frame extends Element{
             return
 
         if (size.width > size.height){
-            this.content.style.gridTemplateRows = '1fr'
-            this.content.style.gridTemplateColumns = '1fr 2fr 1fr'
-
-            this.board.show(.4 * size.width)
+            this.content.style.width = size.height + 'px'
         }
         else{
-            this.content.style.gridTemplateColumns = '1fr'
-            this.content.style.gridTemplateRows = '1fr 2fr 1fr'
-
-            this.board.show(size.width)
+            this.content.style.height = size.width + 'px'
         }
 
+        this.board.show()
 
     }
 }

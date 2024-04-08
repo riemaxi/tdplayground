@@ -13,12 +13,24 @@ const content = `
         width: 100%;
         height: 100%;
         margin: auto;
+
+        transform-box: fill-box;
+        transform-origin: center;
+        transform: rotate(0deg);        
     }
 
     .symbol{
         font-size: .04em;
         color: white;
         border: 1px solid red;
+        cursor: grab;
+
+        transform-box: fill-box;
+        transform-origin: center;
+        transform: rotate(0deg);        
+    }
+
+    .cell{
         cursor: pointer;
     }
 
@@ -45,15 +57,16 @@ export default class Board extends Element{
         return this.get('board')
     }
 
+    get canvas(){
+        return this.get('canvas')
+    }
+
     cell(r,c){
         let color = (r % 2 && !(c % 2)) || (c % 2 && !(r % 2)) ? '#8DD06C' : 'white'
         return `<rect class="cell" id="${c}-${r}" x="${c}" y="${r}" width="1" height="1" fill="${color}"/>`
     }
 
-    show(height){
-        if (height)
-            this.board.style.height = height + 'px'
-
+    show(){
         this.scale = {
             x: this.board.getBoundingClientRect().width / 8,
             y : this.board.getBoundingClientRect().height / 8
@@ -72,8 +85,7 @@ export default class Board extends Element{
     }
 
     rescale(){
-        let canvas = this.get('canvas')
-        canvas.setAttribute('transform', `scale(${this.scale.x},${this.scale.y})`)
+        this.canvas.setAttribute('transform', `scale(${this.scale.x},${this.scale.y})`)
     }
 
     control(){
@@ -88,15 +100,13 @@ export default class Board extends Element{
         let symbol = {  'br':'♜',bn:'♞',bb:'♝',bk:'♚',bq:'♛',bp:'♟', 
                         'wr':'♖',wn:'♘',wb:'♗',wk:'♔',wq:'♕',wp:'♙' }
 
-        let canvas = this.get('canvas')
-
         let piece = (id, c, r) => {
             let shape = symbol[id] //this.pieces[id]?.replace('X', c)?.replace('Y', r)
             return id !== '' ? `<text id="${id}-${c}-${r}" x="${c + .2}"  y="${r + .8}" class="symbol">${shape}</text>`: ''
         }
 
         let svgcontent = this.configuration.map((row, i) => row.map((id, j) => piece(id, j,i)).join('') ).join('')
-        canvas.innerHTML += svgcontent
+        this.canvas.innerHTML += svgcontent
 
     }
 
@@ -149,6 +159,13 @@ export default class Board extends Element{
 
             this.current = null
         }
+    }
+
+    rotate(id){
+        let deg = id === '0' ? '0deg' : '180deg'
+
+        this.board.style.transform = `rotate(${deg})`
+        this.queryAll('.symbol').forEach(s => s.style.transform = `rotate(${deg})`)
     }
 
     onSymbol(_){}    

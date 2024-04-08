@@ -1,7 +1,5 @@
 import Element from "./common/element.js"
 
-import Chat from "./chat.js"
-
 const content = `
 <style>
     #root{
@@ -29,7 +27,6 @@ export default class Session extends Element{
     }
 
     registerComponents(){
-        window.customElements.define('frame-chat', Chat)
     }
 
 
