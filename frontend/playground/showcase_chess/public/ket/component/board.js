@@ -118,13 +118,23 @@ export default class Board extends Element{
         console.log('board utility', value)
     }
 
+    get configuration(){
+        let grid = [...Array(8)].map((_, r) => [...Array(8)].map((_,c) => '' ))
+        this.queryAll('.symbol').forEach(s => {
+            let pos = s.id.split('-').slice(1).map(v => parseInt(v))
+
+            grid[pos[0]][pos[1]] = s.id
+         })
+
+         return grid
+
+    }
+
     set piece(value){
         console.log('board piece', value)
     }
 
     set data(value){
-        /*let {configuration} = value
-        this.configuration = configuration*/
     }
 
     get data(){
@@ -156,8 +166,6 @@ export default class Board extends Element{
             this.current.style.fontWeight = ''
 
             this.current.id = `${name}-${position[0]}-${position[1]}`            
-            //this.configuration[position[1]][position[0]] = name
-            //this.configuration[oldPosition[1]][oldPosition[0]] = ''
 
             this.onMove({piece: name, oldPosition, position, configuration: this.configuration })
 
