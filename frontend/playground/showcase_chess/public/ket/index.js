@@ -33,8 +33,24 @@ export default class Ket{
         frame.data = data
     }
 
+    handlePaste(){
+        navigator.clipboard.readText()
+            .then(data => {
+                let configuration = JSON.parse(data)
+                frame.data = {
+                    configuration
+                }
+            })
+    }
+
+
     handleUser(id, data){
-        this.on('x', data)
+        switch(id){
+            case 'copy' : navigator.clipboard.writeText(JSON.stringify(data)); break;
+            case 'paste' : this.handlePaste(); break;
+            case 'move' : this.on('move', data); break;
+            case 'invite' : this.on('invite', data); break;
+        }
     }
 
     registerComponents(){

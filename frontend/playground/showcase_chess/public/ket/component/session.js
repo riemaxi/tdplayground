@@ -19,6 +19,7 @@ const content = `
         display: flex;
         justify-content: center;
         font-size: 15px;
+        gap: 10px;
     }
 
     #copy{
