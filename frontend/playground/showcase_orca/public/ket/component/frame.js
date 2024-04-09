@@ -38,6 +38,19 @@ export default class Frame extends Element{
         this.registerComponents()
 
         this.control()
+
+        this.canvas.data = [...Array(20)].map(() => ({
+            id : Date.now(),
+            shape : ['c', 'r'][Math.floor(Math.random()*2)],
+            data: {
+                color: ['red','blue','green', 'black', 'orange'][Math.floor(Math.random()*5)],
+                x : Math.ceil(Math.random()*40),
+                y : Math.ceil(Math.random()*40),
+                size : Math.ceil(Math.random()*10)
+            }
+
+
+        }))
     }
 
     registerComponents(){
