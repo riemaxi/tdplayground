@@ -1,5 +1,7 @@
 import Element from "./common/element.js"
 
+import Canvas from "./canvas.js"
+
 const content = `
 <style>
     #root{
@@ -12,11 +14,19 @@ const content = `
         display: flex;
         flex-direction: column;
         margin: auto;
+        width: 100%;
+        height: 100%;
+    }
+
+    #canvas{
+        display: flex;
+        width: 100%;
+        height: 100%;
     }
 </style>
 <div id="root">
     <div id="content">
-        ORCA Console
+        <frame-canvas id="canvas"></frame-canvas>
     </div>
 </div>
 `
@@ -31,6 +41,7 @@ export default class Frame extends Element{
     }
 
     registerComponents(){
+        window.customElements.define('frame-canvas', Canvas)
     }
 
     get size(){
@@ -40,6 +51,7 @@ export default class Frame extends Element{
 
     control(){
         this.root = this.get('root')
+        this.canvas = this.get('canvas')
 
         window.onresize = () => this.onResize(this.size)
         window.ondeviceorientation = () => this.onResize(this.size)
@@ -48,5 +60,8 @@ export default class Frame extends Element{
     set data(value){
     }
 
-    onResize(size){}
+    onResize(size){
+        size.width > size.height    ? this.canvas.scale(size.height, size.height )
+                                    : this.canvas.scale(size.width, size.width )
+    }
 }
