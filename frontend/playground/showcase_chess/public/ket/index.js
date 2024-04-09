@@ -35,7 +35,7 @@ export default class Ket{
                         frame.board.configuration = state.normalize(e.data)
                     }; break;
             case 'move' : frame.board.move(e.data.piece, e.data.position); break;
-            case 'paste': frame.board.data = state.normalize(e.data); break;
+            case 'paste': frame.board.configuration = state.normalize(e.data); break;
         }
         
     }
@@ -54,7 +54,7 @@ export default class Ket{
                 let configuration = state.normalize(json)
                 frame.board.configuration = configuration
 
-                this.on('paste', {peer: frame.session.peer.id, data: configuration})
+                this.on('paste', {peer: frame.session.peer.id, data: json})
             })
     }
 
