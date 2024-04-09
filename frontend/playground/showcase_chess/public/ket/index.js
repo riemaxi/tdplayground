@@ -32,10 +32,10 @@ export default class Ket{
         switch(id){
             case 'invite' : {
                         frame.session.peer = {id: e.from}
-                        frame.data = { board: {configuration: e.data}}
+                        frame.board.configuration = state.normalize(e.data)
                     }; break;
             case 'move' : frame.board.move(e.data.piece, e.data.position); break;
-            case 'paste': frame.data = { board: {configuration: e.data}}; break;
+            case 'paste': frame.board.data = state.normalize(e.data); break;
         }
         
     }
