@@ -101,7 +101,7 @@ export default class Session extends Element{
     }
 
     control(){
-        this.queryAll('.role-box').forEach(rb => rb.onclick = () => this.handleRole())
+        this.queryAll('.role-box').forEach(rb => rb.onclick = () => this.handle('role', this.role))
 
         this.get('copy').onclick = () => this.handle('copy-id', this.localId )
         this.get('invite').onclick = () => this.handle('invite', this.peer.id )
@@ -129,24 +129,32 @@ export default class Session extends Element{
         console.log('session data', value)
     }
 
+    get role(){
+        let w = this.get('white')
+        let b = this.get('black')
+
+        if (b.checked && w.checked) 
+            return 'both'
+
+        if (b.checked && !w.checked)
+             return 'b'
+
+        if (w.checked && !b.checked)
+            return 'w'
+
+        return null
+    }
+
+    set role(value){
+        this.get('white').checked = value == 'w'
+        this.get('black').checked = value ==  'b'
+    }
+
     set peer(value){
         this.get('peer-id').value = value.id
     }
 
     handleRole(){
-        let w = this.get('white')
-        let b = this.get('black')
-
-        let role = null 
-        if (b.checked && w.checked) 
-            role = 'both'
-
-        if (b.checked && !w.checked)
-             role = 'b'
-
-        if (w.checked && !b.checked)
-            role = 'w'
-
-        this.handle('role', role)
+        //this.handle('role', this.role)
     }
 }

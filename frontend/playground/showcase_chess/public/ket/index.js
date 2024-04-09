@@ -28,11 +28,13 @@ export default class Ket{
     }
 
     update(id, e){
-        console.log(id, e)
         switch(id){
             case 'invite' : {
                         frame.session.peer = {id: e.from}
-                        frame.board.configuration = state.normalize(e.data)
+                        frame.board.configuration = state.normalize(e.data.configuration)
+
+                        let role = e.data.role == 'w' ? 'b' : 'w'
+                        frame.board.role = frame.session.role = role
                     }; break;
             case 'move' : frame.board.move(e.data.piece, e.data.position); break;
             case 'paste': frame.board.configuration = state.normalize(e.data); break;
@@ -63,7 +65,7 @@ export default class Ket{
             case 'copy' : navigator.clipboard.writeText(JSON.stringify(frame.board.configuration)); break;
             case 'paste' : this.handleUserPaste(); break;
             case 'move' : this.on('move', {peer: frame.session.peer.id, data}); break;
-            case 'invite' : this.on('invite', {peer: data, data: frame.board.configuration}); break;
+            case 'invite' : this.on('invite', {peer: data, data: {configuration: frame.board.configuration, role: frame.session.role}}); break;
             case 'role' : this.handleUserRole(data) ; break;
             case 'copy-id' : navigator.clipboard.writeText(data); break;
         }
