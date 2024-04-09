@@ -8,13 +8,17 @@ const content = `
         height: 100%;
     }
 
+    .object{
+        cursor: pointer;
+    }
+
 </style>
 <div id="root">
-    <svg width="100%" height="100%">
-        <g id="content"></g>
+    <svg id="canvas" width="100%" height="100%">
     </svg>  
 </div>
 `
+
 
 export default class Canvas extends Element{
     constructor(){
@@ -25,39 +29,92 @@ export default class Canvas extends Element{
             y: 50
         }
 
-        this.content = this.get('content')
+        this.canvas = this.get('canvas')
+
+        this.ratio = {
+            x: this.canvas.getBoundingClientRect().width / this.size.x ,
+            y: this.canvas.getBoundingClientRect().height / this.size.y
+        }
+    }
+
+    control(){
+        this.queryAll('.object').forEach(o => {
+            o.onpointerdown = e => {
+                this.selectObject(o)
+                this.control()
+
+                this.current = o
+                this.delta = {
+                    x: e.offsetX - o.getAttribute('x'),
+                    y: e.offsetY - o.getAttribute('y')
+                }
+            }
+
+            o.onpointerup = e => {
+                this.current = null
+                this.delta = null
+            }
+        })
+
+        this.canvas.onpointermove = e => {
+            if (!this.current)
+            return 
+
+            let r = this.canvas.getBoundingClientRect()
+
+            let x = e.clientX - r.x - this.delta.x
+            let y = e.clientY - r.y - this.delta.y
+
+            this.current.setAttribute('x', x)
+            this.current.setAttribute('y', y)
+
+            let item = this.items[this.current.id]
+            item.data.x = x / this.ratio.x
+            item.data.y = y / this.ratio.y
+        }
+
+    }
+
+    selectObject(o){
+        o.remove()
+        this.canvas.appendChild(o)
     }
 
     addObject(data){
-        this.content.innerHTML += this.circle(data)
-    }
-
-    circle(id, data){
-        let {x,y, size, color} = data
-        return `<circle id="${id}" cx=${x} cy="${y}" r="${size}" fill="${color}" />`
+        this.canvas.innerHTML += this.object(data)
     }
 
     rectangle(id, data){
         let {x,y, size, color} = data
-        return `<rect id="${id}" x=${x} y="${y}" width="${size}" height="${size}" fill="${color}" rx="15" />`
+        return `<rect class="object" id="${id}" x=${x * this.ratio.x} y="${y *  this.ratio.y}" width="${x * this.ratio.x}" height="${size * this.ratio.x}" fill="${color}" rx="${this.ratio.x}" />`
     }
 
     object(o){
-        switch(o.shape){
-            case 'c' : return this.circle(o.id, o.data)
-            case 'r' : return this.rectangle(o.id, o.data)
-        }
+          return this.rectangle(o.id, o.data)
     }
     
     set data(value){
-        this.content.innerHTML = value.map(item => this.object(item) ).join('')
+        this.items = value
+        this.canvas.innerHTML = Object.values(this.items).map(item => this.object(item) ).join('')
+
+        this.control()
     }
 
     scale(w, h){
-        let xs = w / this.size.x
-        let ys = h / this.size.y
+        this.ratio = {
+            x: w / this.size.x,
+            y: h / this.size.y
+        }
 
-        this.content.setAttribute('transform', `scale(${xs} ${ys})`)
+        this.queryAll('.object').forEach(o => {
+            let item = this.items[o.id]
+            o.setAttribute('x', item.data.x * this.ratio.x)
+            o.setAttribute('y', item.data.y * this.ratio.y)
+
+            o.setAttribute('width', item.data.size * this.ratio.x)
+            o.setAttribute('height', item.data.size * this.ratio.y)
+        })
+ 
     }
 
 
