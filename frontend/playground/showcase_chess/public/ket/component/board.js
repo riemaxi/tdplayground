@@ -178,16 +178,15 @@ export default class Board extends Element{
             let vector = this.current.id.split('-')
             let name = vector[0]
 
-            let oldPosition = vector.slice(1).map(v => parseInt(v))
             let position = cell.id.split('-').map(v => parseInt(v))
 
             this.current.setAttribute('x', position[0] + .2)
             this.current.setAttribute('y', position[1] + .8)
             this.current.style.fontWeight = ''
 
-            this.current.id = `${name}-${position[1]}-${position[0]}`    
+            this.current.id = `${name}-${position[0]}-${position[1]}`    
             
-            this.onMove({piece: name, oldPosition, position, configuration: this.configuration })
+            this.onMove({piece: vector.join('-') , position })
 
             this.current = null
         }
@@ -198,6 +197,17 @@ export default class Board extends Element{
 
         this.board.style.transform = `rotate(${deg})`
         this.queryAll('.symbol').forEach(s => s.style.transform = `rotate(${deg})`)
+    }
+
+    move(id, position){
+        let name = id.split('-')[0]
+        let piece = this.get(id)
+
+        piece.setAttribute('x', position[0] + .2)
+        piece.setAttribute('y', position[1] + .8)
+
+        piece.id = `${name}-${position[1]}-${position[0]}`    
+   
     }
 
     onSymbol(_){}    

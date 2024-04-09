@@ -43,17 +43,17 @@ class Session{
 		this.notify('init', { session: {id}})
 	}
 
-	handleEvent(id, data){
-		console.log(id, {to: this.id, data})
-		
-		if (desk.getSession(data.peer))
-			desk.notify(data.peer, id, {to: this.id, data})
+	handleEvent(id, e){
+		console.log(id, e)
+		if (desk.getSession(e.peer))
+			desk.notify(e.peer, id, {from: this.id, data: e.data})
 		else{
-			prompt.notify(id, {to: this.id, data})
+			prompt.notify(id, {from: this.id, to: e.peer, data: e.data})
 		}
 	}
 
 	notify(id, data){
+		console.log('notify', id, data)
 		this.socket.emit(id, data)
 	}
 

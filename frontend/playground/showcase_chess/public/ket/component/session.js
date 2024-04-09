@@ -31,6 +31,7 @@ const content = `
     }
 
     #peer-id{
+    
         width: 100%;
     }
 
@@ -129,7 +130,7 @@ export default class Session extends Element{
     }
 
     set peer(value){
-        this.get('peer-id').innerText = value.id
+        this.get('peer-id').value = value.id
     }
 
     handleRole(){

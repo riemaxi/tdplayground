@@ -16,8 +16,20 @@ let bra = new class extends Bra{
         super()
     }
 
-    onResponse(data){
-        ket.update('', data)
+    onMove(data){
+        ket.update('move', data)
+    }
+
+    onPaste(data){
+        ket.update('paste',  data)
+    }
+
+    onRole(data){
+        ket.update('role', data)
+    }
+
+    onInvite(data){
+        ket.update('invite', data)
     }
 
     onInit(data){
