@@ -41,7 +41,7 @@ export default class Ket{
         frame.board.role = data
 
         if (data && data !== 'both')
-            this.on('role', {peer: frame.session.peer.id, data})
+            this.on('role', {peer: frame.session.peer.id,  data})
     }
 
     handleUserPaste(){
@@ -61,7 +61,7 @@ export default class Ket{
             case 'paste' : this.handleUserPaste(); break;
             case 'move' : this.on('move', {peer: frame.session.peer.id, data}); break;
             case 'invite' : this.on('invite', {peer: data, data: frame.board.configuration}); break;
-            case 'role' : this.handleUserRole({peer: frame.session.peer.id,  data}) ; break;
+            case 'role' : this.handleUserRole(data) ; break;
             case 'copy-id' : navigator.clipboard.writeText(data); break;
         }
     }

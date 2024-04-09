@@ -207,8 +207,7 @@ export default class Board extends Element{
         piece.setAttribute('y', position[1] + .8)
 
         piece.id = `${name}-${position[1]}-${position[0]}`    
-   
-    }
+       }
 
     onSymbol(_){}    
     onMove(_){}
