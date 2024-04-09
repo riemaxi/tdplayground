@@ -109,16 +109,17 @@ export default class Board extends Element{
         let symbol = {  'br':'♜',bn:'♞',bb:'♝',bk:'♚',bq:'♛',bp:'♟', 
                         'wr':'♖',wn:'♘',wb:'♗',wk:'♔',wq:'♕',wp:'♙' }
 
-        let piece = (id, c, r) => {
+        let piece = id => {
             if (id == '')
                 return ''
 
             let vector = id.split('-')
             let shape = symbol[vector[0]]
-            return `<text id="${id}" x="${c + .2}"  y="${r + .8}" class="symbol">${shape}</text>`
+            let position = vector.slice(1).map(v => parseInt(v))
+            return `<text id="${id}" x="${position[0] + .2}"  y="${position[1] + .8}" class="symbol">${shape}</text>`
         }
 
-        let svgcontent = configuration.map((row, i) => row.map((id, j) => piece(id, j,i)).join('') ).join('')
+        let svgcontent = configuration.map(row => row.map(id => piece(id)).join('') ).join('')
         this.canvas.innerHTML += svgcontent
 
     }

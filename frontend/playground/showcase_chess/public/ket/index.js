@@ -30,9 +30,12 @@ export default class Ket{
     update(id, e){
         console.log(id, e)
         switch(id){
-            case 'invite' : frame.session.peer = {id: e.from}; break;
+            case 'invite' : {
+                        frame.session.peer = {id: e.from}
+                        frame.data = { board: {configuration: e.data}}
+                    }; break;
             case 'move' : frame.board.move(e.data.piece, e.data.position); break;
-            //case 'paste': frame.data = data; break;
+            case 'paste': frame.data = { board: {configuration: e.data}}; break;
         }
         
     }
