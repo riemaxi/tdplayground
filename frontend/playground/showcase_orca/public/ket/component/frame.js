@@ -40,13 +40,13 @@ export default class Frame extends Element{
         this.control()
 
         let items = {}
-        for(let id=0; id<10; id++)
+        for(let id=0; id<300; id++)
             items[id] = {
                 id,
                 data: {
                     color: ['red','blue','green', 'black', 'orange'][Math.floor(Math.random()*5)],
-                    x : Math.ceil(Math.random() * 25),
-                    y : Math.ceil(Math.random() * 25),
+                    x : 10 + Math.ceil(Math.random() * 25),
+                    y : 10 + Math.ceil(Math.random() * 25),
                     size : 5
                 }
               }

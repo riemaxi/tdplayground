@@ -113,6 +113,7 @@ export default class Canvas extends Element{
 
             o.setAttribute('width', item.data.size * this.ratio.x)
             o.setAttribute('height', item.data.size * this.ratio.y)
+            o.setAttribute('rx', this.ratio.x)
         })
  
     }
