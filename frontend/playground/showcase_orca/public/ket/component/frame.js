@@ -40,7 +40,7 @@ export default class Frame extends Element{
         this.control()
 
         let items = {}
-        for(let id=0; id<300; id++)
+        for(let id=0; id<=5; id++)
             items[id] = {
                 id,
                 data: {
@@ -50,7 +50,18 @@ export default class Frame extends Element{
                     size : 5
                 }
               }
-        this.canvas.data = items
+
+        let links = [
+            {a: 0, b:1 },
+            {a: 3, b: 5},
+            {a: 5, b: 2},
+            {a: 4, b: 3}
+        ]
+
+        this.canvas.data = {
+                items,
+                links
+        }
 
     }
 
