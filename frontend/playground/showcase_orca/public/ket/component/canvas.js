@@ -38,19 +38,44 @@ export default class Canvas extends Element{
            }
 
 
-       this.llayer = new LinkLayer(this.get('link-canvas'), this.size, {})
+       this.llayer = new LinkLayer(this.get('link-canvas'), this.size, [])
         this.tlayer = new TileLayer(this.get('tile-canvas'), this.size, {})
         this.olayer = new ObjectLayer(this.get('object-canvas'), this.size, {})
     }
 
     control(){
+        this.olayer.onChange = item => {
+            this.llayer.updateObject(item)
+        }
+    }
 
+    createLinks(links, objects){
+        Object.values(links).forEach(link => {
+            let oa = objects[link.feature.a].data
+            let ob = objects[link.feature.b].data
+            link.state = {
+                a: {
+                    x: oa.state.x + oa.feature.size / 2,
+                    y: oa.state.y + oa.feature.size / 2
+                },
+                b: {
+                    x: ob.state.x + ob.feature.size / 2,
+                    y: ob.state.y  + ob.feature.size / 2
+                }
+            }
+        })
+
+        return links
     }
 
     set data(value){
         this.olayer.data = value.objects
-        this.llayer.data = value.links
+
+        this.llayer.data = this.createLinks(value.links, value.objects)
+
         this.tlayer.data = value.tiles
+
+        this.control()
     }
 
     scale(w, h){

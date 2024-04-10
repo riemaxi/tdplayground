@@ -44,6 +44,8 @@ export default class ObjectLayer extends Layer {
             let item = this.items[this.current.id]
             item.data.state.x = x / this.ratio.x
             item.data.state.y = y / this.ratio.y
+
+            this.onChange(item)
         }
 
     }
@@ -87,7 +89,8 @@ export default class ObjectLayer extends Layer {
             o.setAttribute('width', feature.size * this.ratio.x)
             o.setAttribute('height', feature.size * this.ratio.y)
             o.setAttribute('rx', this.ratio.x)
-        })        
+         })        
     }
 
+    onChange(_){}
 }

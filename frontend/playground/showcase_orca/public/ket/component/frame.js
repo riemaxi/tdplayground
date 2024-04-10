@@ -55,12 +55,24 @@ export default class Frame extends Element{
                 }
               }
 
-        let links = [
-            {a: 0, b:1 },
-            {a: 3, b: 5},
-            {a: 5, b: 2},
-            {a: 4, b: 3}
-        ]
+        let links = {
+            '0-1':{
+                id: '0-1',
+                feature: {a: 0, b:1 }
+            },
+            '3-5': {
+                id: '3-5',
+                feature: {a: 3, b: 5}
+            },
+            '5-2': {
+                id: '5-2',
+                feature: {a: 5, b: 2}
+            },
+            '4-3': {
+                id: '4-3',
+                feature: {a: 4, b: 3}
+            }
+        }
 
         let tiles = {}
 
