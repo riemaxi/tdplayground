@@ -13,4 +13,8 @@ export default class Layer{
     objects(cn){
         return [...this.root.children]
     }
+
+    get(id){
+        return this.objects().find(o => o.id == id)
+    }
 }

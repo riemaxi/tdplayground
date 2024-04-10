@@ -45,7 +45,7 @@ export default class Canvas extends Element{
 
     control(){
         this.olayer.onChange = item => {
-            this.llayer.updateObject(item)
+            this.llayer.updateLink(item)
         }
     }
 
