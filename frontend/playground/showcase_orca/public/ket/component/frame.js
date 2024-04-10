@@ -39,15 +39,19 @@ export default class Frame extends Element{
 
         this.control()
 
-        let items = {}
+        let objects = {}
         for(let id=0; id<=5; id++)
-            items[id] = {
+            objects[id] = {
                 id,
                 data: {
-                    color: ['red','blue','green', 'black', 'orange'][Math.floor(Math.random()*5)],
-                    x : 10 + Math.ceil(Math.random() * 25),
-                    y : 10 + Math.ceil(Math.random() * 25),
-                    size : 5
+                    feature: {
+                        color: ['red','blue','green', 'black', 'orange'][Math.floor(Math.random()*5)],
+                        size : 5
+                    },
+                    state: {
+                        x : 10 + Math.ceil(Math.random() * 25),
+                        y : 10 + Math.ceil(Math.random() * 25)
+                    }
                 }
               }
 
@@ -58,9 +62,12 @@ export default class Frame extends Element{
             {a: 4, b: 3}
         ]
 
+        let tiles = {}
+
         this.canvas.data = {
-                items,
-                links
+                objects,
+                links,
+                tiles
         }
 
     }

@@ -48,7 +48,7 @@ export default class Canvas extends Element{
     }
 
     set data(value){
-        this.olayer.data = value.items
+        this.olayer.data = value.objects
         this.llayer.data = value.links
         this.tlayer.data = value.tiles
     }

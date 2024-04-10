@@ -1,14 +1,14 @@
 import Layer from "./common/layer.js"
 
 export default class ObjectLayer extends Layer { 
-    constructor(root, gridsize, items){
+    constructor(root, gridsize, data){
         super(root)
 
         this.ratio = {
             x: this.size.width / gridsize.width,
             y: this.size.height / gridsize.height
         }
-        this.data = items
+        this.data = data
     }
 
     control(){
@@ -42,8 +42,8 @@ export default class ObjectLayer extends Layer {
             this.current.setAttribute('y', y)
 
             let item = this.items[this.current.id]
-            item.data.x = x / this.ratio.x
-            item.data.y = y / this.ratio.y
+            item.data.state.x = x / this.ratio.x
+            item.data.state.y = y / this.ratio.y
         }
 
     }
@@ -55,7 +55,10 @@ export default class ObjectLayer extends Layer {
 
 
     rectangle(id, data){
-        let {x,y, size, color} = data
+        let {state, feature} = data
+        let {x,y } = state
+        let {color, size} = feature
+
         return `<rect class="object" id="${id}" x=${x * this.ratio.x} y="${y *  this.ratio.y}" width="${x * this.ratio.x}" height="${size * this.ratio.x}" fill="${color}" rx="${this.ratio.x}" />`
     }
 
@@ -64,8 +67,8 @@ export default class ObjectLayer extends Layer {
     }    
 
     set data(value){
-
         this.items = value
+
         this.root.innerHTML = Object.values(this.items).map(item => this.object(item) ).join('')
 
         this.control()
@@ -76,11 +79,13 @@ export default class ObjectLayer extends Layer {
 
         this.objects().forEach(o => {
             let item = this.items[o.id]
-            o.setAttribute('x', item.data.x * this.ratio.x)
-            o.setAttribute('y', item.data.y * this.ratio.y)
+            let {feature, state} = item.data
 
-            o.setAttribute('width', item.data.size * this.ratio.x)
-            o.setAttribute('height', item.data.size * this.ratio.y)
+            o.setAttribute('x', state.x * this.ratio.x)
+            o.setAttribute('y', state.y * this.ratio.y)
+
+            o.setAttribute('width', feature.size * this.ratio.x)
+            o.setAttribute('height', feature.size * this.ratio.y)
             o.setAttribute('rx', this.ratio.x)
         })        
     }
