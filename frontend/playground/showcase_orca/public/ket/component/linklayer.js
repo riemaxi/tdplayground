@@ -43,21 +43,24 @@ export default class LinkLayer extends Layer{
     }
 
     updateLink(object){
-        let linkItem =  Object.values(this.items).find(l => {
+        let linkItems =  Object.values(this.items).filter(l => {
             let v = l.id.split('-')
             return v[0] == object.id || v[1] == object.id
         })
 
-        if (linkItem){
+        for(let linkItem of linkItems){
             let v = linkItem.id.split('-')
             let link = this.get(linkItem.id)
 
+            let x =  object.data.state.x  + object.data.feature.size / 2
+            let y = object.data.state.y  + object.data.feature.size / 2
+
             if (v[0] == object.id){
-                link.setAttribute('x1', object.state.x  + object.data.feature.size / 2 ) 
-                link.setAttribute('y1', object.state.y  + object.data.feature.size / 2)
+                link.setAttribute('x1', x * this.ratio.x ) 
+                link.setAttribute('y1', y * this.ratio.y)
             }else{
-                link.setAttribute('x2', object.data.state.x  + object.data.feature.size / 2)
-                link.setAttribute('y2', object.data.state.y  + object.data.feature.size / 2)
+                link.setAttribute('x2', x * this.ratio.x)
+                link.setAttribute('y2', y * this.ratio.y)
             }
         }
     }
