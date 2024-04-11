@@ -46,7 +46,7 @@ export default class Frame extends Element{
                 data: {
                     feature: {
                         color: ['red','blue','green', 'black', 'orange'][Math.floor(Math.random()*5)],
-                        size : 5
+                        size : 2
                     },
                     state: {
                         x : 10 + Math.ceil(Math.random() * 25),
@@ -58,7 +58,7 @@ export default class Frame extends Element{
         let links = {
             '0-1':{
                 id: '0-1',
-                feature: {a: 0, b:1 }
+                feature: {a: 0, b:1}
             },
             '3-5': {
                 id: '3-5',

@@ -53,6 +53,12 @@ export default class Canvas extends Element{
         Object.values(links).forEach(link => {
             let oa = objects[link.feature.a].data
             let ob = objects[link.feature.b].data
+
+            link.feature.size = {
+                a: oa.feature.size,
+                b: ob.feature.size
+            }
+
             link.state = {
                 a: {
                     x: oa.state.x + oa.feature.size / 2,

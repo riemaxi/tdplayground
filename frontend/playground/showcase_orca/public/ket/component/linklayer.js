@@ -37,31 +37,31 @@ export default class LinkLayer extends Layer{
             o.setAttribute('x1', item.state.a.x * ratio.x)
             o.setAttribute('y1', item.state.a.y * ratio.y)
 
-            o.setAttribute('x2', item.state.b.x * ratio.x)
+            o.setAttribute('x2', item.state.b.x  * ratio.x)
             o.setAttribute('y2', item.state.b.y * ratio.y)
+
         })
     }
 
     updateLink(object){
         let linkItems =  Object.values(this.items).filter(l => {
-            let v = l.id.split('-')
-            return v[0] == object.id || v[1] == object.id
+            let end = l.id.split('-')
+            return end[0] == object.id || end[1] == object.id
         })
 
         for(let linkItem of linkItems){
-            let v = linkItem.id.split('-')
             let link = this.get(linkItem.id)
 
-            let x =  object.data.state.x  + object.data.feature.size / 2
-            let y = object.data.state.y  + object.data.feature.size / 2
-
-            if (v[0] == object.id){
-                link.setAttribute('x1', x * this.ratio.x ) 
-                link.setAttribute('y1', y * this.ratio.y)
-            }else{
-                link.setAttribute('x2', x * this.ratio.x)
-                link.setAttribute('y2', y * this.ratio.y)
-            }
+            let end = linkItem.id.split('-')[0] == object.id ? {coord:1, o: linkItem.state.a} : {coord: 2, o: linkItem.state.b}
+            this.updateEnd(end.o, end.coord, link, object.data)
         }
-    }
+     }
+
+     updateEnd(o, coord, link, data){
+        o.x = data.state.x + data.feature.size/2
+        o.y = data.state.y + data.feature.size/2
+        
+        link.setAttribute('x' + coord, o.x * this.ratio.x)
+        link.setAttribute('y' + coord, o.y * this.ratio.y)
+     }
 }
