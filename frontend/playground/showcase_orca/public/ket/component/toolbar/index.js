@@ -7,7 +7,7 @@ const STYLE = `
     height: 100%;
     justify-content: space-evenly;
     align-items: center;
-    background-color: green;
+    background-color: #8d7a7a;
     color: white;
     font-family: Impact;
 }
@@ -33,14 +33,14 @@ const STYLE = `
 
 const STRUCTURE = `
 <div id="content">
-    <div class="tool"><div class="button" id="palette">P</div><div class="caption">Palette</div></div>
-    <div class="tool"><div class="button" id="console">C</div><div class="caption">Console</div></div>    
-    <div class="tool"><div class="button" id="notification">N</div><div class="caption">Notification</div></div>
-    <div class="tool"><div class="button" id="setting">S</div><div class="caption">Setting</div></div>
-    <div class="tool"><div class="button" id="property">T</div><div class="caption">Property</div></div>
-    <div class="tool"><div class="button" id="repository">E</div><div class="caption">Repository</div></div>
-    <div class="tool"><div class="button" id="recycle">R</div><div class="caption">Recycle</div></div>
-    <div class="tool"><div class="button" id="signout">O</div><div class="caption">Sign out</div></div>
+    <div class="tool"><div class="button" id="palette">&#9874;</div><div class="caption">Palette</div></div>
+    <div class="tool"><div class="button" id="console">&#9760;</div><div class="caption">Console</div></div>    
+    <div class="tool"><div class="button" id="notification">&#9873;</div><div class="caption">Notification</div></div>
+    <div class="tool"><div class="button" id="setting">&#9881;</div><div class="caption">Setting</div></div>
+    <div class="tool"><div class="button" id="property">&#9777;</div><div class="caption">Property</div></div>
+    <div class="tool"><div class="button" id="repository">&#10070;</div><div class="caption">Repository</div></div>
+    <div class="tool"><div class="button" id="recycle">&#9851;</div><div class="caption">Recycle</div></div>
+    <div class="tool"><div class="button" id="signout">&#8658;</div><div class="caption">Sign out</div></div>
 </div>
 `
 

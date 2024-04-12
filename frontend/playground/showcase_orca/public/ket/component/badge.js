@@ -6,6 +6,7 @@ const content = `
         display: flex;
         width: 100%;
         height: 100%;
+        border-radius: inherit;        
     }
 
     #content{
@@ -15,6 +16,7 @@ const content = `
         height: 100%;
         background-color: black;
         color: white;
+        border-radius: inherit;
     }    
 </style>
 <div id="root">

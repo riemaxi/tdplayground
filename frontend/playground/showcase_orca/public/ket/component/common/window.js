@@ -17,7 +17,7 @@ const STYLE = `
         width: 10px;
         height: 10px;
         border-radius: 50%;
-        background-color: black;
+        background-color: #8d7a7a;
         cursor: grab;
     }
 
@@ -44,7 +44,7 @@ const STYLE = `
         top: -15px;
         width: 30px;
         height: 30px;
-        background-color: black;
+        background-color: #8d7a7a;
         cursor: grab;
     }
 
@@ -63,7 +63,7 @@ const STYLE = `
         top: -5px;
         width: 10px;
         height: 10px;
-        background-color: black;
+        background-color: #8d7a7a;
     }
 
     #closer:hover{

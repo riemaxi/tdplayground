@@ -55,7 +55,7 @@ const content = `
         width: 200px;
         height: 80px;
         border: 1px solid white;
-        border-radius: 3px;
+        border-radius: 7px;
     }
 </style>
 <div id="root">
