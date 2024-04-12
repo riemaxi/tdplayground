@@ -3,6 +3,11 @@ import Element from "./common/element.js"
 import Toolbar from "./toolbar/index.js"
 import Palette from "./palette/index.js"
 import Property from "./property/index.js"
+import Console from "./console/index.js"
+import Notification from "./notification/index.js"
+import Recycle from "./recycle/index.js"
+import Setting from "./setting/index.js"
+import Badge from "./badge.js"
 import Canvas from "./canvas/index.js"
 
 
@@ -31,11 +36,26 @@ const content = `
 
     .window{
         position: absolute;
-        display: flex;
+        display: none;
         width: 400px;
         height: 400px;
         left: 50px;
         top: 50px;
+    }
+
+    #toolbar{
+        display: flex;
+        height: 50px;
+    }
+
+    #badge{
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+        width: 200px;
+        height: 80px;
+        border: 1px solid white;
+        border-radius: 3px;
     }
 </style>
 <div id="root">
@@ -44,6 +64,12 @@ const content = `
         <frame-toolbar class="window" id="toolbar"></frame-toolbar>        
         <frame-palette class="window" id="palette"></frame-palette>        
         <frame-property class="window" id="property"></frame-property>        
+        <frame-console class="window" id="console"></frame-console>
+        <frame-repository class="window" id="repository"></frame-repository>
+        <frame-recycle class="window" id="recycle"></frame-recycle>
+        <frame-notification class="window" id="notification"></frame-notification> 
+        <frame-setting class="window" id="setting"></frame-setting> 
+        <frame-badge id="badge"></frame-badge>        
     </div>
 </div>
 `
@@ -132,4 +158,6 @@ window.customElements.define('frame-palette', Palette)
 window.customElements.define('frame-property', Property)
 window.customElements.define('frame-console', Console)
 window.customElements.define('frame-notification', Notification)
+window.customElements.define('frame-recycle', Recycle)
+window.customElements.define('frame-setting', Setting)
 window.customElements.define('frame-badge', Badge)

@@ -5,7 +5,7 @@ const STYLE = `
     display: flex;
     width: 100%;
     height: 100%;
-    background-color: green;
+    background-color: black;
     color: white;
     font-family: Impact;
 
@@ -14,13 +14,13 @@ const STYLE = `
 
 const STRUCTURE = `
 <div id="content">
-    <h1>TOOLBAR</h1>
+    <h1>CONSOLE</h1>
 </div>
 `
 
-export default class Toolbar extends Window{
+export default class Console extends Window{
     constructor(){
-        super()
+        super(true)
     }
 
     get customStructure(){
