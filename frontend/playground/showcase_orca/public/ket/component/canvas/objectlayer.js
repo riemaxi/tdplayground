@@ -1,4 +1,4 @@
-import Layer from "./common/layer.js"
+import Layer from "../common/layer.js"
 
 export default class ObjectLayer extends Layer { 
     constructor(root, gridsize, data){

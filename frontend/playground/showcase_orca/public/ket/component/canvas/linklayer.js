@@ -1,4 +1,4 @@
-import Layer from "./common/layer.js"
+import Layer from "../common/layer.js"
 
 export default class LinkLayer extends Layer{
     constructor(root, gridsize, data){

@@ -1,4 +1,4 @@
-import Element from "./common/element.js"
+import Element from "../common/element.js"
 
 import ObjectLayer from "./objectlayer.js"
 import LinkLayer from "./linklayer.js"
@@ -10,6 +10,7 @@ const content = `
         display: flex;
         width: 100%;
         height: 100%;
+        background-color: lightblue;
     }
 
     .object{
@@ -18,13 +19,15 @@ const content = `
 
     .layer{
         position: absolute;
+        width: 100%;
+        height: 100%;
     }
 
 </style>
 <div id="root">
-    <svg class="layer" id="tile-canvas" width="100%" height="100%" />
-    <svg class="layer" id="link-canvas" width="100%" height="100%" />
-    <svg class="layer" id="object-canvas" width="100%" height="100%" />
+    <svg class="layer" id="tile-canvas"/>
+    <svg class="layer" id="link-canvas"/>
+    <svg class="layer" id="object-canvas"/>
 </div>
 `
 

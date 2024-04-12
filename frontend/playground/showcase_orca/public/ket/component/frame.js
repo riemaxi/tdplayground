@@ -1,6 +1,8 @@
 import Element from "./common/element.js"
 
-import Canvas from "./canvas.js"
+import Toolbar from "./toolbar/index.js"
+import Canvas from "./canvas/index.js"
+
 
 const content = `
 <style>
@@ -11,22 +13,33 @@ const content = `
     }
 
     #content{
+        display: grid;
+        grid-template-columns: 2fr 10fr;
+        width: 100%;
+        height: 100%;
+        background-color: red;
+    }
+
+    #canvas{
+        position: absolute;
         display: flex;
-        flex-direction: column;
-        margin: auto;
         width: 100%;
         height: 100%;
     }
 
-    #canvas{
+    #toolbar{
+        position: absolute;
         display: flex;
-        width: 100%;
-        height: 100%;
+        width: 400px;
+        height: 400px;
+        left: 50px;
+        top: 50px;
     }
 </style>
 <div id="root">
     <div id="content">
         <frame-canvas id="canvas"></frame-canvas>
+        <frame-toolbar id="toolbar"></frame-toolbar>        
     </div>
 </div>
 `
@@ -86,6 +99,7 @@ export default class Frame extends Element{
 
     registerComponents(){
         window.customElements.define('frame-canvas', Canvas)
+        window.customElements.define('frame-toolbar', Toolbar)
     }
 
     get size(){
