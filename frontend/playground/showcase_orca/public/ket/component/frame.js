@@ -150,7 +150,10 @@ export default class Frame extends Element{
     }
 
     handleToolbar(id){
-        this.get(id).show(this.maxZindex())
+        if (id=='signout')
+            this.handle('signout')
+        else
+            this.get(id).show(this.maxZindex())
     }
 
     set data(value){

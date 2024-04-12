@@ -27,12 +27,12 @@ class Session{
 
 		this.socket.on('event', data => this.handleEvent(data))
 
-		this.notify('init', { session: {id}})
+		this.notify('init', { session: {id}, users: desk.users})
 	}
 
 	handleEvent(e){
 		let {to, id, data} = e
-		console.log(id, to)
+		console.log(id, data)
 		if (desk.getSession(to))
 			desk.notify(to, id, data)
 		else{
@@ -53,6 +53,25 @@ let desk = new class extends require('../../core/ns.desk'){
 	constructor(){
 		super(config.desk)
 		this.sessions = {}
+
+		this.users = [
+			{
+				id: '3000',
+				badge: 'Guest'
+			},
+			{
+				id: '1000',
+				badge: 'Lola Marta'
+			},
+			{
+				id: '1001',
+				badge: 'Papo Lucas'
+			},
+			{
+				id: '1002',
+				badge: 'Petro Marcelo'
+			}
+		]
 	}
 
 	getSession(id){

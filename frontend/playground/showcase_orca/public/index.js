@@ -7,7 +7,7 @@ let ket = new class extends Ket{
     }
 
     on(id, data){
-        bra.sendEvent({id, ...data})
+        bra.sendEvent({id, data})
     }
 }
 

@@ -1,4 +1,5 @@
 import Frame from "./frame.js"
+import Lobby from "./lobby.js"
 
 class FrameHandler extends Frame{
     constructor(){
@@ -6,6 +7,13 @@ class FrameHandler extends Frame{
     }
 }
 
+class LobbyHandler extends Lobby{
+    constructor(){
+        super()
+    }
+}
+
 export{
-    FrameHandler
+    FrameHandler,
+    LobbyHandler
 }
