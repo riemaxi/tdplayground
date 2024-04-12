@@ -78,8 +78,6 @@ export default class Frame extends Element{
     constructor(){
         super(content)
 
-        this.registerComponents()
-
         this.control()
 
         let objects = {}
@@ -127,13 +125,17 @@ export default class Frame extends Element{
 
     }
 
-    registerComponents(){
-    }
-
     get size(){
         let r = this.root.getBoundingClientRect()
         return {width: r.width, height: r.height}
     }
+
+    maxZindex(gap = 10){
+        let list = this.queryAll('.window').map(item => item.style.zIndex)
+    
+        return Math.max(...list) + gap
+    }
+    
 
     control(){
         this.root = this.get('root')
@@ -141,6 +143,14 @@ export default class Frame extends Element{
 
         window.onresize = () => this.onResize(this.size)
         window.ondeviceorientation = () => this.onResize(this.size)
+
+        this.get('toolbar').handle = id => this.handleToolbar(id)
+
+        this.queryAll('.window').forEach( w => w.onFocus = ()  => w.show(this.maxZindex()) )
+    }
+
+    handleToolbar(id){
+        this.get(id).show(this.maxZindex())
     }
 
     set data(value){

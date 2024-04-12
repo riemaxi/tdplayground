@@ -178,18 +178,18 @@ export default class Window extends HTMLElement{
                 
         this.shadow.appendChild(template.content.cloneNode(true))
 
-        this.root = this.shadow.getElementById('root')
-        this.content = this.shadow.getElementById('content')
-        this.resizer = this.shadow.getElementById('resizer')
+        this.root = this.get('root')
+        this.content = this.get('content')
+        this.resizer = this.get('resizer')
         this.resizer.style.display = resizable ? 'block' : 'none'
-        this.mover = this.shadow.getElementById('mover')
+        this.mover = this.get('mover')
 
         this.control()
 
     }
 
     control(){
-        let closer = this.shadow.getElementById('closer')
+        let closer = this.get('closer')
         closer.onclick = e => {
             e.stopPropagation()
             this.handleClose()
@@ -211,6 +211,8 @@ export default class Window extends HTMLElement{
                     case 'stop' : this.onStartDragging(); break;
                 }
             })
+
+        this.root.onpointerdown = () => this.onFocus()
     }
 
     resize(width, height){
@@ -229,6 +231,14 @@ export default class Window extends HTMLElement{
 
     hide(){
         this.visible = false
+    }
+
+    queryAll(exp){
+        return [...this.shadow.querySelectorAll(exp)]
+    }
+    
+    get(id){
+        return  this.shadow.getElementById(id)
     }
 
     get customStructure(){
@@ -262,6 +272,7 @@ export default class Window extends HTMLElement{
     onStopDragging(){}
     onStartResizing(){}
     onResize(){}
+    onFocus(){}
  }
 
  window.customElements.define('window-resizer', Resizer)
