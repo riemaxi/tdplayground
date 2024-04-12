@@ -1,6 +1,8 @@
 import Element from "./common/element.js"
 
 import Toolbar from "./toolbar/index.js"
+import Palette from "./palette/index.js"
+import Property from "./property/index.js"
 import Canvas from "./canvas/index.js"
 
 
@@ -27,7 +29,7 @@ const content = `
         height: 100%;
     }
 
-    #toolbar{
+    .window{
         position: absolute;
         display: flex;
         width: 400px;
@@ -39,7 +41,9 @@ const content = `
 <div id="root">
     <div id="content">
         <frame-canvas id="canvas"></frame-canvas>
-        <frame-toolbar id="toolbar"></frame-toolbar>        
+        <frame-toolbar class="window" id="toolbar"></frame-toolbar>        
+        <frame-palette class="window" id="palette"></frame-palette>        
+        <frame-property class="window" id="property"></frame-property>        
     </div>
 </div>
 `
@@ -98,8 +102,6 @@ export default class Frame extends Element{
     }
 
     registerComponents(){
-        window.customElements.define('frame-canvas', Canvas)
-        window.customElements.define('frame-toolbar', Toolbar)
     }
 
     get size(){
@@ -123,3 +125,11 @@ export default class Frame extends Element{
                                     : this.canvas.scale(size.width, size.width )
     }
 }
+
+window.customElements.define('frame-canvas', Canvas)
+window.customElements.define('frame-toolbar', Toolbar)
+window.customElements.define('frame-palette', Palette)
+window.customElements.define('frame-property', Property)
+window.customElements.define('frame-console', Console)
+window.customElements.define('frame-notification', Notification)
+window.customElements.define('frame-badge', Badge)

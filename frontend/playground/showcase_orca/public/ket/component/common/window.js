@@ -172,8 +172,6 @@ export default class Window extends HTMLElement{
     constructor(resizable){
         super()
 
-        window.customElements.define('window-resizer', Resizer)
-
         this.shadow = this.attachShadow({mode: "open"})
 
         template.innerHTML = STYLE.replace('CUSTOM', this.customStyle) + STRUCTURE.replace('CUSTOM', this.customStructure)
@@ -265,3 +263,5 @@ export default class Window extends HTMLElement{
     onStartResizing(){}
     onResize(){}
  }
+
+ window.customElements.define('window-resizer', Resizer)
