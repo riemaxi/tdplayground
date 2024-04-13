@@ -23,6 +23,10 @@ export default class Palette extends Window{
         super(true)
     }
 
+    set data(value){
+        console.log('palette value', value)
+    }
+
     get customStructure(){
         return STRUCTURE
     }

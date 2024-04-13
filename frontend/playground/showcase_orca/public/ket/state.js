@@ -52,7 +52,7 @@ export default class State{
         }
     }
 
-    get repository(){
+    get library(){
         return {
             protocols: {
                 basic: {

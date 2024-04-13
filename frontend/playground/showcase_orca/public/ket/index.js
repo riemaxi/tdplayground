@@ -41,7 +41,10 @@ export default class Ket{
 
         lobby.hide()
         frame.show()
-        frame.data = state.data
+        frame.data = {
+            objects: state.data,
+            library: state.library
+        }
     }
 
     on(_){}

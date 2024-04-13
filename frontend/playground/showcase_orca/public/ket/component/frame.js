@@ -99,6 +99,8 @@ export default class Frame extends Element{
     control(){
         this.root = this.get('root')
         this.canvas = this.get('canvas')
+        this.repository = this.get('repository')
+        this.palette = this.get('palette')
 
         window.onresize = () => this.onResize(this.size)
         window.ondeviceorientation = () => this.onResize(this.size)
@@ -116,7 +118,8 @@ export default class Frame extends Element{
     }
 
     set data(value){
-        this.canvas.data = value
+        this.canvas.data = value.objects
+        this.palette.data = value.library
 
         let size = Math.min(this.size.width, this.size.height)
         this.canvas.scale(size, size)
