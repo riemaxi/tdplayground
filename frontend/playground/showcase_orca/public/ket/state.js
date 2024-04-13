@@ -55,51 +55,185 @@ export default class State{
     get repository(){
         return {
             protocols: {
+                basic: {
+                    '00000': {
+                        request: {
+                            id: '',
+                            data: {}
+                        },
+                        response: {
+                            id: '',
+                            data: {}
+                        }
+                    },
 
+                    '00001': {
+                        request: {
+                            id: '',
+                            data: {}
+                        },
+
+                        response: {
+                            id: '',
+                            data: {}
+                        }
+                    },
+
+                    '00002': {
+                        request: {
+                            id: '',
+                            data: {}
+                        },
+
+                        response: {
+                            id: '',
+                            data: {}
+                        }
+                    },
+
+                    '00003': {
+                        request: {
+                            id: '',
+                            data: {}
+                        },
+
+                        response: {
+                            id: '',
+                            data: {}
+                        }
+                    }
+
+
+                },
+
+                streaming: {
+                    '00000': {
+                        request: {
+                            id: '',
+                            data: {}
+                        },
+                        response: {
+                            id: '',
+                            data: {}
+                        }
+                    },
+
+                    '00001': {
+                        request: {
+                            id: '',
+                            data: {}
+                        },
+                        response: {
+                            id: '',
+                            data: {}
+                        }
+                    },
+                    '00002': {
+                        request: {
+                            id: '',
+                            data: {}
+                        },
+                        response: {
+                            id: '',
+                            data: {}
+                        }
+                    },
+
+                    '00003': {
+                        request: {
+                            id: '',
+                            data: {}
+                        },
+                        response: {
+                            id: '',
+                            data: {}
+                        }
+                    }
+                },
+
+                storage: {
+                    '00000': {
+                        request: {
+                            id: '',
+                            data: {}
+                        },
+                        response: {
+                            id: '',
+                            data: {}
+                        }
+                    },
+                    '00001': {
+                        request: {
+                            id: '',
+                            data: {}
+                        },
+                        response: {
+                            id: '',
+                            data: {}
+                        }
+                    }
+                },
+
+                sync: {
+                    '00000': {
+                        request: {
+                            id: '',
+                            data: {}
+                        },
+                        response: {
+                            id: '',
+                            data: {}
+                        }
+                    },
+
+                    '00001': {
+                        request: {
+                            id: '',
+                            data: {}
+                        },
+                        response: {
+                            id: '',
+                            data: {}
+                        }
+                    }
+                }
             },
             services: {
+                basic: {
+                    '00000': {},
+                    '00002': {}
+                },
+                streaming: {
+                    '00000': {}
+                },
+                storage: {
+                    '00000': {}
+                },
+                sync: {
+                    '00000': {}
+                }
 
             },
             categories: {
+                sdn: {
+                    name: 'TDPnet',
+                    symbol: '',
+                    services: ['*']
+                },
                 digital : {
                     name: 'Digital',
                     symbol: '',
-                    protocols: []
+                    services: ['basic', 'sync']
                 },
                 data : {
                     name: 'Data',
                     symbool: '',
-                    protocols: []
+                    services: ['*']
                 },
                 banking: {
                     name: 'Banking',
                     symbol: '',
-                    protocols: []
-                },
-                logistic: {
-                    name: 'Logistic',
-                    symbol: '',
-                    protocols: []
-                },
-                energy: {
-                    name: 'Energy',
-                    symbol: '',
-                    protocols: []
-                },
-                process: {
-                    name: 'Process',
-                    symbol: '',
-                    protocols: []
-                },
-                robotics: {
-                    name: 'Robotics',
-                    symbol: '',
-                    protocols: []
-                },
-                generic: {
-                    name: 'Generic',
-                    symbol: '',
-                    protocols: []
+                    services: ['basic', 'sync']
                 }
             },
             providers: {
@@ -108,15 +242,7 @@ export default class State{
                     description: 'Boolean Algebra implementation',
                     symbol: '',
                     address: '',
-                    categories: {
-                        digital: {
-                            //services
-                            and: {},
-                            or: {},
-                            not: {},
-                            xor: {}
-                        }
-                    }
+                    categories: ['digital']
                 },
                 
                 dbia: {
@@ -124,11 +250,22 @@ export default class State{
                     description: 'Distributed database',
                     symbol: '',
                     address: '',
-                    categories: {
-                        data: {
-                            
-                        }
-                    }
+                    categories: ['data']
+                },
+
+                teledigit: {
+                    name: 'TeleDigit',
+                    description:  'TDPnet elements and core services',
+                    symbol: '',
+                    address: '',
+                    categories: ['sdn']
+                },
+
+                ccf: {
+                    name: 'CCF',
+                    description: 'Banking services',
+                    symbol: '',
+                    categories: ['bankng']
                 }
             }
 
