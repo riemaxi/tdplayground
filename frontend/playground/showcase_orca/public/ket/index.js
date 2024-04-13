@@ -34,7 +34,6 @@ export default class Ket{
         switch(id){
             case 'signout' : this.handleUserSignout(); break;
         }
-        console.log(id, data)
     }
 
     handleLobby(id, data){
@@ -42,6 +41,7 @@ export default class Ket{
 
         lobby.hide()
         frame.show()
+        frame.data = state.data
     }
 
     on(_){}

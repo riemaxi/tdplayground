@@ -78,6 +78,7 @@ export default class Canvas extends Element{
     }
 
     set data(value){
+        console.log('canvas', value)
         this.olayer.data = value.objects
 
         this.llayer.data = this.createLinks(value.links, value.objects)
