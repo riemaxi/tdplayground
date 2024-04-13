@@ -8,6 +8,7 @@ import Notification from "./notification/index.js"
 import Recycle from "./recycle/index.js"
 import Setting from "./setting/index.js"
 import Badge from "./badge.js"
+import Assistant from "./assistant/index.js"
 import Canvas from "./canvas/index.js"
 
 
@@ -45,6 +46,7 @@ const content = `
 
     #toolbar{
         display: flex;
+        width: auto;
         height: 50px;
     }
 
@@ -69,6 +71,7 @@ const content = `
         <frame-recycle class="window" id="recycle"></frame-recycle>
         <frame-notification class="window" id="notification"></frame-notification> 
         <frame-setting class="window" id="setting"></frame-setting> 
+        <frame-assistant class="window" id="assistant"></frame-assistant> 
         <frame-badge id="badge"></frame-badge>        
     </div>
 </div>
@@ -133,4 +136,5 @@ window.customElements.define('frame-console', Console)
 window.customElements.define('frame-notification', Notification)
 window.customElements.define('frame-recycle', Recycle)
 window.customElements.define('frame-setting', Setting)
+window.customElements.define('frame-assistant', Assistant)
 window.customElements.define('frame-badge', Badge)

@@ -10,15 +10,16 @@ const STYLE = `
     background-color: #8d7a7a;
     color: white;
     font-family: Impact;
+    gap: 20px;
 }
 
 .tool{
     display: flex;
     flex-direction: column;
-    width: 40px;
     height: 40px;
     justify-content: center;
     align-items: center;
+    margin: 5px;
 }
 
 .caption{
@@ -39,6 +40,7 @@ const STRUCTURE = `
     <div class="tool"><div class="button" id="setting">&#9881;</div><div class="caption">Setting</div></div>
     <div class="tool"><div class="button" id="property">&#9777;</div><div class="caption">Property</div></div>
     <div class="tool"><div class="button" id="repository">&#10070;</div><div class="caption">Repository</div></div>
+    <div class="tool"><div class="button" id="assistant">&#9086;</div><div class="caption">Assistant</div></div>
     <div class="tool"><div class="button" id="recycle">&#9851;</div><div class="caption">Recycle</div></div>
     <div class="tool"><div class="button" id="signout">&#8658;</div><div class="caption">Sign out</div></div>
 </div>
