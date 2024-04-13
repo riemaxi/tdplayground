@@ -52,4 +52,88 @@ export default class State{
         }
     }
 
+    get repository(){
+        return {
+            protocols: {
+
+            },
+            services: {
+
+            },
+            categories: {
+                digital : {
+                    name: 'Digital',
+                    symbol: '',
+                    protocols: []
+                },
+                data : {
+                    name: 'Data',
+                    symbool: '',
+                    protocols: []
+                },
+                banking: {
+                    name: 'Banking',
+                    symbol: '',
+                    protocols: []
+                },
+                logistic: {
+                    name: 'Logistic',
+                    symbol: '',
+                    protocols: []
+                },
+                energy: {
+                    name: 'Energy',
+                    symbol: '',
+                    protocols: []
+                },
+                process: {
+                    name: 'Process',
+                    symbol: '',
+                    protocols: []
+                },
+                robotics: {
+                    name: 'Robotics',
+                    symbol: '',
+                    protocols: []
+                },
+                generic: {
+                    name: 'Generic',
+                    symbol: '',
+                    protocols: []
+                }
+            },
+            providers: {
+                logica: {
+                    name: 'Logic gate',
+                    description: 'Boolean Algebra implementation',
+                    symbol: '',
+                    address: '',
+                    categories: {
+                        digital: {
+                            //services
+                            and: {},
+                            or: {},
+                            not: {},
+                            xor: {}
+                        }
+                    }
+                },
+                
+                dbia: {
+                    name: 'DBia',
+                    description: 'Distributed database',
+                    symbol: '',
+                    address: '',
+                    categories: {
+                        data: {
+                            
+                        }
+                    }
+                }
+            }
+
+        }
+    }
+
+
 }
