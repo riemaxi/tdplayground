@@ -32,8 +32,8 @@ export default class State{
                         size : 2
                     },
                     state: {
-                        x : 10 + Math.ceil(Math.random() * 25),
-                        y : 10 + Math.ceil(Math.random() * 25)
+                        x : 2 + Math.ceil(Math.random() * 25),
+                        y : 2 + Math.ceil(Math.random() * 25)
                     }
                 }
             }

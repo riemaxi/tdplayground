@@ -200,7 +200,7 @@ export default class Window extends HTMLElement{
         this.resizer.onDragging = p => {
             this.resize(p.left, p.top)
         }
-
+   
         new Mover(
             this.mover,
             this, 
@@ -213,6 +213,11 @@ export default class Window extends HTMLElement{
             })
 
         this.root.onpointerdown = () => this.onFocus()
+    }
+
+    get size(){
+        let r = this.root.getBoundingClientRect()
+        return {width: r.width, height: r.height}
     }
 
     resize(width, height){

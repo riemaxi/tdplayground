@@ -1,18 +1,34 @@
-import Element from "../common/element.js"
+import Window from "../common/window.js"
 
 import ObjectLayer from "./objectlayer.js"
 import LinkLayer from "./linklayer.js"
 import TileLayer from "./tilelayer.js"
 
-const content = `
+const STYLE = `
 <style>
-    #root{
+    #content{
         display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         width: 100%;
         height: 100%;
-        background-color: lightblue;
+        background-color: red;
     }
 
+    #title{
+        display: flex;
+        height: 50px;
+        width: 100%;
+        background-color: black;
+        align-items: center;
+        font-family: Impact;        
+        color: white;
+    }
+    
+    #title div{
+        margin-left: 5px;
+    }
+    
     .object{
         cursor: pointer;
     }
@@ -23,30 +39,52 @@ const content = `
         height: 100%;
     }
 
-</style>
-<div id="root">
-    <svg class="layer" id="tile-canvas"/>
-    <svg class="layer" id="link-canvas"/>
-    <svg class="layer" id="object-canvas"/>
+    #workspace{
+        display: flex;
+        width: 100%;
+        height: 300px;
+        background-color: lightgreen;
+    }
+
+</style>`
+
+const STRUCTURE = `
+<div id="content">
+    <div id="title"><div>Canvas</div></div>
+    <div id="workspace">
+        <svg class="layer" id="tile-canvas"/>
+        <svg class="layer" id="link-canvas"/>
+        <svg class="layer" id="object-canvas"/>
+    </div>
 </div>
 `
 
-export default class Canvas extends Element{
+export default class Canvas extends Window{
     constructor(){
-        super(content)
+        super(true)
 
-        this.size = {
+        this.grid = {
+            size : {
             width: 50,
             height: 50
            }
+        }
 
 
-       this.llayer = new LinkLayer(this.get('link-canvas'), this.size, [])
-        this.tlayer = new TileLayer(this.get('tile-canvas'), this.size, {})
-        this.olayer = new ObjectLayer(this.get('object-canvas'), this.size, {})
+       this.llayer = new LinkLayer(this.get('link-canvas'), this.grid.size, [])
+        this.tlayer = new TileLayer(this.get('tile-canvas'), this.grid.size, {})
+        this.olayer = new ObjectLayer(this.get('object-canvas'), this.grid.size, {})
     }
 
-    control(){
+    customStyle(){
+        return STYLE
+    }
+
+    customStructure(){
+        return STRUCTURE
+    }
+
+    controlLayers(){
         this.olayer.onChange = item => {
             this.llayer.updateLink(item)
         }
@@ -84,13 +122,15 @@ export default class Canvas extends Element{
 
         this.tlayer.data = value.tiles
 
-        this.control()
+        this.controlLayers()
     }
 
     scale(w, h){
-        let ratio = {
-            x: w / this.size.width,
-            y: h / this.size.height
+        this.get('workspace').style.height = (this.size.height - 50) + 'px'
+
+         let ratio = {
+            x: w / this.grid.size.width,
+            y: h / this.grid.size.height
         }
 
         this.olayer.scale(ratio)
@@ -98,5 +138,17 @@ export default class Canvas extends Element{
         this.tlayer.scale(ratio)
     }
 
+    onResize(w, h){
+        let msize = Math.min(w, h)
+        this.scale(msize, msize)
+    }
+
+    show(index){
+        super.show(index)
+        
+        let msize = Math.min(this.size.width, this.size.height)
+        this.scale(msize, msize)
+
+    }
 
 }

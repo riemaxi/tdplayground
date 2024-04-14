@@ -32,8 +32,13 @@ const STYLE = `
 }
 `
 
+/**
+ * 128924
+ * 10024
+ */
 const STRUCTURE = `
 <div id="content">
+    <div class="tool"><div class="button" id="canvas">&#128306;</div><div class="caption">Canvas</div></div>
     <div class="tool"><div class="button" id="palette">&#9874;</div><div class="caption">Palette</div></div>
     <div class="tool"><div class="button" id="console">&#9760;</div><div class="caption">Console</div></div>    
     <div class="tool"><div class="button" id="notification">&#9873;</div><div class="caption">Notification</div></div>

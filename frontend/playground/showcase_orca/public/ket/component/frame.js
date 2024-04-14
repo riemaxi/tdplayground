@@ -25,14 +25,6 @@ const content = `
         grid-template-columns: 2fr 10fr;
         width: 100%;
         height: 100%;
-        background-color: red;
-    }
-
-    #canvas{
-        position: absolute;
-        display: flex;
-        width: 100%;
-        height: 100%;
     }
 
     .window{
@@ -56,6 +48,13 @@ const content = `
         background-color: #8d7a7a;
     }
 
+    #canvas{
+        width: 500px;
+        height: 500px;
+        background-color: #lightblue;
+    }
+
+
     #badge{
         position: absolute;
         right: 10px;
@@ -68,7 +67,7 @@ const content = `
 </style>
 <div id="root">
     <div id="content">
-        <frame-canvas id="canvas"></frame-canvas>
+        <frame-canvas class="window" id="canvas"></frame-canvas>
         <frame-toolbar class="window" id="toolbar"></frame-toolbar>        
         <frame-palette class="window" id="palette"></frame-palette>        
         <frame-property class="window" id="property"></frame-property>        
@@ -133,13 +132,11 @@ export default class Frame extends Element{
         this.canvas.data = value.objects
         this.palette.data = value.library
 
-        let size = Math.min(this.size.width, this.size.height)
+        let size = Math.min(this.canvas.size.width, this.canvas.size.height)
         this.canvas.scale(size, size)
     }
 
     onResize(_){
-        let size = Math.min(this.size.width, this.size.height)
-        this.canvas.scale(size, size)
     }
 }
 
