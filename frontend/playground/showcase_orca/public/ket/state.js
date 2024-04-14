@@ -1,6 +1,19 @@
 let symbol = {
-    'clock': '&#9200;',
-    'sdn': '&#9000;'
+    clock: '&#9200;',
+    sdn: '&#9000;',
+    enter: '&#9166;',
+    play: '&#9205;',
+    pause: '&#9208;',
+    stop : '&9209#;',
+    digital : '&#9085;',
+    data : '&#9017;',
+    banking : '&#8383;',
+    process : '&#9094;',
+    ux : '&#128187;',
+    ccf: '&#128176;',
+    teledigit: '&#11134;',
+    dbia: '&#10066;',
+    logica: '&#8797;'
 }
 
 export default class State{
@@ -229,25 +242,30 @@ export default class State{
                 },
                 digital : {
                     name: 'Digital',
-                    symbol: '',
+                    symbol: this.symbol['digital'],
                     services: ['basic', 'sync']
                 },
                 data : {
                     name: 'Data',
-                    symbool: '',
+                    symbool: this.symbol['data'],
                     services: ['*']
                 },
                 banking: {
                     name: 'Banking',
-                    symbol: '',
+                    symbol: this.symbol['banking'],
                     services: ['basic', 'sync']
-                }
+                },
+                process: {
+                    name: 'Process',
+                    symbol: this.symbol['process'],
+                    services: ['basic', 'sync']
+                } 
             },
             providers: {
                 logica: {
                     name: 'Logic gate',
                     description: 'Boolean Algebra implementation',
-                    symbol: '',
+                    symbol: this.symbol['logica'],
                     address: 'logica.orca.playground.4da',
                     categories: ['digital']
                 },
@@ -255,23 +273,23 @@ export default class State{
                 dbia: {
                     name: 'DBia',
                     description: 'Distributed database',
-                    symbol: '',
-                    address: 'dbia.orca.playground.4da',,
+                    symbol: this.symbol['dbia'],
+                    address: 'dbia.orca.playground.4da',
                     categories: ['data']
                 },
 
                 teledigit: {
                     name: 'TeleDigit',
                     description:  'TDPnet elements and core services',
-                    symbol: '',
-                    address: 'teledigit.orca.playground.4da',,
+                    symbol: this.symbol['teledigit'],
+                    address: 'teledigit.orca.playground.4da',
                     categories: ['sdn']
                 },
 
                 ccf: {
                     name: 'CCF',
                     description: 'Banking services',
-                    symbol: '',
+                    symbol: this.symbol['ccf'],
                     address: 'ccf.orca.playground.4da',
                     categories: ['bankng']
                 },
@@ -279,7 +297,7 @@ export default class State{
                 ux: {
                     name: 'UX',
                     description: 'User Experience',
-                    symbol: '',
+                    symbol: this.symbol['ux'],
                     address: 'ux.orca.playground.4da',
                     categories: ['*']
                 },
@@ -287,9 +305,9 @@ export default class State{
                 kronia: {
                     name: 'Kronia',
                     description: 'Timing',
-                    symbol: '',
+                    symbol: this.symbol['clock'],
                     address: 'kronia.orca.playground.4da',
-                    categories: ['sync']
+                    categories: ['process']
                 }
 
             }
