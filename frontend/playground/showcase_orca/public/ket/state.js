@@ -1,5 +1,11 @@
+let symbol = {
+    'clock': '&#9200;',
+    'sdn': '&#9000;'
+}
+
 export default class State{
     constructor(){
+        this.symbol = symbol
     }
 
     get objects(){
@@ -20,6 +26,7 @@ export default class State{
             }
         return list
     }
+
 
     get links(){
         return {
@@ -217,7 +224,7 @@ export default class State{
             categories: {
                 sdn: {
                     name: 'TDPnet',
-                    symbol: '',
+                    symbol: this.symbol['sdn'],
                     services: ['*']
                 },
                 digital : {
@@ -241,7 +248,7 @@ export default class State{
                     name: 'Logic gate',
                     description: 'Boolean Algebra implementation',
                     symbol: '',
-                    address: '',
+                    address: 'logica.orca.playground.4da',
                     categories: ['digital']
                 },
                 
@@ -249,7 +256,7 @@ export default class State{
                     name: 'DBia',
                     description: 'Distributed database',
                     symbol: '',
-                    address: '',
+                    address: 'dbia.orca.playground.4da',,
                     categories: ['data']
                 },
 
@@ -257,7 +264,7 @@ export default class State{
                     name: 'TeleDigit',
                     description:  'TDPnet elements and core services',
                     symbol: '',
-                    address: '',
+                    address: 'teledigit.orca.playground.4da',,
                     categories: ['sdn']
                 },
 
@@ -265,8 +272,26 @@ export default class State{
                     name: 'CCF',
                     description: 'Banking services',
                     symbol: '',
+                    address: 'ccf.orca.playground.4da',
                     categories: ['bankng']
+                },
+
+                ux: {
+                    name: 'UX',
+                    description: 'User Experience',
+                    symbol: '',
+                    address: 'ux.orca.playground.4da',
+                    categories: ['*']
+                },
+
+                kronia: {
+                    name: 'Kronia',
+                    description: 'Timing',
+                    symbol: '',
+                    address: 'kronia.orca.playground.4da',
+                    categories: ['sync']
                 }
+
             }
 
         }
