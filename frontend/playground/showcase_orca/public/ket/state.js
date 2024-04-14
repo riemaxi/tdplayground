@@ -247,7 +247,7 @@ export default class State{
                 },
                 data : {
                     name: 'Data',
-                    symbool: this.symbol['data'],
+                    symbol: this.symbol['data'],
                     services: ['*']
                 },
                 banking: {

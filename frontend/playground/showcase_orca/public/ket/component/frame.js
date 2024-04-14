@@ -50,6 +50,12 @@ const content = `
         height: 50px;
     }
 
+    #palette{
+        width: 80px;
+        height: auto;
+        background-color: #8d7a7a;
+    }
+
     #badge{
         position: absolute;
         right: 10px;
@@ -108,6 +114,8 @@ export default class Frame extends Element{
         this.get('toolbar').handle = id => this.handleToolbar(id)
 
         this.queryAll('.window').forEach( w => w.onFocus = ()  => w.show(this.maxZindex()) )
+
+        this.palette.onSelection = (id, data) => this.handlePalette(id, data)
     }
 
     handleToolbar(id){
@@ -115,6 +123,10 @@ export default class Frame extends Element{
             this.handle('signout')
         else
             this.get(id).show(this.maxZindex())
+    }
+
+    handlePalette(id, data){
+        console.log('palette', id, data)
     }
 
     set data(value){

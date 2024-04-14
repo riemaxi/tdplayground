@@ -23,8 +23,12 @@ const STYLE = `
     margin-left: 5px;
 }
 
+#stack{
+    display: flex;
+    background-color: #8d7a7a;
+}
+
 .menu{
-    position: absolute;
     display: none;
     flex-direction: column;
     width: 100%;
@@ -41,7 +45,7 @@ const STYLE = `
 .menuitem{
     display: flex;
     flex-direction: column;
-    height: 40px;
+    _height: 30px;
     justify-content: center;
     align-items: center;
     margin: 5px;
@@ -64,14 +68,16 @@ const STYLE = `
 const STRUCTURE = `
 <div id="content">
     <div id="title"><div>Palette</div></div>
-    <div class="menu" id="categories"></div>
-    <div class="manu" id="providers"></div>
+    <div id="stack">
+        <div class="menu" id="categories"></div>
+        <div class="manu" id="providers"></div>
+    </div>
 </div>
 `
 
 export default class Palette extends Window{
     constructor(){
-        super(true)
+        super()
     }
 
     controlCategories(){
@@ -82,27 +88,38 @@ export default class Palette extends Window{
         this.queryAll('.category-button').forEach(b => b.onclick = () => this.onSelection('provider', b.id))
     }
 
-    showCategories(list){
+    showCategories(){
         let html = item => `<div class="menuitem"><div class="category-button" id="${item.id}">${item.symbol}</div><div class="caption">${item.name}</div></div>`
-        this.get('categories').innerHTML = list.map(item => html(item)).join('')
+
+        this.categories = this.get('categories')
+        this.categories.style.display = 'flex'
+
+        this.get('categories').innerHTML = this.items.categories.map(item => html(item)).join('')
 
         this.controlCategories()
     }
 
-    showProviders(list){
-        let html = item => `<div class="menuitem"><div class="provider-button" id="${item.id}">${item.symbol}</div><div class="caption">${item.name}</div></div>`
-        this.get('providers').innerHTML = list.map(item => html(item)).join('') + html({id: 'return', symbol: '&#9166;', name: ''})
+    showProviders(catId){
+        let html = item => `<div class="menuitem"><div class="provider-button" id="${item.id}">${item.symbol}</div><div class="caption">${item.name}</div></div>`        
+
+        console.log('set category', catId)
+
+        this.providers = this.get('providers')
+        this.providers.style.display = 'flex'
+
+        let list = this.items.providers.filter(p => p.categories.indexOf(catId) >= 0)        
+        this.providers.innerHTML = list.map(item => html(item)).join('') + html({id: 'return', symbol: '&#9166;', name: ''})
 
         this.controlProviders()
     }
 
     set data(value){
-        this.showCategories(value.createCategories)
-        //this.showProviders(value.providers)
-    }
+        this.items = {
+            categories: Object.entries(value.categories).map(e => ({id: e[0], ...e[1]})),
+            providers: Object.entries(value.providers).map(e => ({id: e[0], ...e[1]}))
+        }
 
-    set category(id){
-        console.log('set category', id)
+        this.showCategories()
     }
 
     get customStructure(){
