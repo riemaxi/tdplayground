@@ -116,7 +116,6 @@ export default  class Lobby extends Element{
     }
 
     set data(value){
-        console.log(value)
         let html = item => `<option id="${item.id}" data-role="${item.role}" value=${item.id} >${item.badge}</option>`
 
         this.get('username').innerHTML = value.map(item => html(item))

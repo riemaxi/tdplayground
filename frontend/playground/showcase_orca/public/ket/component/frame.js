@@ -40,7 +40,7 @@ const content = `
     #toolbar{
         display: flex;
         width: auto;
-        height: 50px;
+        height: auto;
     }
 
     #palette{
@@ -66,8 +66,8 @@ const content = `
         border-radius: 7px;
     }
 </style>
-<div id="root">
-    <div id="content">
+<div id="root" >
+    <div id="content" data-secret="">
         <frame-canvas class="window" id="canvas"></frame-canvas>
         <frame-toolbar class="window" id="toolbar"></frame-toolbar>        
         <frame-palette class="window" id="palette"></frame-palette>        
@@ -87,8 +87,6 @@ const content = `
 export default class Frame extends Element{
     constructor(){
         super(content)
-
-        this.current = {}
 
         this.control()
     }
@@ -111,15 +109,21 @@ export default class Frame extends Element{
         this.repository = this.get('repository')
         this.palette = this.get('palette')
         this.badge = this.get('badge')
+        this.content = this.get('content')
+        this.toolbar = this.get('toolbar')
 
         window.onresize = () => this.onResize(this.size)
         window.ondeviceorientation = () => this.onResize(this.size)
 
-        this.get('toolbar').handle = id => this.handleToolbar(id)
+        this.toolbar.handle = id => this.handleToolbar(id)
 
         this.queryAll('.window').forEach( w => w.onFocus = ()  => w.show(this.maxZindex()) )
 
         this.palette.onSelection = (id, data) => this.handlePalette(id, data)
+
+        let secret = Date.now()
+        this.content.dataset.secret = secret
+        this.content.onclick = e => secret == e.target.dataset.secret && this.toolbar.show(this.maxZindex())
     }
 
     handleToolbar(id){
@@ -136,8 +140,9 @@ export default class Frame extends Element{
             case 'provider' : {
                             if (data == 'return')
                                 this.palette.showCategories()
-                            else
-                                this.current.provider = data; 
+                            else{
+                                this.canvas.current = data 
+                            }
             }break;
         }            
     }
@@ -153,7 +158,7 @@ export default class Frame extends Element{
     }
 
     hide(){
-        this.queryAll('.window').filter(w => w.id !== 'toolbar').forEach(w => {
+        this.queryAll('.window').filter(w => w !== this.toolbar).forEach(w => {
             w.hide()
         })
 

@@ -74,6 +74,22 @@ export default class Canvas extends Window{
        this.llayer = new LinkLayer(this.get('link-canvas'), this.grid.size, [])
         this.tlayer = new TileLayer(this.get('tile-canvas'), this.grid.size, {})
         this.olayer = new ObjectLayer(this.get('object-canvas'), this.grid.size, {})
+
+    }
+
+    set current(value){
+        console.log('current', value)
+        this._current = value
+    }
+
+    get current(){
+        return this._current
+    }
+
+    control(){
+        super.control()
+        
+        this.get('workspace').onclick = e => this.handleWorkspace(e)
     }
 
     customStyle(){
@@ -136,6 +152,10 @@ export default class Canvas extends Window{
         this.olayer.scale(ratio)
         this.llayer.scale(ratio)
         this.tlayer.scale(ratio)
+    }
+
+    handleWorkspace(e){
+        console.log('place object', this.current)
     }
 
     onResize(w, h){

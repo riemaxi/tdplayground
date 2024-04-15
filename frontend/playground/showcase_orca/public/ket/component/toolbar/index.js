@@ -53,7 +53,7 @@ const STRUCTURE = `
 
 export default class Toolbar extends Window{
     constructor(){
-        super()
+        super(true)
     }
 
     control(){

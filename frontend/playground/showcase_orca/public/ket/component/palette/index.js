@@ -87,7 +87,7 @@ export default class Palette extends Window{
     }
 
     controlProviders(){
-        this.queryAll('.provider-button').forEach(b => b.onclick = () => this.onSelection('provider', b.id))
+        this.queryAll('.provider-button').forEach(b => b.onclick = () => this.onSelection('provider', this.getProvider(b.id)))
     }
 
     showCategories(){
@@ -112,6 +112,10 @@ export default class Palette extends Window{
         this.providers.innerHTML = list.map(item => html(item)).join('') + html({id: 'return', symbol: '&#9166;', name: ''})
 
         this.controlProviders()
+    }
+
+    getProvider(id){
+        return this.items.providers.find(item => item.id == id) || 'return'
     }
 
     set data(value){
