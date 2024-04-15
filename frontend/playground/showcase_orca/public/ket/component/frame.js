@@ -9,6 +9,7 @@ import Recycle from "./recycle/index.js"
 import Setting from "./setting/index.js"
 import Badge from "./badge.js"
 import Assistant from "./assistant/index.js"
+import Repository from "./repository/index.js"
 import Canvas from "./canvas/index.js"
 
 
@@ -77,6 +78,7 @@ const content = `
         <frame-notification class="window" id="notification"></frame-notification> 
         <frame-setting class="window" id="setting"></frame-setting> 
         <frame-assistant class="window" id="assistant"></frame-assistant> 
+        <frame-repository class="window" id="repository"></frame-repository> 
         <frame-badge id="badge"></frame-badge>        
     </div>
 </div>
@@ -85,6 +87,8 @@ const content = `
 export default class Frame extends Element{
     constructor(){
         super(content)
+
+        this.current = {}
 
         this.control()
     }
@@ -106,6 +110,7 @@ export default class Frame extends Element{
         this.canvas = this.get('canvas')
         this.repository = this.get('repository')
         this.palette = this.get('palette')
+        this.badge = this.get('badge')
 
         window.onresize = () => this.onResize(this.size)
         window.ondeviceorientation = () => this.onResize(this.size)
@@ -126,14 +131,33 @@ export default class Frame extends Element{
 
     handlePalette(id, data){
         console.log('palette', id, data)
+        switch(id){
+            case 'category' : this.palette.showProviders(data); break;
+            case 'provider' : {
+                            if (data == 'return')
+                                this.palette.showCategories()
+                            else
+                                this.current.provider = data; 
+            }break;
+        }            
     }
 
     set data(value){
+        this.badge.data = value.badge
+
         this.canvas.data = value.objects
         this.palette.data = value.library
 
         let size = Math.min(this.canvas.size.width, this.canvas.size.height)
         this.canvas.scale(size, size)
+    }
+
+    hide(){
+        this.queryAll('.window').filter(w => w.id !== 'toolbar').forEach(w => {
+            w.hide()
+        })
+
+        super.hide()
     }
 
     onResize(_){
@@ -149,4 +173,5 @@ window.customElements.define('frame-notification', Notification)
 window.customElements.define('frame-recycle', Recycle)
 window.customElements.define('frame-setting', Setting)
 window.customElements.define('frame-assistant', Assistant)
+window.customElements.define('frame-repository', Repository)
 window.customElements.define('frame-badge', Badge)

@@ -122,9 +122,11 @@ export default  class Lobby extends Element{
     }
 
     get data(){
+        let username = this.get('username').value
         return {
-            username : this.get('username').value,
-            password: this.get('password').value
+            username,
+            password: this.get('password').value,
+            badge: this.get(username).innerText
         }
     }
 

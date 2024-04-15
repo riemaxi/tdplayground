@@ -45,7 +45,6 @@ const STYLE = `
 .menuitem{
     display: flex;
     flex-direction: column;
-    _height: 30px;
     justify-content: center;
     align-items: center;
     margin: 5px;
@@ -70,7 +69,7 @@ const STRUCTURE = `
     <div id="title"><div>Palette</div></div>
     <div id="stack">
         <div class="menu" id="categories"></div>
-        <div class="manu" id="providers"></div>
+        <div class="menu" id="providers"></div>
     </div>
 </div>
 `
@@ -78,6 +77,9 @@ const STRUCTURE = `
 export default class Palette extends Window{
     constructor(){
         super()
+
+        this.categories = this.get('categories')
+        this.providers = this.get('providers')
     }
 
     controlCategories(){
@@ -85,13 +87,13 @@ export default class Palette extends Window{
     }
 
     controlProviders(){
-        this.queryAll('.category-button').forEach(b => b.onclick = () => this.onSelection('provider', b.id))
+        this.queryAll('.provider-button').forEach(b => b.onclick = () => this.onSelection('provider', b.id))
     }
 
     showCategories(){
         let html = item => `<div class="menuitem"><div class="category-button" id="${item.id}">${item.symbol}</div><div class="caption">${item.name}</div></div>`
 
-        this.categories = this.get('categories')
+        this.providers.style.display = 'none'
         this.categories.style.display = 'flex'
 
         this.get('categories').innerHTML = this.items.categories.map(item => html(item)).join('')
@@ -102,12 +104,11 @@ export default class Palette extends Window{
     showProviders(catId){
         let html = item => `<div class="menuitem"><div class="provider-button" id="${item.id}">${item.symbol}</div><div class="caption">${item.name}</div></div>`        
 
-        console.log('set category', catId)
 
-        this.providers = this.get('providers')
+        this.categories.style.display = 'none'
         this.providers.style.display = 'flex'
 
-        let list = this.items.providers.filter(p => p.categories.indexOf(catId) >= 0)        
+        let list = this.items.providers.filter(p => p.categories.indexOf('*') >=0 || p.categories.indexOf(catId) >= 0)        
         this.providers.innerHTML = list.map(item => html(item)).join('') + html({id: 'return', symbol: '&#9166;', name: ''})
 
         this.controlProviders()

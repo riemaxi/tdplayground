@@ -42,6 +42,10 @@ export default class Ket{
         lobby.hide()
         frame.show()
         frame.data = {
+            badge:  {
+                name: data.badge,
+                role: data.badge
+            },
             objects: state.data,
             library: state.library
         }
