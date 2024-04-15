@@ -134,7 +134,6 @@ export default class Frame extends Element{
     }
 
     handlePalette(id, data){
-        console.log('palette', id, data)
         switch(id){
             case 'category' : this.palette.showProviders(data); break;
             case 'provider' : {

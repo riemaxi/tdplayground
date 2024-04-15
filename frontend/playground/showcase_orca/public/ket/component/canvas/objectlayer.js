@@ -50,29 +50,60 @@ export default class ObjectLayer extends Layer {
 
     }
 
+    addObject(color, x, y, extra){
+        let size = 2
+        let object = {
+            id : Date.now(),
+            data: {
+                feature: {
+                    color,
+                    size,
+                    extra
+                },
+                state: {
+                    x : x / this.ratio.x - size/2,
+                    y : y / this.ratio.y - size/2
+                }
+            }
+        }
+
+        this.items[object.id] = object
+
+        this.update()
+    }
+
     selectObject(o){
         o.remove()
         this.root.appendChild(o)
     }
 
+    icon(id, data){
+        let {state, feature} = data
+        let {x,y } = state
+        let {color, size, extra} = feature
+
+        return `<text class="object" id="${id}" x=${x * this.ratio.x} y="${y *  this.ratio.y}">${extra.symbol}</text>`
+    }
 
     rectangle(id, data){
         let {state, feature} = data
         let {x,y } = state
         let {color, size} = feature
 
-        return `<rect class="object" id="${id}" x=${x * this.ratio.x} y="${y *  this.ratio.y}" width="${x * this.ratio.x}" height="${size * this.ratio.x}" fill="${color}" rx="${this.ratio.x}" />`
+        return `<rect class="object" id="${id}" x=${x * this.ratio.x} y="${y *  this.ratio.y}" width="${size * this.ratio.x}" height="${size * this.ratio.y}" fill="${color}" rx="${this.ratio.x}" />`
     }
 
     object(o){
-        return this.rectangle(o.id, o.data)
+        return this.icon(o.id, o.data)
     }    
 
     set data(value){
         this.items = value
+        this.update()
+    }
 
+    update(){
         this.root.innerHTML = Object.values(this.items).map(item => this.object(item) ).join('')
-
         this.control()
     }
 

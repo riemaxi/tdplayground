@@ -30,6 +30,7 @@ const STYLE = `
     }
     
     .object{
+        font-size: 2em;
         cursor: pointer;
     }
 
@@ -44,6 +45,12 @@ const STYLE = `
         width: 100%;
         height: 300px;
         background-color: lightgreen;
+    }
+
+    .sp{
+        font-size: 30em;
+        font-family: Impact;
+        color: black;
     }
 
 </style>`
@@ -70,7 +77,6 @@ export default class Canvas extends Window{
            }
         }
 
-
        this.llayer = new LinkLayer(this.get('link-canvas'), this.grid.size, [])
         this.tlayer = new TileLayer(this.get('tile-canvas'), this.grid.size, {})
         this.olayer = new ObjectLayer(this.get('object-canvas'), this.grid.size, {})
@@ -78,8 +84,14 @@ export default class Canvas extends Window{
     }
 
     set current(value){
-        console.log('current', value)
         this._current = value
+    }
+
+    getRatio(w, h){
+        return {
+            x: w / this.grid.size.width,
+            y: h / this.grid.size.height
+        }
     }
 
     get current(){
@@ -88,8 +100,9 @@ export default class Canvas extends Window{
 
     control(){
         super.control()
-        
-        this.get('workspace').onclick = e => this.handleWorkspace(e)
+
+        this.workspace = this.get('workspace')        
+        this.workspace.onclick = e => this.handleWorkspace(e)
     }
 
     customStyle(){
@@ -144,10 +157,7 @@ export default class Canvas extends Window{
     scale(w, h){
         this.get('workspace').style.height = (this.size.height - 50) + 'px'
 
-         let ratio = {
-            x: w / this.grid.size.width,
-            y: h / this.grid.size.height
-        }
+        let ratio = this.getRatio(w,h)
 
         this.olayer.scale(ratio)
         this.llayer.scale(ratio)
@@ -155,7 +165,15 @@ export default class Canvas extends Window{
     }
 
     handleWorkspace(e){
-        console.log('place object', this.current)
+        if (this.current){
+            let r = this.workspace.getBoundingClientRect()
+            let x = e.clientX - r.x
+            let y = e.clientY - r.y
+
+           this.olayer.addObject('red', x, y, {...this.current})
+           this.current = null           
+        }
+
     }
 
     onResize(w, h){
