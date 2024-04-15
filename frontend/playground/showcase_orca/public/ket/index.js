@@ -44,7 +44,7 @@ export default class Ket{
         frame.data = {
             badge:  {
                 name: data.badge,
-                role: data.badge
+                role: data.role
             },
             objects: state.data,
             library: state.library

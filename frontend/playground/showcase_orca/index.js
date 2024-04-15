@@ -57,19 +57,28 @@ let desk = new class extends require('../../core/ns.desk'){
 		this.users = [
 			{
 				id: '3000',
-				badge: 'Guest'
+				badge: 'Guest',
+				role: 'Guest'
 			},
 			{
 				id: '1000',
-				badge: 'Lola Marta'
+				badge: 'Lola Marta',
+				role: 'Administrator'
 			},
 			{
 				id: '1001',
-				badge: 'Papo Lucas'
+				badge: 'Papo Lucas',
+				role: 'Developer'
 			},
 			{
 				id: '1002',
-				badge: 'Petro Marcelo'
+				badge: 'Petro Marcelo',
+				role: 'System Architect'
+			},
+			{
+				id: '1003',
+				badge: 'Armando Postre',
+				role: 'Hotel Chain Advisor'
 			}
 		]
 	}

@@ -116,17 +116,20 @@ export default  class Lobby extends Element{
     }
 
     set data(value){
-        let html = item => `<option id="${item.id}" value=${item.id} >${item.badge}</option>`
+        console.log(value)
+        let html = item => `<option id="${item.id}" data-role="${item.role}" value=${item.id} >${item.badge}</option>`
 
         this.get('username').innerHTML = value.map(item => html(item))
     }
 
     get data(){
         let username = this.get('username').value
+        let detail = this.get(username)
         return {
-            username,
+            username: username.value,
             password: this.get('password').value,
-            badge: this.get(username).innerText
+            badge: detail.innerText,
+            role: detail.dataset.role
         }
     }
 
