@@ -12,7 +12,6 @@ const STYLE = `
         justify-content: space-between;
         width: 100%;
         height: 100%;
-        background-color: red;
     }
 
     #title{
@@ -27,6 +26,32 @@ const STYLE = `
     
     #title div{
         margin-left: 5px;
+    }
+
+    #toolbar{
+        display: flex;
+        justify-content: end;
+        height: 30px;
+        width: 100%;
+        background-color: #8d7a7a;
+        gap: 17px;
+    }
+
+    #toolbar div{
+        display: flex;
+        justify-content: center;
+    }
+
+    .tool{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+
+        font-size: 14px;
+
+        cursor: pointer;
     }
     
     .object{
@@ -47,10 +72,8 @@ const STYLE = `
         background-color: lightgreen;
     }
 
-    .sp{
-        font-size: 30em;
-        font-family: Impact;
-        color: black;
+    input{
+        width: 100%;
     }
 
 </style>`
@@ -58,6 +81,32 @@ const STYLE = `
 const STRUCTURE = `
 <div id="content">
     <div id="title"><div>Canvas</div></div>
+    <div id="toolbar">
+        <div>
+            <input type="text" placeholder="project name">
+        </div>
+        <div>
+            <div class="tool"><div class="button" id="new">&#128196;</div></div>
+            <div class="tool"><div class="button" id="save">&#128190;</div></div>
+            <div class="tool"><div class="button" id="recycle">&#9851;</div></div>
+        </div>
+
+        <div>
+            <div class="tool"><div class="button" id="cut">&#9986;</div></div>
+            <div class="tool"><div class="button" id="copy">&#9646;</div></div>
+            <div class="tool"><div class="button" id="paste">&#9647;</div></div>
+        </div>
+
+        <div>
+            <div class="tool"><div class="button" id="undo">&#10560;</div></div>
+            <div class="tool"><div class="button" id="redo">&#10561;</div></div>
+        </div>
+
+        <div>
+            <div class="tool"><div class="button" id="zoomin">&#10134;</div></div>
+            <div class="tool"><div class="button" id="zoomout">&#10133;</div></div>
+        </div>
+    </div>
     <div id="workspace">
         <svg class="layer" id="tile-canvas"/>
         <svg class="layer" id="link-canvas"/>
@@ -98,11 +147,20 @@ export default class Canvas extends Window{
         return this._current
     }
 
+    get topHeight(){
+        let title = this.get('title')
+        let toolbar = this.get('toolbar')
+        return title.getBoundingClientRect().height +
+                toolbar.getBoundingClientRect().height
+    }
+
     control(){
         super.control()
 
         this.workspace = this.get('workspace')        
         this.workspace.onclick = e => this.handleWorkspace(e)
+
+        this.queryAll('.button').forEach( b => b.onclick = () => console.log(b.id))
     }
 
     customStyle(){
@@ -117,6 +175,10 @@ export default class Canvas extends Window{
         this.olayer.onChange = item => {
             this.llayer.updateLink(item)
         }
+    }
+
+    get minWidth(){
+        return 400
     }
 
     createLinks(links, objects){
@@ -155,7 +217,7 @@ export default class Canvas extends Window{
     }
 
     scale(w, h){
-        this.get('workspace').style.height = (this.size.height - 50) + 'px'
+        this.get('workspace').style.height = (this.size.height - this.topHeight) + 'px'
 
         let ratio = this.getRatio(w,h)
 
