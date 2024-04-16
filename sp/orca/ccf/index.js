@@ -19,14 +19,8 @@ new class extends require('./prompt'){
         this.LA2YA(from)    
    }
 
-	onRequest(e){
-        let {from, subject, detail} = e
-        this.response(from, subject, detail)
-
-        console.log('on request', from, detail)
-    }
-
-    onResponse(e){
-
+	onEvent(e){
+        let {from, detail} = e
+        console.log('on event', from, detail)
     }
 }

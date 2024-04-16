@@ -37,14 +37,12 @@ module.exports = class Prompt extends require('../core/session'){
 	onCommand(data, valid, signal){
 		switch(data.subject){
 			case '2MAMA' : this.on2MAMA(data); break;
-            case 'request': this.onRequest(data); break;
-			case 'response' : this.onResponse(data); break;
+            case 'event': this.onEvent(data); break;
         }
     }
 
 	on2MAMA(_){}
-	onRequest(_){}
-	onResponse(_){}
+	onEvent(_){}
 
 	LA2YA(to){
 		this.send('data', msg.create(
@@ -54,11 +52,11 @@ module.exports = class Prompt extends require('../core/session'){
 			Date.now() ) )
 	}
 
-	response(to, data){
+	notify(to, data){
 		this.send('data', msg.create(
 			this.address,
 			to,
-			'response',
+			'event',
 			data ) )
 	}
 

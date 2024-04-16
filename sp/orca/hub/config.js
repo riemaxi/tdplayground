@@ -10,7 +10,12 @@ module.exports= {
 		},
 
 		peers: {
-			'teledigit.orca.playground.4da' : 'teledigit.orca.playground.4da'
+			teledigit : 'teledigit.orca.playground.4da',
+			ux: 'ux.orca.playground.4da',
+			dbia: 'dbia.orca.playground.4da',
+			logica: 'logica.orca.playground.4da',
+			kronia: 'kronia.orca.playground.4da',
+			ccf: 'ccf.orca.playground.4da'
 		}
 
 	}

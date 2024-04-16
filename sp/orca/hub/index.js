@@ -22,7 +22,7 @@ new class extends require('./prompt'){
         let {from, detail} = e
         console.log('on event', from, detail)
 
-        let to = this.peers[detail.to]
+        let to = this.peers[detail.data.id]
         to && this.notify(to, detail)
     }
 }
