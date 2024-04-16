@@ -111,6 +111,7 @@ export default class Frame extends Element{
         this.badge = this.get('badge')
         this.content = this.get('content')
         this.toolbar = this.get('toolbar')
+        this.property = this.get('property')
 
         window.onresize = () => this.onResize(this.size)
         window.ondeviceorientation = () => this.onResize(this.size)
@@ -120,6 +121,8 @@ export default class Frame extends Element{
         this.queryAll('.window').forEach( w => w.onFocus = ()  => w.show(this.maxZindex()) )
 
         this.palette.onSelection = (id, data) => this.handlePalette(id, data)
+        this.canvas.handle = (id, data) => this.handleCanvas(id, data)
+        this.property.handle = (id, data) => this.handleProperty(id, data)
 
         let secret = Date.now()
         this.content.dataset.secret = secret
@@ -136,14 +139,27 @@ export default class Frame extends Element{
     handlePalette(id, data){
         switch(id){
             case 'category' : this.palette.showProviders(data); break;
-            case 'provider' : {
-                            if (data == 'return')
-                                this.palette.showCategories()
-                            else{
-                                this.canvas.current = data 
-                            }
-            }break;
+            case 'provider' : this.handlePaletteProvide(data); break;
         }            
+    }
+
+    handlePaletteProvide(data){
+        if (data == 'return')
+            this.palette.showCategories()
+            else{
+            this.canvas.current = data 
+        }
+
+    }
+
+    handleCanvas(id, e){
+        switch(id){
+            case 'object.selection' : this.property.data = e.data.feature.extra; break;
+        }
+    }
+
+    handleProperty(id, data){
+        console.log('handle property', id, data)
     }
 
     set data(value){

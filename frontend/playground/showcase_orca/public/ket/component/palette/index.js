@@ -102,14 +102,13 @@ export default class Palette extends Window{
     }
 
     showProviders(catId){
-        let html = item => `<div class="menuitem"><div class="provider-button" id="${item.id}">${item.symbol}</div><div class="caption">${item.name}</div></div>`        
-
+        let html = item => `<div class="menuitem"><div class="provider-button" id="${item.id}">${item.feature.symbol}</div><div class="caption">${item.feature.name}</div></div>`
 
         this.categories.style.display = 'none'
         this.providers.style.display = 'flex'
 
-        let list = this.items.providers.filter(p => p.categories.indexOf('*') >=0 || p.categories.indexOf(catId) >= 0)        
-        this.providers.innerHTML = list.map(item => html(item)).join('') + html({id: 'return', symbol: '&#9166;', name: ''})
+        let list = this.items.providers.filter(p => p.feature.categories.indexOf('*') >=0 || p.feature.categories.indexOf(catId) >= 0)        
+        this.providers.innerHTML = list.map(item => html(item)).join('') + html({id: 'return', feature: { symbol: '&#9166;', name: ''}})
 
         this.controlProviders()
     }

@@ -175,6 +175,8 @@ export default class Canvas extends Window{
         this.olayer.onChange = item => {
             this.llayer.updateLink(item)
         }
+
+        this.olayer.onSelection = item => this.handle('object.selection', item)
     }
 
     get minWidth(){
@@ -212,7 +214,6 @@ export default class Canvas extends Window{
         this.llayer.data = this.createLinks(value.links, value.objects)
 
         this.tlayer.data = value.tiles
-
         this.controlLayers()
     }
 
@@ -250,5 +251,7 @@ export default class Canvas extends Window{
         this.scale(msize, msize)
 
     }
+
+    handle(_){}
 
 }

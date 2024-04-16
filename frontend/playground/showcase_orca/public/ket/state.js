@@ -265,63 +265,118 @@ export default class State{
             },
             providers: {
                 logica: {
-                    name: 'Logic gate',
-                    description: 'Boolean Algebra implementation',
-                    symbol: this.symbol['logica'],
-                    address: 'logica.orca.playground.4da',
-                    addresses: ['logica.orca.playground.4da'],
-                    categories: ['digital']
+                    feature: {
+                        name: 'Logic gate',
+                        description: 'Boolean Algebra implementation',
+                        symbol: this.symbol['logica'],
+                        address: 'logica.orca.playground.4da',
+                        addresses: ['logica.orca.playground.4da'],
+                        categories: ['digital']
+                    },
+
+                    setting: {
+
+                    },
+                    state: {
+
+                    }
                 },
                 
                 dbia: {
-                    name: 'DBia',
-                    description: 'Distributed database',
-                    symbol: this.symbol['dbia'],
-                    address: 'dbia.orca.playground.4da',
-                    addresses: ['dbia.orca.playground.4da'],
-                    categories: ['data']
+                    feature: {
+                        name: 'DBia',
+                        description: 'Distributed database',
+                        symbol: this.symbol['dbia'],
+                        address: 'dbia.orca.playground.4da',
+                        addresses: ['dbia.orca.playground.4da'],
+                        categories: ['data']
+                    },
+
+                    setting: {
+
+                    },
+                    state: {
+
+                    }
                 },
 
                 teledigit: {
-                    name: 'TeleDigit',
-                    description:  'TDPnet elements and core services',
-                    symbol: this.symbol['teledigit'],
-                    address: 'teledigit.orca.playground.4da',
-                    addresses: ['teledigit.orca.playground.4da'],
-                    categories: ['sdn']
+                    feature: {
+                        name: 'TeleDigit',
+                        description:  'TDPnet elements and core services',
+                        symbol: this.symbol['teledigit'],
+                        address: 'teledigit.orca.playground.4da',
+                        addresses: ['teledigit.orca.playground.4da'],
+                        categories: ['sdn']
+                    },
+
+                    setting: {
+
+                    },
+                    state: {
+
+                    }
                 },
 
                 ccf: {
-                    name: 'CCF',
-                    description: 'Banking services',
-                    symbol: this.symbol['ccf'],
-                    address: 'ccf.orca.playground.4da',
-                    addresses: ['ccf.orca.playground.4da'],
-                    categories: ['banking']
+                    feature: {
+                        name: 'CCF',
+                        description: 'Banking services',
+                        symbol: this.symbol['ccf'],
+                        address: 'ccf.orca.playground.4da',
+                        addresses: ['ccf.orca.playground.4da'],
+                        categories: ['banking']
+                    },
+
+                    setting: {
+
+                    },
+                    state: {
+
+                    }
+
                 },
 
                 ux: {
-                    name: 'UX',
-                    description: 'User Experience',
-                    symbol: this.symbol['ux'],
-                    address: 'ux.orca.playground.4da',
-                    addresses: ['ux.orca.playground.4da'],
-                    categories: ['*']
+                    feature: {
+                        name: 'UX',
+                        description: 'User Experience',
+                        symbol: this.symbol['ux'],
+                        address: 'ux.orca.playground.4da',
+                        addresses: ['ux.orca.playground.4da'],
+                        categories: ['*']
+                    },
+                    setting: {
+
+                    },
+                    state: {
+
+                    }
+
                 },
 
                 kronia: {
-                    name: 'Kronia',
-                    description: 'Timing',
-                    symbol: this.symbol['clock'],
-                    address: 'kronia.orca.playground.4da',
-                    addresses: ['kronia.orca.playground.4da'],
-                    categories: ['process']
+                    feature: {
+                        name: 'Kronia',
+                        description: 'Timing',
+                        symbol: this.symbol['clock'],
+                        address: 'kronia.orca.playground.4da',
+                        addresses: ['kronia.orca.playground.4da'],
+                        categories: ['process']
+                    },
+
+                    setting: {
+
+                    },
+                    state: {
+
+                    }
+
                 }
 
             }
 
         }
     }
-
 
 }

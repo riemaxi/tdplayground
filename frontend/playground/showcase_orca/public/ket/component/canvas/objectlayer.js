@@ -21,6 +21,8 @@ export default class ObjectLayer extends Layer {
                     x: e.offsetX - o.getAttribute('x'),
                     y: e.offsetY - o.getAttribute('y')
                 }
+
+                this.onSelection(this.items[this.current.id])
             }
 
             o.onpointerup = e => {
@@ -70,6 +72,8 @@ export default class ObjectLayer extends Layer {
         this.items[object.id] = object
 
         this.update()
+
+        this.onSelection(object)
     }
 
     selectObject(o){
@@ -82,7 +86,7 @@ export default class ObjectLayer extends Layer {
         let {x,y } = state
         let {color, size, extra} = feature
 
-        return `<text class="object" id="${id}" x=${x * this.ratio.x} y="${y *  this.ratio.y}">${extra.symbol}</text>`
+        return `<text class="object" id="${id}" x=${x * this.ratio.x} y="${y *  this.ratio.y}">${extra.feature.symbol}</text>`
     }
 
     rectangle(id, data){
@@ -124,4 +128,5 @@ export default class ObjectLayer extends Layer {
     }
 
     onChange(_){}
+    onSelection(_){}
 }
