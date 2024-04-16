@@ -10,6 +10,7 @@ module.exports= {
 		},
 
 		peers: {
+			'teledigit.orca.playground.4da' : 'teledigit.orca.playground.4da'
 		}
 
 	}

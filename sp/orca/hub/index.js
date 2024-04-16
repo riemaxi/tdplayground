@@ -21,6 +21,8 @@ new class extends require('./prompt'){
 	onEvent(e){
         let {from, detail} = e
         console.log('on event', from, detail)
-        this.notify(detail.to, detail)
+
+        let to = this.peers[detail.to]
+        to && this.notify(to, detail)
     }
 }
