@@ -43,12 +43,12 @@ module.exports = class Prompt extends require('../../core/session'){
 
 	onEvent(_){}
 
-	notify(subject, detail){
+	notify(data){
 		this.send('data', msg.create(
 			this.address,
 			this.peers.hub,
-			subject,
-			detail ) )
+			'event',
+			data ) )
 	}
 }
 

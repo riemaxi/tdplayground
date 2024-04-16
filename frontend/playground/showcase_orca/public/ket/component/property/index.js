@@ -92,6 +92,14 @@ export default class Property extends Window{
         super(true)
     }
 
+    control(){
+        super.control()
+
+        console.log('property controlling ...')
+
+        this.queryAll('.button'). forEach(b => b.onclick = () => this.handle('command', b.id ))
+    }
+
     get customStructure(){
         return STRUCTURE
     }
@@ -99,8 +107,19 @@ export default class Property extends Window{
     get customStyle(){
         return STYLE
     }
+
+    get address(){
+        return this.data.feature.address
+    }
+
+    get data(){
+        return this._data
+    }
     
     set data(value){
+        this._data = value
         this.get('title').innerText = `Properties - ${value.feature.name}`
     }
-}
+
+    handle(_){}
+ }

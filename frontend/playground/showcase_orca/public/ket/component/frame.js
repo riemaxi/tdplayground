@@ -160,6 +160,10 @@ export default class Frame extends Element{
 
     handleProperty(id, data){
         console.log('handle property', id, data)
+
+        switch(id){
+            case 'command' : this.handle( 'sp.command', {id: data, to: this.property.address, data: this.property.data} )
+        }
     }
 
     set data(value){

@@ -31,12 +31,10 @@ class Session{
 	}
 
 	handleEvent(e){
-		let {to, id, data} = e
-		console.log(id, data)
-		if (desk.getSession(to))
-			desk.notify(to, id, data)
-		else{
-			prompt.notify(id, {from: this.id, to, data})
+		let {id, data} = e
+		console.log(id, data.to, data)
+		switch(id){
+			case 'sp.command' : prompt.notify(data); break;
 		}
 	}
 

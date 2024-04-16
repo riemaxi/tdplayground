@@ -13,7 +13,6 @@ new class extends require('./prompt'){
         console.log('denied as', data.address)
    }
 
-
    on2MAMA(e){ 
         let {from, subject, detail} = e
         this.LA2YA(from)    
@@ -22,5 +21,6 @@ new class extends require('./prompt'){
 	onEvent(e){
         let {from, detail} = e
         console.log('on event', from, detail)
+        this.notify(detail.to, detail)
     }
 }
