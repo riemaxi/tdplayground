@@ -153,9 +153,8 @@ export default class Canvas extends Window{
         super.control()
 
         this.workspace = this.get('workspace')        
-        this.workspace.onclick = e => this.handleWorkspace(e)
 
-        this.queryAll('.button').forEach( b => b.onclick = () => console.log(b.id))
+        this.queryAll('.button').forEach( b => b.onclick = () => this.handleTool(b.id))
     }
 
     customStyle(){
@@ -171,7 +170,8 @@ export default class Canvas extends Window{
             this.llayer.updateLink(item)
         }
 
-        this.olayer.onSelection = item => this.handle('object.selection', item)
+        this.olayer.onSelection = item => this.handleObject('selection', item)
+        this.olayer.onRemoval = item => this.handleObject('removal', item)
     }
 
     get minWidth(){
@@ -209,42 +209,24 @@ export default class Canvas extends Window{
         this.llayer.data = this.createLinks(value.links, value.objects)        
         this.olayer.data = value.objects
 
-
-       this.controlLayers()
-    }
-
-    resizeLayers(){
-        let r = this.workspace.getBoundingClientRect()
-
-        this.queryAll('.layer').forEach(l => {
-            l.style.width = r.width + 'px'
-            l.style.height = r.height + 'px'
-        })
-        
-
+        this.controlLayers()
     }
 
     scale(w, h){
 
         let ratio = this.getRatio(w,h)
 
-        //this.resizeLayers()
-
         this.olayer.scale(ratio)
         this.llayer.scale(ratio)
         this.tlayer.scale(ratio)
     }
 
-    handleWorkspace(e){
-        if (this.current){
-            let r = this.workspace.getBoundingClientRect()
-            let x = e.clientX - r.x
-            let y = e.clientY - r.y
+    addObject(o){
+        this.olayer.addObject('red', 100,100, o)
+    }
 
-           this.olayer.addObject('red', x, y, {...this.current})
-           this.current = null           
-        }
-
+    handleTool(id){
+        this.olayer.tool = id
     }
 
     onResize(w, h){
@@ -258,6 +240,14 @@ export default class Canvas extends Window{
         let msize = Math.min(this.size.width, this.size.height)
         this.scale(msize, msize)
 
+    }
+
+    handleObject(id, data){
+        
+        if (id == 'removal')
+            this.llayer.removeLinks(data.id)
+
+        this.handle('object.' + id, data)
     }
 
     handle(_){}

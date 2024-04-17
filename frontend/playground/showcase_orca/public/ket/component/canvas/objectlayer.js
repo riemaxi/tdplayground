@@ -14,9 +14,15 @@ export default class ObjectLayer extends Layer {
     control(){
         this.objects('object').forEach(o => {
             o.onpointerdown = e => {
-                this.selectObject(o)
+                if (this.tool == 'cut'){
+                    o.remove()                    
+                    this.onRemoval(o)                    
+                    return
+                }
 
-                this.current = o
+               this.selectObject(o)
+
+               this.current = o
                 this.delta = {
                     x: e.offsetX - o.getAttribute('x'),
                     y: e.offsetY - o.getAttribute('y')
@@ -107,7 +113,7 @@ export default class ObjectLayer extends Layer {
     }
 
     update(){
-        this.root.innerHTML += Object.values(this.items).map(item => this.object(item) ).join('')
+         this.root.innerHTML += Object.values(this.items).map(item => this.object(item) ).join('')
         this.control()
     }
 
@@ -129,4 +135,5 @@ export default class ObjectLayer extends Layer {
 
     onChange(_){}
     onSelection(_){}
+    onRemoval(_){}
 }

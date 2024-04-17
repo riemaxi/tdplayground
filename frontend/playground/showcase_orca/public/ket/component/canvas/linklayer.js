@@ -45,6 +45,25 @@ export default class LinkLayer extends Layer{
         })
     }
 
+    removeLinks(id){
+        let linkItems =  Object.values(this.items).filter(l => {
+            let end = l.id.split('-')
+            console.log(id, end)
+            return end[0] == id || end[1] == id
+        })
+
+        for(let linkItem of linkItems){
+            let link = this.get(linkItem.id)
+            link.remove()
+        }
+
+        Object.keys(this.items).forEach(key => {
+            if (key.split('-').indexOf(id) >= 0)
+                delete this.items[key]
+        })
+
+    }
+
     updateLink(object){
         let linkItems =  Object.values(this.items).filter(l => {
             let end = l.id.split('-')

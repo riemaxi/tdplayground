@@ -139,15 +139,15 @@ export default class Frame extends Element{
     handlePalette(id, data){
         switch(id){
             case 'category' : this.palette.showProviders(data); break;
-            case 'provider' : this.handlePaletteProvide(data); break;
+            case 'provider' : this.handlePaletteProvider(data); break;
         }            
     }
 
-    handlePaletteProvide(data){
+    handlePaletteProvider(data){
         if (data == 'return')
             this.palette.showCategories()
             else{
-            this.canvas.current = data 
+            this.canvas.addObject(data)
         }
 
     }
