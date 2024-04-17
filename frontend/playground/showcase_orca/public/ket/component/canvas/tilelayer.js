@@ -15,4 +15,8 @@ export default class TileLayer extends Layer{
     scale(ratio){
         this.ratio = ratio
     }
+
+    update(){
+        
+    }
 }

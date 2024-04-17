@@ -9,6 +9,8 @@ export default class ObjectLayer extends Layer {
             y: this.size.height / gridsize.height
         }
         this.data = data
+
+        this.linker = this.get('linker')
     }
 
     controlObject(o){
@@ -28,11 +30,27 @@ export default class ObjectLayer extends Layer {
             }
 
             this.onSelection(this.items[this.current.id])
+
+            if (this.tool == 'link'){
+                this.linker.setAttribute('x1', o.getAttribute('x'))
+                this.linker.setAttribute('y1', o.getAttribute('y'))
+            }
+
         }
 
         o.onpointerup = e => {
+            if (this.tool == 'link')
+                this.onLink(this.items[this.current.id], this.items[this.currentEnd.id])
+
             this.current = null
+            this.currentEnd = null;
             this.delta = null
+        }
+
+        o.onpointermove = e => {
+            if (this.tool == 'link'){
+                this.currentEnd = o
+            }
         }
     }
     control(){
@@ -49,16 +67,32 @@ export default class ObjectLayer extends Layer {
             let x = e.clientX - r.x - this.delta.x
             let y = e.clientY - r.y - this.delta.y
 
-            this.current.setAttribute('x', x)
-            this.current.setAttribute('y', y)
 
-            let item = this.items[this.current.id]
-            item.data.state.x = x / this.ratio.x
-            item.data.state.y = y / this.ratio.y
-
-            this.onChange(item)
+            if (this.tool == 'link')
+                this.stearLinker(x, y)
+            else
+                this.moveObject(x, y)
         }
 
+    }
+
+    moveObject(x, y){
+        this.current.setAttribute('x', x)
+        this.current.setAttribute('y', y)
+
+        let item = this.items[this.current.id]
+        item.data.state.x = x / this.ratio.x
+        item.data.state.y = y / this.ratio.y
+
+        this.onChange(item)
+    }
+
+    stearLinker(x, y){
+        this.linker.setAttribute('x2', x)
+        this.linker.setAttribute('y2', y)
+
+        this.linker.remove()
+        this.root.appendChild(this.linker)
     }
 
     addObject(color, x, y, extra){
@@ -113,7 +147,6 @@ export default class ObjectLayer extends Layer {
 
     set data(value){
         this.items = value
-        this.update()
     }
 
     update(){
@@ -140,4 +173,5 @@ export default class ObjectLayer extends Layer {
     onChange(_){}
     onSelection(_){}
     onRemoval(_){}
+    onLink(_){}
 }

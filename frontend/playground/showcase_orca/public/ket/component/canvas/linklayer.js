@@ -25,9 +25,10 @@ export default class LinkLayer extends Layer{
 
     set data(value){
         this.items = value
+    }
 
+    update(){
         this.root.innerHTML += Object.values(this.items).map(item => this.object(item.id, item.state) ).join('')
-
     }
 
     scale(ratio){
@@ -83,5 +84,39 @@ export default class LinkLayer extends Layer{
         
         link.setAttribute('x' + coord, o.x * this.ratio.x)
         link.setAttribute('y' + coord, o.y * this.ratio.y)
+     }
+
+     addLink(ends){
+        let {a, b} = ends
+        let oa = a.data
+        let ob = b.data
+        console.log('link', a)
+
+        let id = `${a.id}-${b.id}`
+        let link = {
+            id,
+            feature: {
+                a: a.id, b: b.id,
+                size: {
+                    a: oa.feature.size,
+                    b: ob.feature.size
+                }
+            },
+
+            state: {
+                a: {
+                    x: oa.state.x + oa.feature.size / 2,
+                    y: oa.state.y + oa.feature.size / 2
+                },
+                b: {
+                    x: ob.state.x + ob.feature.size / 2,
+                    y: ob.state.y  + ob.feature.size / 2
+                }
+            }
+        }
+
+        this.items[id] = link
+
+        console.log('link', link)
      }
 }

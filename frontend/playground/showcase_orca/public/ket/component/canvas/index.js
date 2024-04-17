@@ -83,6 +83,7 @@ const STRUCTURE = `
         </div>
         <div>
             <div class="tool"><div class="button" id="select">&#11110;</div></div>
+            <div class="tool"><div class="button" id="link">&#11116;</div></div>            
         </div>
         <div>
             <div class="tool"><div class="button" id="new">&#128196;</div></div>
@@ -108,7 +109,7 @@ const STRUCTURE = `
     </div>
 
     <div id="workspace">
-        <svg class="layer" id="object-canvas"></svg>
+        <svg class="layer" id="object-canvas"><line id="linker" stroke="black" /></svg>
     </div>
 </div>
 `
@@ -175,6 +176,7 @@ export default class Canvas extends Window{
 
         this.olayer.onSelection = item => this.handleObject('selection', item)
         this.olayer.onRemoval = item => this.handleObject('removal', item)
+        this.olayer.onLink = (a,b) => this.handleObject('link', {a,b})
     }
 
     get minWidth(){
@@ -212,7 +214,17 @@ export default class Canvas extends Window{
         this.llayer.data = this.createLinks(value.links, value.objects)        
         this.olayer.data = value.objects
 
-        this.controlLayers()
+        this.update()
+
+        //this.controlLayers()
+    }
+
+    update(){
+        this.tlayer.update()
+        this.llayer.update()
+        this.olayer.update()
+
+        this.controlLayers()        
     }
 
     scale(w, h){
@@ -246,9 +258,13 @@ export default class Canvas extends Window{
     }
 
     handleObject(id, data){
-        
-        if (id == 'removal')
-            this.llayer.removeLinks(data.id)
+        switch(id){
+            case 'link' : {
+                            this.llayer.addLink(data)
+                            this.update()
+            }; break;
+            case 'removal' : this.llayer.removeLinks(data.id); break;
+        }
 
         this.handle('object.' + id, data)
     }
