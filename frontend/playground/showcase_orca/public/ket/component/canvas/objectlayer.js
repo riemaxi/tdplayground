@@ -11,30 +11,33 @@ export default class ObjectLayer extends Layer {
         this.data = data
     }
 
+    controlObject(o){
+        o.onpointerdown = e => {
+            if (this.tool == 'cut'){
+                o.remove()                    
+                this.onRemoval(o)                    
+                return
+            }
+
+           this.selectObject(o)
+
+           this.current = o
+            this.delta = {
+                x: e.offsetX - o.getAttribute('x'),
+                y: e.offsetY - o.getAttribute('y')
+            }
+
+            this.onSelection(this.items[this.current.id])
+        }
+
+        o.onpointerup = e => {
+            this.current = null
+            this.delta = null
+        }
+    }
     control(){
         this.objects('object').forEach(o => {
-            o.onpointerdown = e => {
-                if (this.tool == 'cut'){
-                    o.remove()                    
-                    this.onRemoval(o)                    
-                    return
-                }
-
-               this.selectObject(o)
-
-               this.current = o
-                this.delta = {
-                    x: e.offsetX - o.getAttribute('x'),
-                    y: e.offsetY - o.getAttribute('y')
-                }
-
-                this.onSelection(this.items[this.current.id])
-            }
-
-            o.onpointerup = e => {
-                this.current = null
-                this.delta = null
-            }
+            this.controlObject(o)
         })
 
         this.root.onpointermove = e => {
@@ -77,7 +80,8 @@ export default class ObjectLayer extends Layer {
 
         this.items[object.id] = object
 
-        this.update()
+        this.root.innerHTML += this.object(object)
+        this.control()
 
         this.onSelection(object)
     }
@@ -114,7 +118,7 @@ export default class ObjectLayer extends Layer {
 
     update(){
          this.root.innerHTML += Object.values(this.items).map(item => this.object(item) ).join('')
-        this.control()
+         this.control()
     }
 
     scale(ratio){

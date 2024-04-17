@@ -82,6 +82,9 @@ const STRUCTURE = `
             <input type="text" placeholder="project name">
         </div>
         <div>
+            <div class="tool"><div class="button" id="select">&#11110;</div></div>
+        </div>
+        <div>
             <div class="tool"><div class="button" id="new">&#128196;</div></div>
             <div class="tool"><div class="button" id="save">&#128190;</div></div>
             <div class="tool"><div class="button" id="recycle">&#9851;</div></div>
