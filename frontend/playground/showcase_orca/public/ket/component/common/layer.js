@@ -11,7 +11,8 @@ export default class Layer{
     }
 
     objects(cn){
-        return [...this.root.children]
+        let list = [...this.root.children]
+        return cn ? list.filter(item => item.getAttribute('class') == cn) : list
     }
 
     get(id){

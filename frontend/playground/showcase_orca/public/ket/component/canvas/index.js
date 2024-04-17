@@ -3,13 +3,13 @@ import Window from "../common/window.js"
 import ObjectLayer from "./objectlayer.js"
 import LinkLayer from "./linklayer.js"
 import TileLayer from "./tilelayer.js"
+import ActionLayer from "./actionlayer.js"
 
 const STYLE = `
-<style>
     #content{
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        _justify-content: space-between;
         width: 100%;
         height: 100%;
     }
@@ -60,23 +60,19 @@ const STYLE = `
     }
 
     .layer{
-        position: absolute;
         width: 100%;
         height: 100%;
     }
 
     #workspace{
-        display: flex;
         width: 100%;
-        height: 300px;
+        height: 100%;
         background-color: lightgreen;
     }
 
     input{
         width: 100%;
-    }
-
-</style>`
+    }`
 
 const STRUCTURE = `
 <div id="content">
@@ -107,10 +103,9 @@ const STRUCTURE = `
             <div class="tool"><div class="button" id="zoomout">&#10133;</div></div>
         </div>
     </div>
+
     <div id="workspace">
-        <svg class="layer" id="tile-canvas"/>
-        <svg class="layer" id="link-canvas"/>
-        <svg class="layer" id="object-canvas"/>
+        <svg class="layer" id="object-canvas"></svg>
     </div>
 </div>
 `
@@ -126,8 +121,8 @@ export default class Canvas extends Window{
            }
         }
 
-       this.llayer = new LinkLayer(this.get('link-canvas'), this.grid.size, [])
-        this.tlayer = new TileLayer(this.get('tile-canvas'), this.grid.size, {})
+       this.llayer = new LinkLayer(this.get('object-canvas'), this.grid.size, [])
+        this.tlayer = new TileLayer(this.get('object-canvas'), this.grid.size, {})
         this.olayer = new ObjectLayer(this.get('object-canvas'), this.grid.size, {})
 
     }
@@ -209,18 +204,31 @@ export default class Canvas extends Window{
     }
 
     set data(value){
+
+        this.tlayer.data = value.tiles        
+        this.llayer.data = this.createLinks(value.links, value.objects)        
         this.olayer.data = value.objects
 
-        this.llayer.data = this.createLinks(value.links, value.objects)
 
-        this.tlayer.data = value.tiles
-        this.controlLayers()
+       this.controlLayers()
+    }
+
+    resizeLayers(){
+        let r = this.workspace.getBoundingClientRect()
+
+        this.queryAll('.layer').forEach(l => {
+            l.style.width = r.width + 'px'
+            l.style.height = r.height + 'px'
+        })
+        
+
     }
 
     scale(w, h){
-        this.get('workspace').style.height = (this.size.height - this.topHeight) + 'px'
 
         let ratio = this.getRatio(w,h)
+
+        //this.resizeLayers()
 
         this.olayer.scale(ratio)
         this.llayer.scale(ratio)

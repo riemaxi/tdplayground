@@ -12,7 +12,7 @@ export default class ObjectLayer extends Layer {
     }
 
     control(){
-        this.objects().forEach(o => {
+        this.objects('object').forEach(o => {
             o.onpointerdown = e => {
                 this.selectObject(o)
 
@@ -107,14 +107,14 @@ export default class ObjectLayer extends Layer {
     }
 
     update(){
-        this.root.innerHTML = Object.values(this.items).map(item => this.object(item) ).join('')
+        this.root.innerHTML += Object.values(this.items).map(item => this.object(item) ).join('')
         this.control()
     }
 
     scale(ratio){
         this.ratio = ratio
 
-        this.objects().forEach(o => {
+        this.objects('object').forEach(o => {
             let item = this.items[o.id]
             let {feature, state} = item.data
 

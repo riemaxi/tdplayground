@@ -21,15 +21,20 @@ export default class State{
         this.symbol = symbol
     }
 
-    get _objects(){
+    get objects(){
         let list = {}
-        for(let id=0; id<=5; id++)
+        for(let id=0; id<=1; id++)
             list[id] = {
                 id,
                 data: {
                     feature: {
                         color: ['red','blue','green', 'black', 'orange'][Math.floor(Math.random()*5)],
-                        size : 2
+                        size : 2,
+                        extra: {
+                            feature: {
+                                symbol: '&#8383;'
+                            }
+                        }
                     },
                     state: {
                         x : 2 + Math.ceil(Math.random() * 25),
@@ -40,29 +45,17 @@ export default class State{
         return list
     }
 
-    get objects(){ return {} }
+    get _objects(){ return {} }
 
-    get _links(){
+    get links(){
         return {
             '0-1':{
                 id: '0-1',
                 feature: {a: 0, b:1}
-            },
-            '3-5': {
-                id: '3-5',
-                feature: {a: 3, b: 5}
-            },
-            '5-2': {
-                id: '5-2',
-                feature: {a: 5, b: 2}
-            },
-            '4-3': {
-                id: '4-3',
-                feature: {a: 4, b: 3}
             }
         }
     }
-    get links(){  return {}  }
+    get _links(){  return {}  }
 
     get tiles(){ return {}}
 

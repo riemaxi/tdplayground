@@ -20,18 +20,20 @@ export default class LinkLayer extends Layer{
         let x2 = b.x * this.ratio.x
         let y2 = b.y * this.ratio.y
 
-        return `<line id="${id}" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="black" />`
+        return `<line class="link" id="${id}" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="black" />`
     }
 
     set data(value){
         this.items = value
-        this.root.innerHTML = Object.values(this.items).map(item => this.object(item.id, item.state) ).join('')
+
+        this.root.innerHTML += Object.values(this.items).map(item => this.object(item.id, item.state) ).join('')
+
     }
 
     scale(ratio){
         this.ratio = ratio
 
-        this.objects().forEach(o => {
+        this.objects('link').forEach(o => {
             let item = this.items[o.id]
 
             o.setAttribute('x1', item.state.a.x * ratio.x)

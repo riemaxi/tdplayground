@@ -7,6 +7,7 @@ const STYLE = `
     #root{
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
         width: 100%;
         height: 100%;
         border-radius: 10px;
@@ -176,7 +177,7 @@ export default class Window extends HTMLElement{
         this.shadow = this.attachShadow({mode: "open"})
 
         template.innerHTML = STYLE.replace('CUSTOM', this.customStyle) + STRUCTURE.replace('CUSTOM', this.customStructure)
-                
+
         this.shadow.appendChild(template.content.cloneNode(true))
 
         this.root = this.get('root')
