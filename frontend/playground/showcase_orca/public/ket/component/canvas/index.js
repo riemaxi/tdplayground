@@ -244,6 +244,7 @@ export default class Canvas extends Window{
     }
 
     set data(value){
+        this.reset()
 
         this.tlayer.data = value.tiles        
         this.llayer.data = this.createLinks(value.links, value.objects)        
