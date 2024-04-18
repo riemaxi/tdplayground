@@ -21,7 +21,7 @@ export default class State{
         this.symbol = symbol
     }
 
-    get objects(){
+    get _objects(){
         let list = {}
         for(let id=0; id<=1; id++)
             list[id] = {
@@ -45,9 +45,9 @@ export default class State{
         return list
     }
 
-    get _objects(){ return {} }
+    get objects(){ return {} }
 
-    get links(){
+    get _links(){
         return {
             '0-1':{
                 id: '0-1',
@@ -55,7 +55,7 @@ export default class State{
             }
         }
     }
-    get _links(){  return {}  }
+    get links(){  return {}  }
 
     get tiles(){ return {}}
 

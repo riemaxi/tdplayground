@@ -16,7 +16,20 @@ export default class TileLayer extends Layer{
         this.ratio = ratio
     }
 
+    get data(){
+        return this.items
+    }
+
+    set data(value){
+        this.items = value
+    }
+
     update(){
         
     }
+
+    reset(){
+        super.reset('tile')
+     }
+
 }

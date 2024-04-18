@@ -23,6 +23,10 @@ export default class LinkLayer extends Layer{
         return `<line class="link" id="${id}" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="black" />`
     }
 
+    get data(){
+        return this.items
+    }
+
     set data(value){
         this.items = value
     }
@@ -86,37 +90,7 @@ export default class LinkLayer extends Layer{
         link.setAttribute('y' + coord, o.y * this.ratio.y)
      }
 
-     addLink(ends){
-        let {a, b} = ends
-        let oa = a.data
-        let ob = b.data
-        console.log('link', a)
-
-        let id = `${a.id}-${b.id}`
-        let link = {
-            id,
-            feature: {
-                a: a.id, b: b.id,
-                size: {
-                    a: oa.feature.size,
-                    b: ob.feature.size
-                }
-            },
-
-            state: {
-                a: {
-                    x: oa.state.x + oa.feature.size / 2,
-                    y: oa.state.y + oa.feature.size / 2
-                },
-                b: {
-                    x: ob.state.x + ob.feature.size / 2,
-                    y: ob.state.y  + ob.feature.size / 2
-                }
-            }
-        }
-
-        this.items[id] = link
-
-        console.log('link', link)
+     reset(){
+        super.reset('link')
      }
 }

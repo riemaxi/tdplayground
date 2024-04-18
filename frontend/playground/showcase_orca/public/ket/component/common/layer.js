@@ -18,4 +18,9 @@ export default class Layer{
     get(id){
         return this.objects().find(o => o.id == id)
     }
+
+    reset(cn){
+        console.log('reset', cn)
+        this.objects(cn).forEach(l => l.remove())
+    }
 }

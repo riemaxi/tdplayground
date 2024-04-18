@@ -109,7 +109,7 @@ const STRUCTURE = `
     </div>
 
     <div id="workspace">
-        <svg class="layer" id="object-canvas"><line id="linker" stroke="black" /></svg>
+        <svg class="layer" id="object-canvas"></svg>
     </div>
 </div>
 `
@@ -169,6 +169,41 @@ export default class Canvas extends Window{
         return STRUCTURE
     }
 
+    addLink(ends){
+        let {a, b} = ends
+        let oa = a.data
+        let ob = b.data
+
+        let id = `${a.id}-${b.id}`
+        let link = {
+            id,
+            feature: {
+                a: a.id, 
+                b: b.id,
+                size: {
+                    a: oa.feature.size,
+                    b: ob.feature.size
+                }
+            },
+
+            state: {
+                a: {
+                    x: oa.state.x + oa.feature.size / 2,
+                    y: oa.state.y + oa.feature.size / 2
+                },
+                b: {
+                    x: ob.state.x + ob.feature.size / 2,
+                    y: ob.state.y  + ob.feature.size / 2
+                }
+            }
+        }
+
+        let items = {...this.llayer.data}
+        items[id] = link
+
+        return items
+     }    
+
     controlLayers(){
         this.olayer.onChange = item => {
             this.llayer.updateLink(item)
@@ -216,7 +251,12 @@ export default class Canvas extends Window{
 
         this.update()
 
-        //this.controlLayers()
+    }
+
+    reset(){
+        this.tlayer.reset()
+        this.llayer.reset()
+        this.olayer.reset()
     }
 
     update(){
@@ -259,10 +299,15 @@ export default class Canvas extends Window{
 
     handleObject(id, data){
         switch(id){
-            case 'link' : {
-                            this.llayer.addLink(data)
-                            this.update()
-            }; break;
+            case 'link' :  {
+                    this.reset()
+
+                    this.tlayer.data = this.tlayer.data
+                    this.llayer.data = this.addLink(data) 
+                    this.olayer.data = this.olayer.data
+
+                    this.update()
+                }; break;
             case 'removal' : this.llayer.removeLinks(data.id); break;
         }
 

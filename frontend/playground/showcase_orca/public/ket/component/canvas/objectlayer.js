@@ -9,8 +9,6 @@ export default class ObjectLayer extends Layer {
             y: this.size.height / gridsize.height
         }
         this.data = data
-
-        this.linker = this.get('linker')
     }
 
     controlObject(o){
@@ -32,18 +30,19 @@ export default class ObjectLayer extends Layer {
             this.onSelection(this.items[this.current.id])
 
             if (this.tool == 'link'){
-                this.linker.setAttribute('x1', o.getAttribute('x'))
-                this.linker.setAttribute('y1', o.getAttribute('y'))
+                this.addLinker(o.getAttribute('x'), o.getAttribute('y'))
             }
-
         }
 
         o.onpointerup = e => {
-            if (this.tool == 'link')
+            console.log('up', o.id)
+            if (this.tool == 'link'){
                 this.onLink(this.items[this.current.id], this.items[this.currentEnd.id])
+                this.resetLinker()
+                this.currentEnd = null
+            }
 
             this.current = null
-            this.currentEnd = null;
             this.delta = null
         }
 
@@ -53,6 +52,7 @@ export default class ObjectLayer extends Layer {
             }
         }
     }
+
     control(){
         this.objects('object').forEach(o => {
             this.controlObject(o)
@@ -73,7 +73,6 @@ export default class ObjectLayer extends Layer {
             else
                 this.moveObject(x, y)
         }
-
     }
 
     moveObject(x, y){
@@ -86,6 +85,18 @@ export default class ObjectLayer extends Layer {
 
         this.onChange(item)
     }
+
+    addLinker(x,y){
+        this.root.innerHTML += `<line id="linker" x1="${x}" y1="${y}"  x2="${x}" y2="${y}" stroke="red" stroke-width="2" />`
+        this.linker = this.get('linker')
+
+        this.control()
+    }
+
+    resetLinker(){
+        this.get('linker').remove()
+    }
+
 
     stearLinker(x, y){
         this.linker.setAttribute('x2', x)
@@ -143,7 +154,11 @@ export default class ObjectLayer extends Layer {
 
     object(o){
         return this.icon(o.id, o.data)
-    }    
+    }  
+    
+    get data(){
+        return this.items
+    }
 
     set data(value){
         this.items = value
@@ -169,6 +184,11 @@ export default class ObjectLayer extends Layer {
             o.setAttribute('rx', this.ratio.x)
          })        
     }
+
+    reset(){
+        super.reset('object')
+     }
+
 
     onChange(_){}
     onSelection(_){}
