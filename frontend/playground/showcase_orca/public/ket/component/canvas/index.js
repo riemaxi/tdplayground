@@ -305,6 +305,7 @@ export default class Canvas extends Window{
                             this.olayer.tool = id
                             this.llayer.tool = id
             }; break;
+        
             case 'save' : this.handle('canvas.command', {
                 id,
                 project: this.project,
@@ -313,8 +314,13 @@ export default class Canvas extends Window{
                     links: this.llayer.data,
                     objects: this.olayer.data
                 }
-            })
+            }); break;
+
+            case 'new': this.handle('canvas.command', {id, project: this.project} ); break;
+
+            case 'recycle': this.handle('canvas.command', {id, project: this.project} ); break;
         }
+
     }
 
     onResize(w, h){
