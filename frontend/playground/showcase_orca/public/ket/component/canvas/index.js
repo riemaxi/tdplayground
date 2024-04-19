@@ -53,6 +53,10 @@ const STYLE = `
 
         cursor: pointer;
     }
+
+    .link{
+        cursor: pointer;
+    }
     
     .object{
         font-size: 2em;
@@ -205,6 +209,9 @@ export default class Canvas extends Window{
      }    
 
     controlLayers(){
+        this.llayer.control()
+        this.olayer.control()
+
         this.olayer.onChange = item => {
             this.llayer.updateLink(item)
         }
@@ -283,6 +290,7 @@ export default class Canvas extends Window{
 
     handleTool(id){
         this.olayer.tool = id
+        this.llayer.tool = id
     }
 
     onResize(w, h){
@@ -302,11 +310,7 @@ export default class Canvas extends Window{
         switch(id){
             case 'link' :  {
                     this.reset()
-
-                    this.tlayer.data = this.tlayer.data
                     this.llayer.data = this.addLink(data) 
-                    this.olayer.data = this.olayer.data
-
                     this.update()
                 }; break;
             case 'removal' : this.llayer.removeLinks(data.id); break;

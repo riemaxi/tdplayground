@@ -20,7 +20,6 @@ export default class Layer{
     }
 
     reset(cn){
-        console.log('reset', cn)
         this.objects(cn).forEach(l => l.remove())
     }
 }

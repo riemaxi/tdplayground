@@ -10,6 +10,21 @@ export default class LinkLayer extends Layer{
         }
         this.data = data
 
+        this.control()
+    }
+
+    control(){
+        this.objects('link').forEach(l => {
+            l.onpointerdown = () => {
+                if (this.tool = 'cut'){
+                    this.removeLink(l.id)
+                    this.handle('removal', l.id)
+                    return
+                }
+
+                this.handle('selection', l.id)
+            }
+        })
     }
 
     object(id, state){
@@ -20,7 +35,7 @@ export default class LinkLayer extends Layer{
         let x2 = b.x * this.ratio.x
         let y2 = b.y * this.ratio.y
 
-        return `<line class="link" id="${id}" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="black" />`
+        return `<line class="link"  id="${id}" x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke-width="3"  stroke="black" />`
     }
 
     get data(){
@@ -48,6 +63,11 @@ export default class LinkLayer extends Layer{
             o.setAttribute('y2', item.state.b.y * ratio.y)
 
         })
+    }
+
+    removeLink(id){
+        this.get(id)?.remove()
+        delete this.items[id]
     }
 
     removeLinks(id){
@@ -93,4 +113,6 @@ export default class LinkLayer extends Layer{
      reset(){
         super.reset('link')
      }
+
+     handle(_){}
 }

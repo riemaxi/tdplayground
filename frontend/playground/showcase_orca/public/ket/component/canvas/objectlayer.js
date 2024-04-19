@@ -35,7 +35,6 @@ export default class ObjectLayer extends Layer {
         }
 
         o.onpointerup = e => {
-            console.log('up', o.id)
             if (this.tool == 'link'){
                 this.onLink(this.items[this.current.id], this.items[this.currentEnd.id])
                 this.resetLinker()
@@ -53,10 +52,14 @@ export default class ObjectLayer extends Layer {
         }
     }
 
-    control(){
-        this.objects('object').forEach(o => {
-            this.controlObject(o)
-        })
+    controlRoot(){
+        this.root.onpointerup = e => {
+            if (this.tool == 'link'){
+                this.resetLinker()
+            }
+
+            this.current = null
+        }
 
         this.root.onpointermove = e => {
             if (!this.current)
@@ -73,6 +76,12 @@ export default class ObjectLayer extends Layer {
             else
                 this.moveObject(x, y)
         }
+
+    }
+
+    control(){
+        this.objects('object').forEach(o => this.controlObject(o))
+        this.controlRoot()
     }
 
     moveObject(x, y){
@@ -87,14 +96,14 @@ export default class ObjectLayer extends Layer {
     }
 
     addLinker(x,y){
-        this.root.innerHTML += `<line id="linker" x1="${x}" y1="${y}"  x2="${x}" y2="${y}" stroke="red" stroke-width="2" />`
+        this.root.innerHTML += `<line id="linker" x1="${x}" y1="${y}"  x2="${x}" y2="${y}" stroke="red" stroke-width="1" />`
         this.linker = this.get('linker')
 
         this.control()
     }
 
     resetLinker(){
-        this.get('linker').remove()
+        this.get('linker')?.remove()
     }
 
 
@@ -166,7 +175,6 @@ export default class ObjectLayer extends Layer {
 
     update(){
          this.root.innerHTML += Object.values(this.items).map(item => this.object(item) ).join('')
-         this.control()
     }
 
     scale(ratio){

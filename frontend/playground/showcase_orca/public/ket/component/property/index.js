@@ -95,8 +95,6 @@ export default class Property extends Window{
     control(){
         super.control()
 
-        console.log('property controlling ...')
-
         this.queryAll('.button'). forEach(b => b.onclick = () => this.handle('command', b.id ))
     }
 
