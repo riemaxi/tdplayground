@@ -32,9 +32,10 @@ class Session{
 
 	handleEvent(e){
 		let {id, data} = e
-		console.log(id, data.to, data)
+		console.log(id, data)
 		switch(id){
 			case 'sp.command' : prompt.notify(data); break;
+			case 'canvas.command': prompt.notify(data); break;
 		}
 	}
 

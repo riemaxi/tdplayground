@@ -83,7 +83,7 @@ const STRUCTURE = `
     <div id="title"><div>Canvas</div></div>
     <div id="toolbar">
         <div>
-            <input type="text" placeholder="project name">
+            <input id="project-name" type="text" placeholder="project name">
         </div>
         <div>
             <div class="tool"><div class="button" id="select">&#11110;</div></div>
@@ -250,6 +250,17 @@ export default class Canvas extends Window{
         return links
     }
 
+    get project(){
+        let time = Date.now()
+        let name = this.get('project-name').value || ('project-' + time)
+        this.get('project-name').value = name
+
+        return {
+            name,
+            time
+        }
+    }
+
     set data(value){
         this.reset()
 
@@ -289,8 +300,21 @@ export default class Canvas extends Window{
     }
 
     handleTool(id){
-        this.olayer.tool = id
-        this.llayer.tool = id
+        switch(id){
+            case 'cut' : {
+                            this.olayer.tool = id
+                            this.llayer.tool = id
+            }; break;
+            case 'save' : this.handle('canvas.command', {
+                id,
+                project: this.project,
+                data: {
+                    tiles: this.tlayer.data,
+                    links: this.llayer.data,
+                    objects: this.olayer.data
+                }
+            })
+        }
     }
 
     onResize(w, h){

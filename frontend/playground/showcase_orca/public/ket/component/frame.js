@@ -155,6 +155,7 @@ export default class Frame extends Element{
     handleCanvas(id, e){
         switch(id){
             case 'object.selection' : this.property.data = e.data.feature.extra; break;
+            case 'canvas.command' : this.handle(id, e); break;
         }
     }
 

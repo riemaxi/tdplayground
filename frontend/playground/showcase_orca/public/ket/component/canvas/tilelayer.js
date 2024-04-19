@@ -17,6 +17,10 @@ export default class TileLayer extends Layer{
     }
 
     get data(){
+        return this.items || {}
+    }
+
+    get data(){
         return this.items
     }
 

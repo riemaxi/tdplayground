@@ -33,7 +33,8 @@ export default class Ket{
     handleUser(id, data){
         switch(id){
             case 'signout' : this.handleUserSignout(); break;
-            case 'sp.command' : console.log('sp.command', data); this.on('sp.command', data); break;
+            case 'sp.command' : console.log(id, data); this.on(id, data); break;
+            case 'canvas.command' : console.log(id); this.on(id, data); break;
         }
     }
 
