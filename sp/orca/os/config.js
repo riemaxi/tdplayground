@@ -10,6 +10,8 @@ module.exports= {
 		},
 
 		peers: {
+			ux: 'ux.os.orca.4da',
+			hub: 'hub.orca.playground.4da'
 		}
 	},
 
@@ -24,6 +26,22 @@ module.exports= {
 
 		notification: {
 			path: './data/notification.json'
+		},
+
+		repository: {
+			path: './data/repository.json'
+		},
+
+		setting: {
+			path: './data/setting.json'
+		},
+
+		recycle: {
+			path: './data/recycle.json'
+		},
+
+		assistant: {
+			path: './data/assistant.json'
 		}
 	}
 

@@ -1,5 +1,7 @@
-export default class Assitant extends require('./dataobject'){
-    constructor(path){
-        super(path)
+module.exports = class Assistant extends require('./dataobject'){
+    constructor(config){
+        super(config.path)
+
+        console.log('assistant', this.data)
     }
 }

@@ -26,6 +26,7 @@ class Session{
 		this.id = id	
 
 		this.socket.on('event', data => this.handleEvent(data))
+		this.socket.on('request', data => this.handleRequest(data))
 
 		this.notify('init', { session: {id}, users: desk.users})
 	}
@@ -38,6 +39,13 @@ class Session{
 			case 'canvas.command': prompt.notify(data); break;
 		}
 	}
+
+	handleRequest(e){
+		let {id, data} = e
+		console.log(id, data)
+		prompt.request(id, data)
+	}
+
 
 	notify(id, data){
 		this.socket.emit(id, data)

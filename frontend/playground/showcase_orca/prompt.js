@@ -50,5 +50,13 @@ module.exports = class Prompt extends require('../../core/session'){
 			'event',
 			data ) )
 	}
+
+	request(subject, data){
+		this.send('data', msg.create(
+			this.address,
+			this.peers.os,
+			subject,
+			data ) )
+	}
 }
 

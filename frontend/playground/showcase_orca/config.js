@@ -14,7 +14,7 @@ module.exports = {
 		},
 
 		peers: {
-			hub: 'hub.orca.playground.4da'
+			os: 'os.orca.4da'
 		}
 	}
 
