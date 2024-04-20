@@ -40,7 +40,6 @@ class Session{
 	}
 
 	notify(id, data){
-		console.log('notify', id, data)
 		this.socket.emit(id, data)
 	}
 

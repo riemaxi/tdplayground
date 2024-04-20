@@ -10,7 +10,7 @@ module.exports = {
 		credentials: {
 			accesskey: '202020',
 			password: '0a7ce671-5751-4409-bd2b-8d2b90903c5c',
-			address: 'orca.ux.play.4da'
+			address: 'ux.os.orca.4da'
 		},
 
 		peers: {
