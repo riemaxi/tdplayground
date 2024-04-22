@@ -59,6 +59,15 @@ const STYLE = `
     background-color: gray;
 }
 
+.fields{
+    display: flex;
+    flex-direction: column;
+}
+
+.field{
+    width: 100%;
+}
+
 `
 
 const STRUCTURE = `
@@ -73,7 +82,10 @@ const STRUCTURE = `
     <div id="sections">
         <div class="section">
             <div class="section-title">feature</div>
-            <div id="feature"></div>
+            <div class="fields" id="feature">
+                <div class="field"><select id="address" placeholder="address"></select></div>
+                <div class="field"><input id="description" placeholder="description" ></div>
+            </div>
         </div>
         <div class="section">
             <div class="section-title">setting</div>
@@ -115,6 +127,7 @@ export default class Property extends Window{
     }
     
     set data(value){
+        console.log('property', value)
         this._data = value
         this.get('title').innerText = `Properties - ${value.feature.name}`
     }

@@ -1,4 +1,5 @@
 const fs = require('fs')
+const {v4: uuid} = require('uuid')
 
 module.exports = class DataObject{
     constructor(path){
@@ -8,5 +9,9 @@ module.exports = class DataObject{
 
     save(ready, path){
         fs.writeFile(path || this.path, JSON.stringify(this.data), e => ready && ready(e) )
+    }
+
+    getId(){
+        return uuid()
     }
 }

@@ -91,7 +91,7 @@ const STRUCTURE = `
         </div>
         <div>
             <div class="tool"><div class="button" id="new">&#128196;</div></div>
-            <div class="tool"><div class="button" id="save">&#128190;</div></div>
+            <div class="tool"><div class="button" id="update">&#128190;</div></div>
             <div class="tool"><div class="button" id="recycle">&#9851;</div></div>
         </div>
 
@@ -306,7 +306,7 @@ export default class Canvas extends Window{
                             this.llayer.tool = id
             }; break;
         
-            case 'save' : this.handle('canvas.command', {
+            case 'update' : this.handle('canvas.command', {
                 id,
                 project: this.project,
                 data: {

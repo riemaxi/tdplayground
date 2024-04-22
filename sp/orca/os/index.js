@@ -90,8 +90,9 @@ new class extends require('./prompt'){
    }
 
    onRepositoryRequest(data){
-    let {from, subject, detail} = data
-    console.log('on repository request', from, subject, detail)
+    let {from, detail} = data
+    console.log('on repository request', detail)
+    this.response(from,'repository.response',  repository.request(detail) )
    }
 
    onAssistantRequest(data){

@@ -35,8 +35,8 @@ class Session{
 		let {id, data} = e
 		console.log(id, data)
 		switch(id){
-			case 'sp.command' : prompt.notify(data); break;
-			case 'canvas.command': prompt.notify(data); break;
+			case 'sp.command' : prompt.request('request', data); break;
+			case 'canvas.command': prompt.request('repository.request', data); break;
 		}
 	}
 
