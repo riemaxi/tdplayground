@@ -60,7 +60,7 @@ const content = `
         color: red;
         font-family: Arial;
         font-weight: bold;
-        font-size: 1em;
+        font-size: .7em;
     }
 
       input, 
@@ -112,7 +112,7 @@ export default  class Lobby extends Element{
     }
 
     control(){
-            this.get('signin').onclick = () => this.handle('signin', this.data)
+            this.get('signin').onclick = () => this.handle('grant', this.data)
     }
 
     set data(value){
@@ -122,19 +122,24 @@ export default  class Lobby extends Element{
     }
 
     get data(){
-        let username = this.get('username').value
-        let detail = this.get(username)
         return {
-            username: username.value,
-            password: this.get('password').value,
-            badge: detail.innerText,
-            role: detail.dataset.role
+            id: this.get('username').value,
+            password: this.get('password').value
         }
+    }
+
+    set password(value){
+        this.get('password').value = value
+    }
+
+    set message(value){
+        this.get('message').innerText = value
     }
 
     show(){
         super.show()
 
-        this.get('password').value = ''
+        this.password = ''
+        this.message = ''
     }
 }

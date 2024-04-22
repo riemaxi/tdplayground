@@ -21,6 +21,10 @@ export default class State{
         this.symbol = symbol
     }
 
+    getUser(id){
+        return this.users.find(item => item.id == id)
+    }
+
     get objects(){
         let list = {}
         for(let id=0; id<=1; id++)

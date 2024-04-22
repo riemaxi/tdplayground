@@ -23,4 +23,8 @@ let bra = new class extends Bra{
     onInit(data){
         ket.init(data)
     }
+
+    onGranted(data){
+        ket.update('granted', data)
+    }
 }

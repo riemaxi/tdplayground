@@ -21,24 +21,30 @@ module.exports = class Repository extends require('./dataobject'){
     }
 
     load(id){
-        return this.data[id]
+        return {
+            id: 'load',
+            detail: this.data[id]
+        }
     }
 
     update(project, data){
         if (project.id && this.data[project.id]){
             console.log('update', project.id, data)
             this.data[project.id] = data
-            return true
+            return { id: 'update', detail: true}
         }else
-            return !project.id && this.create(project, data)
+            return {
+                    id: 'update',
+                    detail: !project.id && this.create(project, data)
+            }
     }
 
     remove(id){
         if (this.data[id]){
             delete this.data[id]
-            return true
+            return { id:"remove", detail: true}
         }
 
-        return false
+        return { id:"remove", detail: false}
     }
 }

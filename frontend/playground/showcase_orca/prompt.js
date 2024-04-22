@@ -38,10 +38,12 @@ module.exports = class Prompt extends require('../../core/session'){
 	onCommand(data, valid, signal){
 		switch(data.subject){
 			case 'event' : this.onEvent(data); break;
+			case 'access.response' : this.onAccessResponse(data); break;
         }
     }
 
 	onEvent(_){}
+	onAccessResponse(_){}
 
 	notify(data){
 		this.send('data', msg.create(

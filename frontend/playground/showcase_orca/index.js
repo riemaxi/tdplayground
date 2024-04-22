@@ -11,12 +11,23 @@ let prompt = new class extends require('./prompt'){
 
 	onGranted(data){
 		console.log('granted as', this.address)
+
+		this.request('access.request', { id: 'list' })		
 	}
 
 	onEvent(e){
 		let {to, id, data} = e.detail
 		console.log('on event', e.detail)
 		desk.notify(to, id, data)
+	}
+
+	onAccessResponse(e){
+		let {id, detail} = e.detail
+		console.log(id, detail)
+		switch(id){
+			case 'grant' : desk.notify(detail.to, 'granted', detail); break;
+			case 'list' : desk.users = detail; break;
+		}
 	}
 }
 
@@ -35,6 +46,7 @@ class Session{
 		let {id, data} = e
 		console.log(id, data)
 		switch(id){
+			case 'session.command' : prompt.request('access.request', data); break;
 			case 'sp.command' : prompt.request('request', data); break;
 			case 'canvas.command': prompt.request('repository.request', data); break;
 		}
@@ -60,33 +72,7 @@ let desk = new class extends require('../../core/ns.desk'){
 		super(config.desk)
 		this.sessions = {}
 
-		this.users = [
-			{
-				id: '3000',
-				badge: 'Guest',
-				role: 'Guest'
-			},
-			{
-				id: '1000',
-				badge: 'Lola Marta',
-				role: 'Administrator'
-			},
-			{
-				id: '1001',
-				badge: 'Papo Lucas',
-				role: 'Developer'
-			},
-			{
-				id: '1002',
-				badge: 'Petro Marcelo',
-				role: 'System Architect'
-			},
-			{
-				id: '1003',
-				badge: 'Armando Postre',
-				role: 'Hotel Chain Advisor'
-			}
-		]
+		this.users = []
 	}
 
 	getSession(id){

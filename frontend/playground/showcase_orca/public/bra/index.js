@@ -5,6 +5,7 @@ export default class Bra{
 
         this.socket.on('init', data => this.onInit(data))
         this.socket.on('event', data => this.onEvent(data))
+        this.socket.on('granted', data => this.onGranted(data))
     }
 
     send(id, data){
@@ -17,4 +18,5 @@ export default class Bra{
 
     onEvent(_){}
     onInit(_){}
+    onGranted(_){}
 }

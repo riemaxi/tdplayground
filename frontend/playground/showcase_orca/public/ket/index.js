@@ -18,11 +18,33 @@ export default class Ket{
 
     init(data){
         state.session = data.session
-        lobby.data = data.users
+        state.users = data.users
+        lobby.data = state.users.map(u => ({id: u.id, badge: u.badge.screen, role: u.role}))
+    }
+
+    handleNetworkGranted(data){
+        if (data.ok){
+            lobby.hide()
+            frame.show()
+
+            let user = state.getUser(data.id)
+
+            frame.data = {
+                badge:  {
+                    name: user.badge.screen,
+                    role: user.role
+                },
+                objects: state.data,
+                library: state.library
+            }
+        }else
+            lobby.message = 'Acces denied'
     }
 
     update(id, e){
-        console.log('update', id, e)
+        switch(id){
+            case 'granted' : this.handleNetworkGranted(e); break;
+        }
     }
 
     handleUserSignout(){
@@ -38,19 +60,9 @@ export default class Ket{
         }
     }
 
-    handleLobby(id, data){
-        this.on(id, data)
-
-        lobby.hide()
-        frame.show()
-        frame.data = {
-            badge:  {
-                name: data.badge,
-                role: data.role
-            },
-            objects: state.data,
-            library: state.library
-        }
+    handleLobby(id, detail){
+        detail.to = state.session.id
+        this.on('session.command', {id,detail})
     }
 
     on(_){}
