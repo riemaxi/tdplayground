@@ -39,7 +39,7 @@ export default class Ket{
                     name: state.session.user.badge.screen,
                     role: state.session.user.role
                 },
-                objects: state.data,
+                objects: state.getProject(),
                 library: state.library
             }
         }else

@@ -376,4 +376,13 @@ export default class State{
         }
     }
 
+    getProject(){
+        return this.session.user.projects.length ? this.session.user.projects[0].data 
+                                                : {
+                                                    tiles: [],
+                                                    links: {},
+                                                    objects: {}
+                                                }
+    }
+
 }
