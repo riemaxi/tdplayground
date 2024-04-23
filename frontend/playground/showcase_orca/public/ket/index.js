@@ -22,17 +22,22 @@ export default class Ket{
         lobby.data = state.users.map(u => ({id: u.id, badge: u.badge.screen, role: u.role}))
     }
 
+    handleNetworkProject(data){
+        console.log('project', data)
+    }
+
     handleNetworkGranted(data){
         if (data.ok){
             lobby.hide()
             frame.show()
 
-            let user = state.getUser(data.id)
+            state.session.user = {...state.getUser(data.id), projects: data.projects}
+            console.log('granted', state.session.user)
 
             frame.data = {
                 badge:  {
-                    name: user.badge.screen,
-                    role: user.role
+                    name: state.session.user.badge.screen,
+                    role: state.session.user.role
                 },
                 objects: state.data,
                 library: state.library
@@ -44,6 +49,7 @@ export default class Ket{
     update(id, e){
         switch(id){
             case 'granted' : this.handleNetworkGranted(e); break;
+            case 'project' : this.handleNetworkProject(e); break;
         }
     }
 
@@ -56,13 +62,20 @@ export default class Ket{
         switch(id){
             case 'signout' : this.handleUserSignout(); break;
             case 'sp.command' : this.on(id, data); break;
-            case 'canvas.command' : this.on(id, data); break;
+            case 'canvas.command' : this.handleUserCanvas(data); break;
         }
+    }
+
+    handleUserCanvas(command){
+        command.to = state.session.id
+        command.detail.project.owner = state.session.user.id
+        console.log('handle user canvas', command)
+        this.on('canvas.command',  command)
     }
 
     handleLobby(id, detail){
         detail.to = state.session.id
-        this.on('session.command', {id,detail})
+        this.on('session.command', {id, detail})
     }
 
     on(_){}

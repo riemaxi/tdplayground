@@ -71,8 +71,10 @@ new class extends require('./prompt'){
 
    onAccessRequest(data){
     let {from, detail} = data
-    console.log('on access request', detail)
-    this.response(from,'access',  access.request(detail) )
+    let r = access.request(detail)
+    r.detail.projects = r.detail.ok ? repository.listDetail(detail.detail.id) : []
+    console.log('on access request', r)
+    this.response(from,'access',  r )
    }
 
    onLibraryRequest(data){
@@ -92,8 +94,9 @@ new class extends require('./prompt'){
 
    onRepositoryRequest(data){
     let {from, detail} = data
-    console.log('on repository request', detail)
-    this.response(from,'repository',  repository.request(detail) )
+    console.log('on repository request', detail)    
+    let r = repository.request(detail)
+    this.response(from,'repository',  r )
    }
 
    onAssistantRequest(data){

@@ -308,17 +308,19 @@ export default class Canvas extends Window{
         
             case 'update' : this.handle('canvas.command', {
                 id,
-                project: this.project,
-                data: {
-                    tiles: this.tlayer.data,
-                    links: this.llayer.data,
-                    objects: this.olayer.data
+                detail: {
+                    project: this.project,
+                    data: {
+                        tiles: this.tlayer.data,
+                        links: this.llayer.data,
+                        objects: this.olayer.data
+                    }
                 }
             }); break;
 
-            case 'new': this.handle('canvas.command', {id, project: this.project} ); break;
+            case 'new': this.handle('canvas.command', {id, detail: this.project} ); break;
 
-            case 'recycle': this.handle('canvas.command', {id, project: this.project} ); break;
+            case 'recycle': this.handle('canvas.command', {id, detail: this.project} ); break;
         }
 
     }

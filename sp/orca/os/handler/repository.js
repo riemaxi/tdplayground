@@ -4,18 +4,30 @@ module.exports = class Repository extends require('./dataobject'){
         console.log('repository', this.data)
     }
 
-    request(detail){
-        switch(detail.id){
-            case 'load' : return this.load(detail.data)
-            case 'update' : return this.update(detail.project, detail.data)
-            case 'remove' : return this.remove(detail.id)
+    request(r){
+        switch(r.id){
+            case 'list' : return this.list(r.detail)
+            case 'load' : return this.load(r.detail)
+            case 'update' : return this.update(r.detail)
+            case 'remove' : return this.remove(r.detail)
+        }
+    }
+
+    listDetail(owner){
+        return Object.values(this.data).filter(item => item.project.owner == owner)
+    }
+
+    list(owner){
+        return {
+            id: 'list',
+            detail : this.listDetail(owner)
         }
     }
 
     create(project, data){
         console.log('create', project, data)
         let id = this.getId()
-        this.data[id] = {project, data}
+        this.data[id] = {id, project, data}
 
         return id
     }
@@ -27,7 +39,9 @@ module.exports = class Repository extends require('./dataobject'){
         }
     }
 
-    update(project, data){
+    update(r){
+        let {project, data} = r
+        console.log('update', project, data)
         if (project.id && this.data[project.id]){
             console.log('update', project.id, data)
             this.data[project.id] = data
