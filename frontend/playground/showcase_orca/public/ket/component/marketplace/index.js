@@ -34,7 +34,7 @@ const STYLE = `
 
 const STRUCTURE = `
 <div id="content">
-    <div id="title"><div>Repository</div></div>
+    <div id="title"><div>Marketplace</div></div>
     <common-list id="list"></common-list>
 </div>
 `
@@ -45,7 +45,7 @@ const test_data = {
     footer: []
 }
 
-export default class Recycle extends Window{
+export default class Marketplace extends Window{
     constructor(){
         super(true)
 

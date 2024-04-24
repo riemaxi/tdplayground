@@ -11,6 +11,7 @@ const STYLE = `
     color: white;
     font-family: Impact;
     gap: 20px;
+    border-radius: 0 0 4px 4px;
 }
 
 .tool{
@@ -43,13 +44,14 @@ const STRUCTURE = `
     <div class="tool"><div class="button" id="repository">&#10070;</div><div class="caption">Repository</div></div>
     <div class="tool"><div class="button" id="assistant">&#9086;</div><div class="caption">Assistant</div></div>
     <div class="tool"><div class="button" id="recycle">&#9851;</div><div class="caption">Recycle</div></div>
+    <div class="tool"><div class="button" id="marketplace">&#9878;</div><div class="caption">Marketplace</div></div>
     <div class="tool"><div class="button" id="signout">&#8658;</div><div class="caption">Sign out</div></div>
 </div>
 `
 
 export default class Toolbar extends Window{
     constructor(){
-        super(true)
+        super()
     }
 
     control(){

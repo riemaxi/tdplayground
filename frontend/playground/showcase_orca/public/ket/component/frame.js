@@ -10,6 +10,7 @@ import Setting from "./setting/index.js"
 import Badge from "./badge.js"
 import Assistant from "./assistant/index.js"
 import Repository from "./repository/index.js"
+import Marketplace from "./marketplace/index.js"
 import Canvas from "./canvas/index.js"
 
 
@@ -79,6 +80,7 @@ const content = `
         <frame-setting class="window" id="setting"></frame-setting> 
         <frame-assistant class="window" id="assistant"></frame-assistant> 
         <frame-repository class="window" id="repository"></frame-repository> 
+        <frame-marketplace class="window" id="marketplace"></frame-marketplace> 
         <frame-badge id="badge"></frame-badge>        
     </div>
 </div>
@@ -199,4 +201,5 @@ window.customElements.define('frame-recycle', Recycle)
 window.customElements.define('frame-setting', Setting)
 window.customElements.define('frame-assistant', Assistant)
 window.customElements.define('frame-repository', Repository)
+window.customElements.define('frame-marketplace', Marketplace)
 window.customElements.define('frame-badge', Badge)

@@ -33,7 +33,6 @@ export default class Ket{
             frame.show()
 
             state.session.user = {...state.getUser(data.id), projects: data.projects}
-            console.log('granted', state.session.user)
 
             frame.data = {
                 badge:  {
@@ -48,7 +47,6 @@ export default class Ket{
     }
 
     update(id, e){
-        console.log(id, e)
         switch(id){
             case 'granted' : this.handleNetworkGranted(e); break;
             case 'project' : this.handleNetworkProject(e); break;
