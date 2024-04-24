@@ -43,6 +43,11 @@ const assistant = new class extends require('./handler/assistant'){
 }
 
 
+const marketplace = new class extends require('./handler/marketplace'){
+    constructor(){
+        super(config.handler.marketplace)
+    }
+}
 
 new class extends require('./prompt'){
     constructor(){
@@ -109,6 +114,11 @@ new class extends require('./prompt'){
     console.log('on recycle request', from, subject, detail)
    }
 
+   onMarketplaceRequest(data){
+    let {from, subject, detail} = data
+    console.log('on marketplace request', from, subject, detail)
+   }
+
    //Event handler
    onEvent(data){
     let {from, subject, detail} = data
@@ -148,5 +158,10 @@ new class extends require('./prompt'){
    onRecycleEvent(data){
     let {from, subject, detail} = data
     console.log('on recycle event', from, subject, detail)
+   }
+
+   onMarketplaceEvent(data){
+    let {from, subject, detail} = data
+    console.log('on marketplace event', from, subject, detail)
    }
 }

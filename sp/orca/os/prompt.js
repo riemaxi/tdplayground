@@ -44,6 +44,7 @@ module.exports = class Prompt extends require('../core/session'){
 			case 'notification.request': this.onNotificationRequest(data); break;
 			case 'setting.request': this.onSettingRequest(data); break;
 			case 'repository.request' : this.onRepositoryRequest(data); break;
+			case 'marketplace.request' : this.onMarketplaceRequest(data); break;
 
 			case 'event' : this.onEvent(data); break;			
 			case 'access.event' : this.onAccessEvent(data); break;
@@ -51,6 +52,7 @@ module.exports = class Prompt extends require('../core/session'){
 			case 'notification.event': this.onNotificationEvent(data); break;
 			case 'setting.event': this.onSettingEvent(data); break;
 			case 'repository.event' : this.onRepositoryEvent(data); break;
+			case 'marketplace.event' : this.onMarketplaceEvent(data); break;
         }
     }
 
@@ -64,6 +66,7 @@ module.exports = class Prompt extends require('../core/session'){
 	onRepositoryRequest(_){}
 	onAssistantRequest(_){}
 	onRecycleRequest(_){}
+	onMarketplaceRequest(_){}
 
 	onEvent(_){}
 	onAccessEvent(_){}
@@ -73,6 +76,7 @@ module.exports = class Prompt extends require('../core/session'){
 	onRepositoryEvent(_){}
 	onAssistantEvent(_){}
 	onRecycleEvent(_){}
+	onMarketplaceEvent(_){}
 
 	LA2YA(to){
 		this.send('data', msg.create(
@@ -97,5 +101,4 @@ module.exports = class Prompt extends require('../core/session'){
 			subject + '.ack',
 			data ) )
 	}
-
 }

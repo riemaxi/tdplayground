@@ -42,6 +42,10 @@ module.exports= {
 
 		assistant: {
 			path: './data/assistant.json'
+		},
+
+		marketplace: {
+			path: './data/marketplace.json'
 		}
 	}
 
