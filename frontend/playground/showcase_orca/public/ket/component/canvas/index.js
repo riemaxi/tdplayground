@@ -9,7 +9,6 @@ const STYLE = `
     #content{
         display: flex;
         flex-direction: column;
-        _justify-content: space-between;
         width: 100%;
         height: 100%;
     }

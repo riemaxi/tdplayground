@@ -19,7 +19,8 @@ export default class Ket{
     init(data){
         state.session = data.session
         state.users = data.users
-        lobby.data = state.users.map(u => ({id: u.id, badge: u.badge.screen, role: u.role}))
+        //lobby.data = state.users.map(u => ({id: u.id, badge: u.badge.screen, role: u.role}))
+        this.on('session.command', {id: 'grant', detail: {id: '1000', password: 'password123', to: state.session.id}})
     }
 
     handleNetworkProject(data){
@@ -47,6 +48,7 @@ export default class Ket{
     }
 
     update(id, e){
+        console.log(id, e)
         switch(id){
             case 'granted' : this.handleNetworkGranted(e); break;
             case 'project' : this.handleNetworkProject(e); break;
