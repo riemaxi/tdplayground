@@ -7,10 +7,19 @@ new class extends require('./prompt'){
 
     onGranted(data){
         console.log('granted as', data.address)
+
+        this.start()
     }
 
     onDenied(data){
         console.log('denied as', data.address)
+   }
+
+   start(){
+    let targets = Object.entries(this.peers).map( e => ({id: e[0], data: e[1]}))
+    targets.forEach(target => {
+        setInterval(() => this.notify(target.data.address, {id: target.id, data: target.data}), target.data.interval)
+    })
    }
 
 

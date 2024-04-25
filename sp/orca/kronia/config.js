@@ -10,6 +10,18 @@ module.exports= {
 		},
 
 		peers: {
+			access: {
+				address: 'os.orca.4da',
+				interval: 20000,
+				action: 12
+			},
+
+			repository: {
+				address: 'os.orca.4da',
+				interval: 10000,
+				action: 34
+			}
+
 		}
 
 	}

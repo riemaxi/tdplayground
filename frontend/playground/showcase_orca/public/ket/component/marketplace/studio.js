@@ -1,4 +1,4 @@
-import Window from "../common/window.js"
+import Window from "../common/window";
 
 const STYLE = `
 #content{
@@ -29,10 +29,10 @@ const STYLE = `
 
 const STRUCTURE = `
 <div id="content">
-    <div id="title"><div>Console</div></div>
+    <div id="title"><div>Marketplace Studio</div></div>
 </div>`
 
-export default class Console extends Window{
+export default class Studio extends Window{
     constructor(){
         super(true)
     }
