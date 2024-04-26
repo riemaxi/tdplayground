@@ -3,7 +3,6 @@ import Window from "../common/window.js"
 import ObjectLayer from "./objectlayer.js"
 import LinkLayer from "./linklayer.js"
 import TileLayer from "./tilelayer.js"
-import ActionLayer from "./actionlayer.js"
 
 const STYLE = `
     #content{
@@ -268,7 +267,11 @@ export default class Canvas extends Window{
         this.olayer.data = value.objects
 
         this.update()
+    }
 
+    set tool(id){
+        this.olayer.tool = id
+        this.llayer.tool = id
     }
 
     reset(){
@@ -299,12 +302,9 @@ export default class Canvas extends Window{
     }
 
     handleTool(id){
+        this.tool =  id
+
         switch(id){
-            case 'cut' : {
-                            this.olayer.tool = id
-                            this.llayer.tool = id
-            }; break;
-        
             case 'update' : this.handle('canvas.command', {
                 id,
                 detail: {

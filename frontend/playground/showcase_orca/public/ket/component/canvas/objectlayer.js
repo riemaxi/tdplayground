@@ -54,6 +54,7 @@ export default class ObjectLayer extends Layer {
 
     controlRoot(){
         this.root.onpointerup = e => {
+            console.log('tool', this.tool)
             if (this.tool == 'link'){
                 this.resetLinker()
             }
