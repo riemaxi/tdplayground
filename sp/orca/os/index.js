@@ -77,7 +77,11 @@ new class extends require('./prompt'){
    onAccessRequest(data){
     let {from, detail} = data
     let r = access.request(detail)
-    r.detail.projects = r.detail.ok ? repository.listDetail(detail.detail.id) : []
+    r.detail.projects = []
+    if (r.detail.ok){
+        r.detail.projects = repository.listDetail(detail.detail.id)
+        r.detail.library = library.listDetail(detail.detail.id)
+    }
     console.log('on access request', r)
     this.response(from,'access',  r )
    }
