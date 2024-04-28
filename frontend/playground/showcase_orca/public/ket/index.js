@@ -32,7 +32,14 @@ export default class Ket{
             lobby.hide()
             frame.show()
 
-            state.session.user = {...state.getUser(data.id), projects: data.projects}
+            state.session.user = {
+                ...state.getUser(data.id), 
+                projects: data.projects,
+                library: {
+                    nodes: data.library[0].data.nodes,
+                    links: data.library[0].data.links
+                }
+            }
 
             frame.data = {
                 badge:  {
@@ -40,7 +47,7 @@ export default class Ket{
                     role: state.session.user.role
                 },
                 objects: state.getProject(),
-                library: state.library
+                library: state.session.user.library
             }
         }else
             lobby.message = 'Acces denied'

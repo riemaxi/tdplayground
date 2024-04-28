@@ -54,7 +54,6 @@ export default class ObjectLayer extends Layer {
 
     controlRoot(){
         this.root.onpointerup = e => {
-            console.log('tool', this.tool)
             if (this.tool == 'link'){
                 this.resetLinker()
             }
@@ -151,7 +150,7 @@ export default class ObjectLayer extends Layer {
         let {x,y } = state
         let {color, size, extra} = feature
 
-        return `<text class="object" id="${id}" x=${x * this.ratio.x} y="${y *  this.ratio.y}">${extra.feature.symbol}</text>`
+        return `<text class="object" id="${id}" x=${x * this.ratio.x} y="${y *  this.ratio.y}">${extra.data.icon}</text>`
     }
 
     rectangle(id, data){

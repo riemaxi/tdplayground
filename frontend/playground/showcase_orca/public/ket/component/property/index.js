@@ -129,7 +129,7 @@ export default class Property extends Window{
     set data(value){
         console.log('property', value)
         this._data = value
-        this.get('title').innerText = `Properties - ${value.feature.name}`
+        this.get('title').innerText = `Properties - ${value.data.name}`
     }
 
     handle(_){}

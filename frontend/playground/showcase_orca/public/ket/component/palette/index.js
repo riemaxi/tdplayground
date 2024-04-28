@@ -68,7 +68,7 @@ const STRUCTURE = `
 <div id="content">
     <div id="title"><div>Palette</div></div>
     <div id="stack">
-        <div class="menu" id="categories"></div>
+        <!--div class="menu" id="categories"></div -->
         <div class="menu" id="providers"></div>
     </div>
 </div>
@@ -78,52 +78,53 @@ export default class Palette extends Window{
     constructor(){
         super()
 
-        this.categories = this.get('categories')
         this.providers = this.get('providers')
-    }
-
-    controlCategories(){
-        this.queryAll('.category-button').forEach(b => b.onclick = () => this.onSelection('category', b.id))
     }
 
     controlProviders(){
         this.queryAll('.provider-button').forEach(b => b.onclick = () => this.onSelection('provider', this.getProvider(b.id)))
     }
 
-    showCategories(){
-        let html = item => `<div class="menuitem"><div class="category-button" id="${item.id}">${item.symbol}</div><div class="caption">${item.name}</div></div>`
-
-        this.providers.style.display = 'none'
-        this.categories.style.display = 'flex'
-
-        this.get('categories').innerHTML = this.items.categories.map(item => html(item)).join('')
-
-        this.controlCategories()
+    terminal(id){
+        let list = this.items.links.filter(item => item.p == id)
+        return list.length ? '$' : ''
     }
 
-    showProviders(catId){
-        let html = item => `<div class="menuitem"><div class="provider-button" id="${item.id}">${item.feature.symbol}</div><div class="caption">${item.feature.name}</div></div>`
+    showProviders(root = '-1'){
+        let html = (terminal, item) => `<div class="menuitem"><div class="provider-button" id="${terminal}${item.id}">${item.data.icon}</div><div class="caption">${item.data.name}</div></div>`
 
-        this.categories.style.display = 'none'
         this.providers.style.display = 'flex'
 
-        let list = this.items.providers.filter(p => p.feature.categories.indexOf('*') >=0 || p.feature.categories.indexOf(catId) >= 0)        
-        this.providers.innerHTML = list.map(item => html(item)).join('') + html({id: 'return', feature: { symbol: '&#9166;', name: ''}})
+        let list = this.getBranch(root, this.items)
+
+        let back = root !== '-1' ? html('', {id: '$' + this.getParent(root), data: { icon: '&#9166;', name: ''}}) : ''
+        this.providers.innerHTML = list.map(item => html(this.terminal(item.id), item)).join('') + back
 
         this.controlProviders()
     }
 
+    getParent(id){
+        return this.items.links.find(item => item.c == id)?.p
+    }
+
     getProvider(id){
-        return this.items.providers.find(item => item.id == id) || 'return'
+        let node = this.items.nodes.find(item => item.id == id.replace('$',''))
+        return {node, expand: id[0] == '$'}
+    }
+
+    getBranch(root, data){
+        let {nodes, links} = data
+        return links.filter(item => item.p == root).map(item => nodes.find(n => n.id == item.c))
     }
 
     set data(value){
+        let root = '-1'
         this.items = {
-            categories: Object.entries(value.categories).map(e => ({id: e[0], ...e[1]})),
-            providers: Object.entries(value.providers).map(e => ({id: e[0], ...e[1]}))
+            nodes: value.nodes,
+            links: value.links
         }
 
-        this.showCategories()
+        this.showProviders(root)
     }
 
     get customStructure(){

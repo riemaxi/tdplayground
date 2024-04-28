@@ -146,10 +146,10 @@ export default class Frame extends Element{
     }
 
     handlePaletteProvider(data){
-        if (data == 'return')
-            this.palette.showCategories()
+        if (data.expand)
+            this.palette.showProviders(data?.node?.id)
             else{
-            this.canvas.addObject(data)
+            this.canvas.addObject(data.node)
         }
 
     }
