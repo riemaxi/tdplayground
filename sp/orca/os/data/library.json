@@ -9,11 +9,19 @@
                         {
                             "id" : "0",
                             "request" : {
-
+                                "timestamp" : "",
+                                "from" : "",
+                                "to" : "to",
+                                "subject" : "[PREFIX]AIAIUCHE2",
+                                "detail" : {}
                             },
 
                             "response": {
-
+                                "timestamp" : "",
+                                "from" : "",
+                                "to" : "to",
+                                "subject" : "[PREFIX]AIAIUCHE2",
+                                "detail" : {}
                             }
                         }
 
@@ -25,28 +33,143 @@
                         {
                             "id" : "0",
                             "request" : {
-
+                                "timestamp" : "",
+                                "from" : "",
+                                "to" : "to",
+                                "subject" : "[PREFIX]event",
+                                "detail" : {}
                             },
 
-                            "response": {
-
+                            "response?": {
+                                "timestamp" : "",
+                                "from" : "",
+                                "to" : "to",
+                                "subject" : "[PREFIX]ack",
+                                "detail" : {}
                             }
                         }
                     ]
                 },
                 {
                     "id" : "2",
-                    "messaged": [
+                    "messages": [
                         {
                             "id" : "0",
                             "request" : {
-
+                                "timestamp" : "",
+                                "from" : "",
+                                "to" : "to",
+                                "subject" : "[PREFIX]request",
+                                "detail" : {}
                             },
 
                             "response": {
+                                "timestamp" : "",
+                                "from" : "",
+                                "to" : "to",
+                                "subject" : "[PREFIX]response",
+                                "detail" : {}
+                            }
+                        },
 
+                        {
+                            "id" : "1",
+                            "request" : {
+                                "timestamp" : "",
+                                "from" : "",
+                                "to" : "to",
+                                "subject" : "[PREFIX]packet",
+                                "detail" : {}
+                            },
+
+                            "response?": {
+                                "timestamp" : "",
+                                "from" : "",
+                                "to" : "to",
+                                "subject" : "[PREFIX]received",
+                                "detail" : {}
                             }
                         }
+
+                    ]
+                },
+                {
+                    "id": "3",
+                    "messages": [
+                        {
+                            "id" : "0",
+                            "request" : {
+                                "timestamp" : "",
+                                "from" : "",
+                                "to" : "to",
+                                "subject" : "[PREFIX]start",
+                                "detail" : {
+                                    "encoding": "",
+                                    "max-size": "",
+                                    "frequency" : ""
+                                }
+                            },
+
+                            "response": {
+                                "timestamp" : "",
+                                "from" : "",
+                                "to" : "to",
+                                "subject" : "[PREFIX]packet",
+                                "detail" : {
+                                    "size": "",
+                                    "packet" : ""
+                                }
+                            }
+                        },
+
+                        {
+                            "id" : "1",
+                            "request" : {
+                                "timestamp" : "",
+                                "from" : "",
+                                "to" : "to",
+                                "subject" : "[PREFIX]pause",
+                                "detail" : {
+                                }
+                            },
+
+                            "response?": {
+                                "timestamp" : "",
+                                "from" : "",
+                                "to" : "to",
+                                "subject" : "[PREFIX]paused",
+                                "detail" : {
+                                }
+                            }
+                        },
+
+                        {
+                            "id" : "3",
+                            "request" : {
+                                "timestamp" : "",
+                                "from" : "",
+                                "to" : "to",
+                                "subject" : "[PREFIX]resume",
+                                "detail" : {
+                                    "encoding": "",
+                                    "max-size": "",
+                                    "frequency" : ""
+                                }
+                            },
+
+                            "response": {
+                                "timestamp" : "",
+                                "from" : "",
+                                "to" : "to",
+                                "subject" : "[PREFIX]packet",
+                                "detail" : {
+                                    "size": "",
+                                    "packet" : ""
+                                }
+                            }
+                        }
+
+
                     ]
                 }
             ],
@@ -72,7 +195,14 @@
                         {
                             "id" : "0",
                             "constrains" : [
-
+                                {
+                                    "protocol" : "0",
+                                    "message" : "0",
+                                    "request" : {
+                                    },
+                                    "response": {
+                                    }
+                                }
                             ]
                         },
 
@@ -86,9 +216,8 @@
                     ]
                 },
 
-
                 {
-                    "id" : "1",
+                    "id" : "2",
                     "name" : "advanced",
                     "protocols": [
                         {
@@ -108,7 +237,15 @@
                             "constrains" : [
                                 
                             ]
+                        },
+
+                        {
+                            "id" : "3",
+                            "constrains" : [
+                                
+                            ]
                         }
+
 
                     ]
                 }
@@ -118,25 +255,181 @@
             "nodes" : [
                 {
                     "id": "0",
-                    "type" : "0",
+                    "type" : "00000111",
                     "data": {
-                        "name" : "node 0"
+                        "name" : "storage",
+                        "icon" : ""
                     }
                 },
                 {
                     "id" : "1",
-                    "type" : "0",
+                    "type" : "00000111",
                     "data" : {
-                        "name" : "node 1"
+                        "name" : "process",
+                        "icon" : ""
+                    }
+                },
+                {
+                    "id" : "2",
+                    "type" : "00000111",
+                    "data" : {
+                        "name" : "flow",
+                        "icon" : ""
+                    }
+                },
+                {
+                    "id" : "3",
+                    "type" : "00000111",
+                    "data" : {
+                        "name" : "monitor",
+                        "icon" : ""
+                    }
+                },
+
+                {
+                    "id" : "4",
+                    "type" : "00000111",
+                    "data" : {
+                        "name" : "general",
+                        "icon" : ""
+                    }
+                },
+
+                {
+                    "id" : "5",
+                    "type" : "00000111",
+                    "data" : {
+                        "name" : "source",
+                        "icon" : ""
+                    }
+                },
+
+                {
+                    "id" : "6",
+                    "type" : "00000111",
+                    "data" : {
+                        "name" : "sink",
+                        "icon" : ""
+                    }
+                },
+
+                {
+                    "id" : "7",
+                    "type" : "00000111",
+                    "data" : {
+                        "name" : "filter",
+                        "icon" : ""
+                    }
+                },
+
+                {
+                    "id" : "8",
+                    "type" : "00000111",
+                    "data" : {
+                        "name" : "transformer",
+                        "icon" : ""
+                    }
+                },
+
+                {
+                    "id" : "9",
+                    "type" : "00000111",
+                    "data" : {
+                        "name" : "aggregator",
+                        "icon" : ""
+                    }
+                },
+
+                {
+                    "id" : "10",
+                    "type" : "00000111",
+                    "data" : {
+                        "name" : "dam",
+                        "icon" : ""
+                    }
+                },
+
+                {
+                    "id" : "11",
+                    "type" : "00000111",
+                    "data" : {
+                        "name" : "queue",
+                        "icon" : ""
+                    }
+                },
+
+                {
+                    "id" : "11",
+                    "type" : "00000111",
+                    "data" : {
+                        "name" : "stack",
+                        "icon" : ""
+                    }
+                },
+
+
+                {
+                    "id" : "13",
+                    "type" : "00000111",
+                    "data" : {
+                        "name" : "fork",
+                        "icon" : ""
+                    }
+                },
+
+                {
+                    "id" : "14",
+                    "type" : "00000111",
+                    "data" : {
+                        "name" : "sensor",
+                        "icon" : ""
+                    }
+                },
+
+                {
+                    "id" : "15",
+                    "type" : "00000111",
+                    "data" : {
+                        "name" : "clock",
+                        "icon" : ""
                     }
                 }
+
+
+
+
+
+
+
+
+
+
+
+
+
             ],
 
             "links": [
                 {
                     "p" : "0",
                     "c" : "1"
-                }
+                },
+
+                {"p":  "0", "c": "5"},
+                {"p":"0", "c":  "6"},
+                
+                {"p":"1", "c": "7"},
+                {"p":"1", "c":"8"},
+                {"p":"1", "c": "9"},
+                
+                {"p":"2", "c":"10"},
+                {"p":"2", "c":"11"},
+                {"p":"2", "c":"12"},
+                {"p":"2", "c":"13"},
+                
+                {"p":"3", "c":"14"},
+                
+                {"p":"4", "c":"15"}
             ]
         }
     }
