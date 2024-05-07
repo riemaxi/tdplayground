@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DBia</title>
+
+    <style>
+        body, 
+        html,
+        *{
+            position: absolute;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            top: 0px;
+            left: 0px;
+        }
+
+        #visual{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            background-color: black;
+        }
+
+        #text{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial;
+            font-size: 40px;
+            color: lightblue;
+        }
+
+        #time{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial;
+            font-size: 30px;
+            height: 30px;
+
+        }
+
+    </style>
+</head>
+<body>
+    <div id="scene">
+        <video id="sound" src="./resource/dbia.mp4" autoplay controls></video>
+        <div id="visual">
+            <div id="text"></div>
+        </div>
+        <div id="time"></div>
+    </div>
+    
+</body>
+<script>
+    let sound = document.getElementById('sound')
+    let visual = document.getElementById('visual')
+    let text = document.getElementById('text')
+    let time = document.getElementById('time')
+
+    let texts = [
+        'The hell of data management',
+        'Introducing DBia',
+        'Robust distributed database system',
+        'Diving into the architecture',
+        'Entia. Where every item lives in real time',
+        'Linkia. Making connections',
+        'Kronia. Synchronized persistence network',
+        'Meshia. The backbone',
+        'User-friendly interface',
+        'Managing data in dynamic business environments',
+        'DBia is all about business growth'
+    ]
+
+    let index = 1
+    text.innerText = texts[index-1]
+           
+    time.onclick = () => {
+            sound.play()
+    }
+
+    text.onclick = () => {
+        text.innerText = texts[index++]
+    }
+</script>
+</html>

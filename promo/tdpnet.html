@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introducing TDPnet</title>
+
+    <style>
+        body, 
+        html,
+        *{
+            position: absolute;
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            top: 0px;
+            left: 0px;
+        }
+
+        #visual{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            background-color: black;
+        }
+
+        #text{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial;
+            font-size: 40px;
+            color: lightblue;
+
+        }
+
+    </style>
+</head>
+<body>
+    <div id="scene">
+        <video id="sound" src="./resource/tdpnet.mp4" autoplay controls></video>
+        <div id="visual">
+            <div id="text"></div>
+        </div>
+    </div>
+    
+</body>
+<script>
+    let sound = document.getElementById('sound')
+    let visual = document.getElementById('visual')
+    let text = document.getElementById('text')
+    let index = 0
+
+    let texts = [
+            'Introducing TDPnet',
+            'Welcome to TDPnet',
+            'Developed by 4 Digital Asset',
+            'Transformative Data Processing Network',
+            'Internet on steroids',
+            'Smooth uninterrupted communication across the globe',
+            'No need for IP addresses',
+            'Millions of dynamically assigned channels',
+            'Efficient data-routing and automatic self-repair',
+            'Continuous secure lightning fast communication',
+            'Efficient and reliable',
+            'Regardless of the scale of your operations',
+            'Envision and create ... the way of the future',
+            'Experience the future with us'
+        ]
+           
+    visual.onclick = () => {
+        if (index == 0)
+            sound.play()
+
+            text.innerText = texts[index++]
+    }
+</script>
+</html>
