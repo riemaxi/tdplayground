@@ -1,4 +1,10 @@
 module.exports = {
+    desk : {
+      port: 33399,
+      home: './public',
+      capacity: 1
+    },
+
     system: {
       host: 'http://217.76.52.255:20000',
   
