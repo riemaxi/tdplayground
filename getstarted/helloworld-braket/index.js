@@ -59,7 +59,7 @@ new class extends require('./desk'){
     }
 
     onListening(){
-        console.log('use the browser and navigate to', 'localhost:' + config.desk.port)
+        console.log('use the browser and navigate to', 'http://localhost:' + config.desk.port)
     }
 
     openSession(socket, id){
