@@ -1,0 +1,129 @@
+import io.socket.client.IO;
+import io.socket.client.Socket;
+import io.socket.emitter.Emitter;
+import java.net.URISyntaxException;
+import java.util.UUID;
+import java.util.function.Consumer;
+
+class Session {
+    private Socket socket;
+
+    public void connect(String host) {
+        try {
+            IO.Options options = new IO.Options();
+            socket = IO.socket(host, options);
+
+            socket.on(Socket.EVENT_CONNECT, args -> onConnected(System.currentTimeMillis()));
+            socket.on("granted", args -> onGranted(args[0]));
+            socket.on("denied", args -> onDenied(args[0]));
+            socket.on("data", args -> onData(args[0], valid(args[0])));
+            socket.on("signal", args -> onSignal(args[0], valid(args[0])));
+            socket.on(Socket.EVENT_ERROR, args -> onError(args[0]));
+
+            socket.connect();
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+    }
+
+    protected void onError(Object data) {}
+    protected void onConnected(long timestamp) {}
+    protected void onGranted(Object data) {}
+    protected void onDenied(Object data) {}
+    protected void onData(Object data, boolean valid) {
+        onCommand(data, valid, false);
+    }
+    protected void onSignal(Object data, boolean valid) {
+        onCommand(data, valid, true);
+    }
+    protected void onCommand(Object data, boolean valid, boolean signal) {}
+
+    protected boolean valid(Object data) {
+        // Assuming data is a JSON object. You may need to cast and handle it properly.
+        return true; // Implement your validation logic here.
+    }
+
+    public void send(String id, Object data) {
+        socket.emit(id, data);
+    }
+
+    public void signin(Object data) {
+        send("signin", data);
+    }
+
+    public void signoff(Object data) {
+        send("signoff", data);
+    }
+
+    public Message message(String from, String to, String subject, String detail) {
+        return new Message(System.currentTimeMillis(), from, to, subject, detail);
+    }
+
+    public static class Message {
+        private long timestamp;
+        private String from;
+        private String to;
+        private String subject;
+        private String detail;
+
+        public Message(long timestamp, String from, String to, String subject, String detail) {
+            this.timestamp = timestamp;
+            this.from = from;
+            this.to = to;
+            this.subject = subject;
+            this.detail = detail;
+        }
+
+        // Getters and setters can be added here
+    }
+}
+
+class Desk {
+    private int port;
+    private String home;
+
+    public Desk(Config config) {
+        this.port = config.port;
+        this.home = config.home;
+
+        listen(port);
+    }
+
+    private void listen(int port) {
+        // Implement the server setup and listening here
+        // You might use a framework like Spark or embed a Jetty server
+        onListening(port);
+    }
+
+    protected void dispatch(Consumer<Socket> io) {
+        // Implement WebSocket connection handling here
+        // Since Java doesn't have a direct equivalent to socket.io,
+        // this method will need to be implemented based on the chosen WebSocket library.
+    }
+
+    protected void onListening(int port) {
+        // Handle what happens when the server starts listening
+    }
+
+    protected void onCloseSession(Object session, String id) {
+        // Handle session closure
+    }
+
+    protected Object createSession(Socket socket, String id) {
+        return new Object(); // Replace with actual session creation logic
+    }
+
+    protected String getSessionId() {
+        return UUID.randomUUID().toString();
+    }
+
+    public static class Config {
+        public int port;
+        public String home;
+
+        public Config(int port, String home) {
+            this.port = port;
+            this.home = home;
+        }
+    }
+}
