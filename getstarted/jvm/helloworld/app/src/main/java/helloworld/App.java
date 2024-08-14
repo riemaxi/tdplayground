@@ -3,15 +3,9 @@
  */
 package helloworld;
 
-import tdpnet.Session;
-
-class Prompt extends Session{
-    Prompt(){
-
-    }
-
-    protected void onConnected(long timestamp){
-        System.out.println("connected");
+class Prompt extends Sysnet{
+    Prompt(Sysnet.Config config){
+        super(config);
     }
 
     protected void onGranted(Object data){
@@ -24,10 +18,20 @@ public class App {
         return "Hello World!";
     }
 
+    public static Sysnet.Config config = new Sysnet.Config();
+
     public static void main(String[] args) {
         System.out.println(new App().getGreeting());
 
-        Prompt prompt = new Prompt();
-        prompt.connect("http://217.76.52.255:20000");
+        config.credentials = new Sysnet.Credentials();
+        config.credentials.address = "hello.getstarted.java.tdpnet.4da";
+        config.credentials.accesskey = "000450";
+        config.credentials.password = "1af241ed-41e6-49ed-9e04-116b9dc38ee7";
+        config.host = "http://217.76.52.255:20000";
+
+        config.peers = new Sysnet.Peers();
+        config.peers.greeter = "greeter.getstarted.tdpnet.4da";
+
+        Prompt prompt = new Prompt(config);
     }
 }

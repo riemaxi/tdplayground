@@ -3,7 +3,10 @@ package tdpnet;
 import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
+import netscape.javascript.JSObject;
+
 import java.net.URISyntaxException;
+
 
 public class Session {
     private Socket socket;
@@ -48,6 +51,7 @@ public class Session {
     }
 
     public void signin(Object data) {
+        System.out.println(data.toString());
         send("signin", data);
     }
 
@@ -58,6 +62,8 @@ public class Session {
     public Message message(String from, String to, String subject, String detail) {
         return new Message(System.currentTimeMillis(), from, to, subject, detail);
     }
+
+    
 
     public static class Message {
         private long timestamp;
