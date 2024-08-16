@@ -1,4 +1,4 @@
-package helloworld;
+package hello;
 
 import java.util.*;
 import tdpnet.*;
@@ -6,11 +6,10 @@ import tdpnet.*;
 public class Sysnet extends Session {
 
     private Codec codec = new Codec();
-    private String address;
-    private String host;
-    private String greeting;
-    private Peers peers;
-    private Credentials credentials;
+    public String address;
+    public String host;
+    public Peers peers;
+    public Credentials credentials;
 
     public Sysnet(Config config) {
         super();
@@ -26,7 +25,12 @@ public class Sysnet extends Session {
 
     protected void onConnected(long timestamp) {
         System.out.println("connected ... signin ...");
-        this.signin(this.credentials);
+
+        try{
+            this.signin(JSONizer.createCredentials(this.credentials));
+        }catch(Exception e){
+
+        }
     }
 
     public void reconnect() {
@@ -41,16 +45,18 @@ public class Sysnet extends Session {
         // Implement onDenied functionality
     }
 
-    
-    protected void onSignal(Object error, Object data) {
-        this.onCommand(data, true, true);
-    }
-
-    protected void onData(Object error, Object data) {
-        this.onCommand(data, true, false);
-    }
-
+    @Override
     protected void onCommand(Object data, boolean valid, boolean signal) {
+        Message message = JSONizer.extractMessage(data);
+        switch (message.subject) {
+            case "request": onRequest(message); break;
+            case "response" : onResponse(message); break;
+            default:
+                break;
+        }
+    }
+    
+    /*protected void onCommand(Object data, boolean valid, boolean signal) {
         // Assuming data is of type Map<String, Object> or a similar structure
         if (data instanceof Map) {
             Map<String, Object> dataMap = (Map<String, Object>) data;
@@ -61,38 +67,23 @@ public class Sysnet extends Session {
                 this.onResponse(dataMap);
             }
         }
-    }
+    }*/
 
-    protected void onRequest(Map<String, Object> data) {
+    protected void onRequest(Message msg) {
         // Implement onRequest functionality
     }
 
-    protected void onResponse(Map<String, Object> data) {
+    protected void onResponse(Message msg) {
         // Implement onResponse functionality
     }
 
-    public void request(String to, Object detail) {
-        this.send("data", this.message(
-            this.address,
-            to,
-            "request",
-            detail.toString()));
-    }
-    
-    // Helper classes (you need to define these or import them as necessary)
-    public static class Config {
-        public Credentials credentials;
-        public String host;
-        public Peers peers;
+    public void request(String to, String detail) {
+            this.send("data", this.message(
+                this.address,
+                to,
+                "request",
+                detail)
+            );
     }
 
-    public static class Credentials {
-        public String address;
-        public String accesskey;
-        public String password;
-    }
-
-    public static class Peers {
-        public String greeter;
-    }
 }

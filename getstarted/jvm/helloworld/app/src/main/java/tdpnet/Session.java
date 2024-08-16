@@ -1,12 +1,12 @@
 package tdpnet;
 
+import java.util.Map;
+
 import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
-import netscape.javascript.JSObject;
 
 import java.net.URISyntaxException;
-
 
 public class Session {
     private Socket socket;
@@ -59,27 +59,12 @@ public class Session {
         send("signoff", data);
     }
 
-    public Message message(String from, String to, String subject, String detail) {
-        return new Message(System.currentTimeMillis(), from, to, subject, detail);
-    }
-
-    
-
-    public static class Message {
-        private long timestamp;
-        private String from;
-        private String to;
-        private String subject;
-        private String detail;
-
-        public Message(long timestamp, String from, String to, String subject, String detail) {
-            this.timestamp = timestamp;
-            this.from = from;
-            this.to = to;
-            this.subject = subject;
-            this.detail = detail;
+    public Object message(String from, String to, String subject, String detail){
+        try{
+            return JSONizer.createMessage(from, to, subject, detail);
+        }catch(Exception e){
+            return "";
         }
-
-        // Getters and setters can be added here
     }
+
 }
