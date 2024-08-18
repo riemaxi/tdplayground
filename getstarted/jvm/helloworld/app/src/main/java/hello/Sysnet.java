@@ -86,4 +86,12 @@ public class Sysnet extends Session {
             );
     }
 
+    public Object message(String from, String to, String subject, String detail){
+        try{
+            return JSONizer.createMessage(from, to, subject, detail);
+        }catch(Exception e){
+            return "";
+        }
+    }
+
 }

@@ -58,13 +58,4 @@ public class Session {
     public void signoff(Object data) {
         send("signoff", data);
     }
-
-    public Object message(String from, String to, String subject, String detail){
-        try{
-            return JSONizer.createMessage(from, to, subject, detail);
-        }catch(Exception e){
-            return "";
-        }
-    }
-
 }

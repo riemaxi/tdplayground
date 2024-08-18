@@ -1,4 +1,4 @@
-package tdpnet;
+package hello;
 
 
 //import com.fasterxml.jackson.core.JsonProcessingException;
@@ -16,7 +16,7 @@ public class JSONizer {
             return mapper.writeValueAsString(new Message(from, to, subject, detail));
         }
 
-        public static Object createCredentials(Credentials credentials ) throws Exception{
+        public static Object createCredentials(Credentials credentials) throws Exception{
             ObjectMapper mapper = new ObjectMapper();
             return mapper.writeValueAsString(credentials); 
         }

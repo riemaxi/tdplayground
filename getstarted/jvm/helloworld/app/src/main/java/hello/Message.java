@@ -1,4 +1,4 @@
-package tdpnet;
+package hello;
 
 public class Message{
     public String timestamp;

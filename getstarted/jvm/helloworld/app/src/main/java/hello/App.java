@@ -31,19 +31,9 @@ class Prompt extends Sysnet{
 }
 
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
-
     public static void main(String[] args) throws Exception {
-        String host = "http://217.76.52.255:20000";
-        Peers peers = new Peers("greeter.getstarted.tdpnet.4da");
 
-        //Use the credentials here:
-        Credentials credentials = new Credentials("ACCESSKEY", "PASSWORD", "ADDRESS");
-
-        Config config = new Config(host, peers, credentials);
-
-        new Prompt(config);
+        new Prompt(new Config());
+        
     }
 }
