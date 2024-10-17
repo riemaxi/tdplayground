@@ -1,9 +1,9 @@
 package hello;
 
 public class Credentials {
-    public String accesskey = "000505";
-    public String password = "bb32f561-066c-46c0-ac7c-d562b562c582";
-    public String address = "hello.getstarted.tdpnet.4da";
+    public String accesskey = "002042";
+    public String password = "961b6b65-d75b-4591-9fb5-8105cee4c852";
+    public String address = "heyou.getstarted.tdpnet.4da";
 
     public Credentials(){}
 }

@@ -1,7 +1,7 @@
 package hello;
 
 public class Config {
-        public String host = "http://localhost:20000";    
+        public String host = "http://217.76.52.255:20000";
         public Credentials credentials = new Credentials();
         public Peers peers = new Peers();
 
