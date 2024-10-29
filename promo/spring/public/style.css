@@ -1,0 +1,28 @@
+html, body{
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+#lab{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(29, 160, 29);
+}
+
+.charge{
+    font: normal 20em Arial;
+    fill: white;
+}
+
+#sensor{
+    font: normal .8em Arial;
+    fill: white;
+
+}
+
+

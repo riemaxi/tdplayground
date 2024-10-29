@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spring</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <div id="lab">
+        <svg id="canvas" width="600" height="300">
+            <g>
+                <rect width="5%" height="100%" fill="black"></rect>
+            </g>
+
+            <g>
+                <rect x="95%" width="10%" height="100%" fill="black"></rect>
+            </g>
+
+
+            <g>
+                <rect x="40%" y="50%" width="20%" height="20%" fill="black" rx="3%"></rect>
+                <text id="sensor" x="45%" y="60%">sensor</text>
+            </g>
+
+            <g transform="translate(0,200) scale(1,.2)">
+                <line x1="50%" x2="50%" y2="100%" stroke-width="4" stroke="black" stroke-dasharray="1"/>
+                <line  x2="100%" y1="100%" y2="100%" stroke-width="4" stroke="black" stroke-dasharray="4"/>
+            </g>
+
+            <g transform="translate(0,100)">
+                <rect x="40%" y="50%" width="20%" height="10%" fill="black" rx="1%"></rect>
+                <text id="sensor" x="45%" y="57%">ESP32</text>
+            </g>
+
+
+            <g id="spring0" transform="translate(100,100) scale(1,1)">
+                <path d='M0 10 Q5 0, 10 10 T20 10 T30 10 T40 10 T50 10 T60 10 T70 10 T80 10 T90 10 T100 10' stroke-width="3" stroke='black' fill-opacity='0' />
+            </g>
+
+            <g id="body" transform="translate(200,100) scale(.05,.08)">
+              <rect width="100%" height="100%" fill="black" rx="20%"></rect>
+              <text x="40%" y="90%" class="charge">+</text>
+            </g>
+
+            <g id="spring1" transform="translate(420,100) scale(1,1)">
+                <path d='M0 10 Q5 0, 10 10 T20 10 T30 10 T40 10 T50 10 T60 10 T70 10 T80 10 T90 10 T100 10' stroke-width="3" stroke='black' fill-opacity='0' />
+            </g>
+
+        </svg>
+    </div>
+</body>
+<script type="module" src="./index.js"></script>
+</html>
+
