@@ -1,6 +1,6 @@
 config = {
     'system': {
-        'host': 'http://217.76.52.255:20000',
+        'host': 'http://164.68.120.163:20000',
 
 	'credentials': {
 		'accesskey': '000345', 
